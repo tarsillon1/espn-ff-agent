@@ -12,6 +12,8 @@ export interface ESPNLeagueResponse {
   status: LeagueStatus;
   teams: Team[];
   transactions: Transaction[];
+  schedule?: Schedule[]; // Added for mMatchup view
+  scheduleForScoringPeriod?: ScheduleForScoringPeriod[]; // Added for mMatchupScore view
 }
 
 export interface DraftDetail {
@@ -141,12 +143,122 @@ export interface Schedule {
   matchupPeriodId: number;
   scoringPeriodId: number;
   winner: string;
+  playoffTierType: string;
 }
 
 export interface ScheduleTeam {
   adjustment: number;
-  rosterForCurrentScoringPeriod: Roster;
+  cumulativeScore?: {
+    losses: number;
+    scoreByStat: Record<
+      string,
+      {
+        ineligible: boolean;
+        rank: number;
+        result: any;
+        score: number;
+      }
+    >;
+    ties: number;
+    wins: number;
+  };
+  pointsByScoringPeriod?: Record<string, number>;
   teamId: number;
+  tiebreak: number;
+  totalPoints: number;
+  rosterForMatchupPeriod: RosterForMatchupPeriod;
+}
+
+// Types for rosterForMatchupPeriod structure
+export interface RosterForMatchupPeriod {
+  appliedStatTotal: number;
+  entries: RosterEntryForMatchupPeriod[];
+}
+
+export interface RosterEntryForMatchupPeriod {
+  acquisitionDate: number | null;
+  acquisitionType: string | null;
+  injuryStatus: string;
+  lineupSlotId: number;
+  pendingTransactionIds: number[] | null;
+  playerId: number;
+  playerPoolEntry: PlayerPoolEntryForMatchupPeriod;
+}
+
+export interface PlayerPoolEntryForMatchupPeriod {
+  appliedStatTotal: number;
+  id: number;
+  keeperValue: number;
+  keeperValueFuture: number;
+  lineupLocked: boolean;
+  onTeamId: number;
+  player: PlayerForMatchupPeriod;
+}
+
+export interface PlayerForMatchupPeriod {
+  active: boolean;
+  defaultPositionId: number;
+  droppable: boolean;
+  eligibleSlots: number[];
+  firstName: string;
+  fullName: string;
+  id: number;
+  injured: boolean;
+  injuryStatus: string;
+  lastName: string;
+  proTeamId: number;
+  stats: PlayerStats[];
+}
+
+// New types for mMatchupScore view
+export interface ScheduleForScoringPeriod {
+  away: ScheduleForScoringPeriodTeam;
+  home: ScheduleForScoringPeriodTeam;
+  id: number;
+  matchupPeriodId: number;
+  scoringPeriodId: number;
+  winner: string;
+}
+
+export interface ScheduleForScoringPeriodTeam {
+  adjustment: number;
+  rosterForCurrentScoringPeriod: RosterForScoringPeriod;
+  teamId: number;
+}
+
+export interface RosterForScoringPeriod {
+  appliedStatTotal: number;
+  entries: RosterEntryForScoringPeriod[];
+}
+
+export interface RosterEntryForScoringPeriod {
+  lineupSlotId: number;
+  playerPoolEntry: PlayerPoolEntryForScoringPeriod;
+}
+
+export interface PlayerPoolEntryForScoringPeriod {
+  appliedStatTotal: number;
+  id: number;
+  keeperValue: number;
+  keeperValueFuture: number;
+  lineupLocked: boolean;
+  onTeamId: number;
+  player: PlayerForScoringPeriod;
+}
+
+export interface PlayerForScoringPeriod {
+  active: boolean;
+  defaultPositionId: number;
+  droppable: boolean;
+  eligibleSlots: number[];
+  firstName: string;
+  fullName: string;
+  id: number;
+  injured: boolean;
+  lastName: string;
+  proTeamId: number;
+  universeId: number;
+  stats: PlayerStats[];
 }
 
 export interface Roster {

@@ -1,0 +1,2509 @@
+{
+  "matchups": [
+    {
+      "id": 1,
+      "matchupPeriodId": 1,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 1,
+        "totalPoints": 115.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 11,
+        "totalPoints": 101.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 2,
+      "matchupPeriodId": 1,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 141,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 97.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 3,
+      "matchupPeriodId": 1,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 9,
+        "totalPoints": 122.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 74.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 4,
+      "matchupPeriodId": 1,
+      "winner": "HOME",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 127.4,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 163.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 5,
+      "matchupPeriodId": 1,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 125.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 120.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 6,
+      "matchupPeriodId": 2,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 9,
+        "totalPoints": 154,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 131.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 7,
+      "matchupPeriodId": 2,
+      "winner": "HOME",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 119.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 8,
+        "totalPoints": 148.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 8,
+      "matchupPeriodId": 2,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 1,
+        "totalPoints": 107.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 81.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 9,
+      "matchupPeriodId": 2,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 149.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 100,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 10,
+      "matchupPeriodId": 2,
+      "winner": "HOME",
+      "away": {
+        "teamId": 10,
+        "totalPoints": 113.6,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 126.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 11,
+      "matchupPeriodId": 3,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 142.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 8,
+        "totalPoints": 84,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 12,
+      "matchupPeriodId": 3,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 158.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 136.6,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 13,
+      "matchupPeriodId": 3,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 115.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 73.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 14,
+      "matchupPeriodId": 3,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 128.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 11,
+        "totalPoints": 118.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 15,
+      "matchupPeriodId": 3,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 10,
+        "totalPoints": 127.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 77.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 16,
+      "matchupPeriodId": 4,
+      "winner": "HOME",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 125.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 135.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 17,
+      "matchupPeriodId": 4,
+      "winner": "HOME",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 104.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 126.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 18,
+      "matchupPeriodId": 4,
+      "winner": "HOME",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 109.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 129.5,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 19,
+      "matchupPeriodId": 4,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 115.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 11,
+        "totalPoints": 95.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 20,
+      "matchupPeriodId": 4,
+      "winner": "HOME",
+      "away": {
+        "teamId": 9,
+        "totalPoints": 81.4,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 108.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 21,
+      "matchupPeriodId": 5,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 10,
+        "totalPoints": 153,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 102.4,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 22,
+      "matchupPeriodId": 5,
+      "winner": "HOME",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 120.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 161.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 23,
+      "matchupPeriodId": 5,
+      "winner": "HOME",
+      "away": {
+        "teamId": 1,
+        "totalPoints": 114.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 151.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 24,
+      "matchupPeriodId": 5,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 134.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 8,
+        "totalPoints": 126.6,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 25,
+      "matchupPeriodId": 5,
+      "winner": "HOME",
+      "away": {
+        "teamId": 9,
+        "totalPoints": 101.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 119.5,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 26,
+      "matchupPeriodId": 6,
+      "winner": "HOME",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 114.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 137.1,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 27,
+      "matchupPeriodId": 6,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 137.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 83.5,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 28,
+      "matchupPeriodId": 6,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 115.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 83.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 29,
+      "matchupPeriodId": 6,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 139,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 129.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 30,
+      "matchupPeriodId": 6,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 134.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 132.1,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 31,
+      "matchupPeriodId": 7,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 1,
+        "totalPoints": 163.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 8,
+        "totalPoints": 109.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 32,
+      "matchupPeriodId": 7,
+      "winner": "HOME",
+      "away": {
+        "teamId": 9,
+        "totalPoints": 120.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 162.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 33,
+      "matchupPeriodId": 7,
+      "winner": "HOME",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 76.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 148.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 34,
+      "matchupPeriodId": 7,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 102.4,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 11,
+        "totalPoints": 75.4,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 35,
+      "matchupPeriodId": 7,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 10,
+        "totalPoints": 113.8,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 83,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 36,
+      "matchupPeriodId": 8,
+      "winner": "HOME",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 124.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 165.5,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 37,
+      "matchupPeriodId": 8,
+      "winner": "HOME",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 115.8,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 135.5,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 38,
+      "matchupPeriodId": 8,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 141.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 113.4,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 39,
+      "matchupPeriodId": 8,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 148.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 132.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 40,
+      "matchupPeriodId": 8,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 112.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 97.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 41,
+      "matchupPeriodId": 9,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 1,
+        "totalPoints": 105.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 90.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 42,
+      "matchupPeriodId": 9,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 151.7,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 11,
+        "totalPoints": 119.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 43,
+      "matchupPeriodId": 9,
+      "winner": "HOME",
+      "away": {
+        "teamId": 10,
+        "totalPoints": 108.7,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 125.1,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 44,
+      "matchupPeriodId": 9,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 182.7,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 130.6,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 45,
+      "matchupPeriodId": 9,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 139.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 115.4,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 46,
+      "matchupPeriodId": 10,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 9,
+        "totalPoints": 109,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 11,
+        "totalPoints": 106.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 47,
+      "matchupPeriodId": 10,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 114.1,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 105.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 48,
+      "matchupPeriodId": 10,
+      "winner": "HOME",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 98.7,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 121.6,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 49,
+      "matchupPeriodId": 10,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 137.7,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 8,
+        "totalPoints": 127.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 50,
+      "matchupPeriodId": 10,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 127,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 80.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 51,
+      "matchupPeriodId": 11,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 107.8,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 93.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 52,
+      "matchupPeriodId": 11,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 178.7,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 11,
+        "totalPoints": 92.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 53,
+      "matchupPeriodId": 11,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 9,
+        "totalPoints": 155.8,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 111.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 54,
+      "matchupPeriodId": 11,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 128.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 110.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 55,
+      "matchupPeriodId": 11,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 1,
+        "totalPoints": 163.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 118.4,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 56,
+      "matchupPeriodId": 12,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 123,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 8,
+        "totalPoints": 120.1,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 57,
+      "matchupPeriodId": 12,
+      "winner": "HOME",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 108,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 133.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 58,
+      "matchupPeriodId": 12,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 10,
+        "totalPoints": 111.8,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 105.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 59,
+      "matchupPeriodId": 12,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 131.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 3,
+        "totalPoints": 109.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 60,
+      "matchupPeriodId": 12,
+      "winner": "HOME",
+      "away": {
+        "teamId": 1,
+        "totalPoints": 130.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 144.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 61,
+      "matchupPeriodId": 13,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 10,
+        "totalPoints": 135.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 92.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 62,
+      "matchupPeriodId": 13,
+      "winner": "HOME",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 89.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 8,
+        "totalPoints": 109.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 63,
+      "matchupPeriodId": 13,
+      "winner": "HOME",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 129,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 147.1,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 64,
+      "matchupPeriodId": 13,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 153.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 140.4,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 65,
+      "matchupPeriodId": 13,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 147.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 108.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 66,
+      "matchupPeriodId": 14,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 137.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 105.4,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 67,
+      "matchupPeriodId": 14,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 150.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 121,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 68,
+      "matchupPeriodId": 14,
+      "winner": "HOME",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 127.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 157.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 69,
+      "matchupPeriodId": 14,
+      "winner": "HOME",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 125.7,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 157.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 70,
+      "matchupPeriodId": 14,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 128.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 92.6,
+        "adjustment": 0
+      },
+      "playoffTierType": "NONE"
+    },
+    {
+      "id": 71,
+      "matchupPeriodId": 15,
+      "winner": "UNDECIDED",
+      "home": {
+        "teamId": 1,
+        "totalPoints": 0,
+        "adjustment": 0
+      },
+      "playoffTierType": "WINNERS_BRACKET"
+    },
+    {
+      "id": 72,
+      "matchupPeriodId": 15,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 166.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 110.9,
+        "adjustment": 0
+      },
+      "playoffTierType": "WINNERS_BRACKET"
+    },
+    {
+      "id": 73,
+      "matchupPeriodId": 15,
+      "winner": "HOME",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 110,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 169.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "WINNERS_BRACKET"
+    },
+    {
+      "id": 74,
+      "matchupPeriodId": 15,
+      "winner": "UNDECIDED",
+      "home": {
+        "teamId": 5,
+        "totalPoints": 99.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "WINNERS_BRACKET"
+    },
+    {
+      "id": 75,
+      "matchupPeriodId": 15,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 117.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 95.3,
+        "adjustment": 0
+      },
+      "playoffTierType": "LOSERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 76,
+      "matchupPeriodId": 15,
+      "winner": "HOME",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 127.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 201.5,
+        "adjustment": 0
+      },
+      "playoffTierType": "LOSERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 77,
+      "matchupPeriodId": 16,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 129.5,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 109,
+        "adjustment": 0
+      },
+      "playoffTierType": "WINNERS_BRACKET"
+    },
+    {
+      "id": 78,
+      "matchupPeriodId": 16,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 4,
+        "totalPoints": 168.3,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 5,
+        "totalPoints": 160.7,
+        "adjustment": 0
+      },
+      "playoffTierType": "WINNERS_BRACKET"
+    },
+    {
+      "id": 79,
+      "matchupPeriodId": 16,
+      "winner": "HOME",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 135.9,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 157,
+        "adjustment": 0
+      },
+      "playoffTierType": "WINNERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 80,
+      "matchupPeriodId": 16,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 2,
+        "totalPoints": 124,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 6,
+        "totalPoints": 99.8,
+        "adjustment": 0
+      },
+      "playoffTierType": "LOSERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 81,
+      "matchupPeriodId": 16,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 147.2,
+        "adjustment": 0
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 109.2,
+        "adjustment": 0
+      },
+      "playoffTierType": "LOSERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 82,
+      "matchupPeriodId": 17,
+      "winner": "HOME",
+      "away": {
+        "teamId": 3,
+        "totalPoints": 117.8,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 18.9,
+            "player": {
+              "id": 4683062,
+              "fullName": "Xavier Worthy",
+              "team": "KC",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 7.9,
+            "player": {
+              "id": 4241474,
+              "fullName": "Brian Robinson Jr.",
+              "team": "WSH",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 11.1,
+            "player": {
+              "id": 4047646,
+              "fullName": "A.J. Brown",
+              "team": "PHI",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 1.7999999999999998,
+            "player": {
+              "id": 3045147,
+              "fullName": "James Conner",
+              "team": "ARI",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 6.3,
+            "player": {
+              "id": 2985659,
+              "fullName": "Wil Lutz",
+              "team": "DEN",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 15.700000000000001,
+            "player": {
+              "id": 3040151,
+              "fullName": "George Kittle",
+              "team": "SF",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 17.5,
+            "player": {
+              "id": -16027,
+              "fullName": "Buccaneers D/ST",
+              "team": "TB",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 16,
+            "player": {
+              "id": 4374302,
+              "fullName": "Amon-Ra St. Brown",
+              "team": "DET",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 16.900000000000002,
+            "player": {
+              "id": 4240703,
+              "fullName": "Kenny Pickett",
+              "team": "CLE",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 5.7,
+            "player": {
+              "id": 4047650,
+              "fullName": "DK Metcalf",
+              "team": "PIT",
+              "position": "WR"
+            }
+          }
+        ]
+      },
+      "home": {
+        "teamId": 4,
+        "totalPoints": 141.9,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 9.1,
+            "player": {
+              "id": 4241457,
+              "fullName": "Najee Harris",
+              "team": "LAC",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 14,
+            "player": {
+              "id": 3128429,
+              "fullName": "Courtland Sutton",
+              "team": "DEN",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 9.8,
+            "player": {
+              "id": 4038815,
+              "fullName": "Rico Dowdle",
+              "team": "CAR",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 9.7,
+            "player": {
+              "id": 4567104,
+              "fullName": "Will Reichard",
+              "team": "MIN",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 28.2,
+            "player": {
+              "id": 3046779,
+              "fullName": "Jared Goff",
+              "team": "DET",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 20.4,
+            "player": {
+              "id": 4432773,
+              "fullName": "Brian Thomas Jr.",
+              "team": "JAX",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 15.200000000000001,
+            "player": {
+              "id": 4362628,
+              "fullName": "Ja'Marr Chase",
+              "team": "CIN",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 13.200000000000001,
+            "player": {
+              "id": 4262921,
+              "fullName": "Justin Jefferson",
+              "team": "MIN",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 24.8,
+            "player": {
+              "id": 4361307,
+              "fullName": "Trey McBride",
+              "team": "ARI",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": -2.5,
+            "player": {
+              "id": -16011,
+              "fullName": "Colts D/ST",
+              "team": "IND",
+              "position": "DST"
+            }
+          }
+        ]
+      },
+      "playoffTierType": "WINNERS_BRACKET"
+    },
+    {
+      "id": 83,
+      "matchupPeriodId": 17,
+      "winner": "HOME",
+      "away": {
+        "teamId": 5,
+        "totalPoints": 109.2,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 11.299999999999999,
+            "player": {
+              "id": 3050478,
+              "fullName": "Jake Elliott",
+              "team": "PHI",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 2.2,
+            "player": {
+              "id": 4372019,
+              "fullName": "Jerome Ford",
+              "team": "CLE",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 4.7,
+            "player": {
+              "id": 4040655,
+              "fullName": "Darnell Mooney",
+              "team": "ATL",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 1.3,
+            "player": {
+              "id": 4242355,
+              "fullName": "Jake Ferguson",
+              "team": "DAL",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 5,
+            "player": {
+              "id": -16022,
+              "fullName": "Cardinals D/ST",
+              "team": "ARI",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 18.4,
+            "player": {
+              "id": 3929630,
+              "fullName": "Saquon Barkley",
+              "team": "PHI",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 16.7,
+            "player": {
+              "id": 2576336,
+              "fullName": "Ameer Abdullah",
+              "team": "LV",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 30.700000000000003,
+            "player": {
+              "id": 3916387,
+              "fullName": "Lamar Jackson",
+              "team": "BAL",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 4.300000000000001,
+            "player": {
+              "id": 4048244,
+              "fullName": "Alexander Mattison",
+              "team": "MIA",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 14.600000000000001,
+            "player": {
+              "id": 3916433,
+              "fullName": "Jakobi Meyers",
+              "team": "LV",
+              "position": "WR"
+            }
+          }
+        ]
+      },
+      "home": {
+        "teamId": 1,
+        "totalPoints": 170,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 1,
+            "player": {
+              "id": 3121422,
+              "fullName": "Terry McLaurin",
+              "team": "WSH",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 22.8,
+            "player": {
+              "id": 4430807,
+              "fullName": "Bijan Robinson",
+              "team": "ATL",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 37.60000000000001,
+            "player": {
+              "id": 3052587,
+              "fullName": "Baker Mayfield",
+              "team": "TB",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 12.600000000000001,
+            "player": {
+              "id": 4432708,
+              "fullName": "Marvin Harrison Jr.",
+              "team": "ARI",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 10.9,
+            "player": {
+              "id": 4047365,
+              "fullName": "Josh Jacobs",
+              "team": "GB",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 18,
+            "player": {
+              "id": -16026,
+              "fullName": "Seahawks D/ST",
+              "team": "SEA",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 35.1,
+            "player": {
+              "id": 4239993,
+              "fullName": "Tee Higgins",
+              "team": "CIN",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 22.2,
+            "player": {
+              "id": 15835,
+              "fullName": "Zach Ertz",
+              "team": "WSH",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 4.8999999999999995,
+            "player": {
+              "id": 17372,
+              "fullName": "Chris Boswell",
+              "team": "PIT",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 4.9,
+            "player": {
+              "id": 3116385,
+              "fullName": "Joe Mixon",
+              "team": "HOU",
+              "position": "RB"
+            }
+          }
+        ]
+      },
+      "playoffTierType": "WINNERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 84,
+      "matchupPeriodId": 17,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 8,
+        "totalPoints": 138.9,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 15.5,
+            "player": {
+              "id": -16033,
+              "fullName": "Ravens D/ST",
+              "team": "BAL",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 19.3,
+            "player": {
+              "id": 4362081,
+              "fullName": "Cameron Dicker",
+              "team": "LAC",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 15.9,
+            "player": {
+              "id": 4429205,
+              "fullName": "Jordan Addison",
+              "team": "MIN",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 15.4,
+            "player": {
+              "id": 4241463,
+              "fullName": "Jerry Jeudy",
+              "team": "CLE",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 1,
+            "player": {
+              "id": 4361579,
+              "fullName": "Javonte Williams",
+              "team": "DAL",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 11.1,
+            "player": {
+              "id": 4432665,
+              "fullName": "Brock Bowers",
+              "team": "LV",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 41.300000000000004,
+            "player": {
+              "id": 3915511,
+              "fullName": "Joe Burrow",
+              "team": "CIN",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 4.7,
+            "player": {
+              "id": 4430878,
+              "fullName": "Jaxon Smith-Njigba",
+              "team": "SEA",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 11.3,
+            "player": {
+              "id": 4428557,
+              "fullName": "Tyjae Spears",
+              "team": "TEN",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 3.4000000000000004,
+            "player": {
+              "id": 2977187,
+              "fullName": "Cooper Kupp",
+              "team": "SEA",
+              "position": "WR"
+            }
+          }
+        ]
+      },
+      "home": {
+        "teamId": 9,
+        "totalPoints": 125.5,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 24.800000000000004,
+            "player": {
+              "id": 4429795,
+              "fullName": "Jahmyr Gibbs",
+              "team": "DET",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 24.1,
+            "player": {
+              "id": 4426338,
+              "fullName": "Bo Nix",
+              "team": "DEN",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 16,
+            "player": {
+              "id": -16002,
+              "fullName": "Bills D/ST",
+              "team": "BUF",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 3.3000000000000003,
+            "player": {
+              "id": 4429013,
+              "fullName": "Tank Bigsby",
+              "team": "JAX",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 11.600000000000001,
+            "player": {
+              "id": 3925357,
+              "fullName": "Calvin Ridley",
+              "team": "TEN",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 0,
+            "player": {
+              "id": 2971573,
+              "fullName": "Ka'imi Fairbairn",
+              "team": "HOU",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 10.1,
+            "player": {
+              "id": 3054212,
+              "fullName": "Jonnu Smith",
+              "team": "MIA",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 5,
+            "player": {
+              "id": 15818,
+              "fullName": "Keenan Allen",
+              "team": "CHI",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 4.8,
+            "player": {
+              "id": 4429160,
+              "fullName": "De'Von Achane",
+              "team": "MIA",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 25.799999999999997,
+            "player": {
+              "id": 4612826,
+              "fullName": "Ladd McConkey",
+              "team": "LAC",
+              "position": "WR"
+            }
+          }
+        ]
+      },
+      "playoffTierType": "WINNERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 85,
+      "matchupPeriodId": 17,
+      "winner": "AWAY",
+      "away": {
+        "teamId": 11,
+        "totalPoints": 158.8,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 18.4,
+            "player": {
+              "id": 4426515,
+              "fullName": "Puka Nacua",
+              "team": "LAR",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 3.9,
+            "player": {
+              "id": 4697815,
+              "fullName": "Rachaad White",
+              "team": "TB",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 33.6,
+            "player": {
+              "id": 4595348,
+              "fullName": "Malik Nabers",
+              "team": "NYG",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 5,
+            "player": {
+              "id": -16007,
+              "fullName": "Broncos D/ST",
+              "team": "DEN",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 21.5,
+            "player": {
+              "id": 4596448,
+              "fullName": "Bucky Irving",
+              "team": "TB",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 14.100000000000001,
+            "player": {
+              "id": 4569618,
+              "fullName": "Garrett Wilson",
+              "team": "NYJ",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 0,
+            "player": {
+              "id": 3046439,
+              "fullName": "Hunter Henry",
+              "team": "NE",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 0.6,
+            "player": {
+              "id": 3953687,
+              "fullName": "Brandon Aubrey",
+              "team": "DAL",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 34.6,
+            "player": {
+              "id": 4426348,
+              "fullName": "Jayden Daniels",
+              "team": "WSH",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 27.1,
+            "player": {
+              "id": 4242335,
+              "fullName": "Jonathan Taylor",
+              "team": "IND",
+              "position": "RB"
+            }
+          }
+        ]
+      },
+      "home": {
+        "teamId": 2,
+        "totalPoints": 141,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 7.2,
+            "player": {
+              "id": 16800,
+              "fullName": "Davante Adams",
+              "team": "LAR",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 24.5,
+            "player": {
+              "id": 3918298,
+              "fullName": "Josh Allen",
+              "team": "BUF",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 25.700000000000003,
+            "player": {
+              "id": 16737,
+              "fullName": "Mike Evans",
+              "team": "TB",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": -2,
+            "player": {
+              "id": -16020,
+              "fullName": "Jets D/ST",
+              "team": "NYJ",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 11.3,
+            "player": {
+              "id": 4379399,
+              "fullName": "James Cook",
+              "team": "BUF",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 10.5,
+            "player": {
+              "id": 4689936,
+              "fullName": "Jake Bates",
+              "team": "DET",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 18.4,
+            "player": {
+              "id": 15847,
+              "fullName": "Travis Kelce",
+              "team": "KC",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 9.3,
+            "player": {
+              "id": 4036133,
+              "fullName": "T.J. Hockenson",
+              "team": "MIN",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 9.7,
+            "player": {
+              "id": 3042519,
+              "fullName": "Aaron Jones",
+              "team": "MIN",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 26.4,
+            "player": {
+              "id": 16460,
+              "fullName": "Adam Thielen",
+              "team": "CAR",
+              "position": "WR"
+            }
+          }
+        ]
+      },
+      "playoffTierType": "LOSERS_CONSOLATION_LADDER"
+    },
+    {
+      "id": 86,
+      "matchupPeriodId": 17,
+      "winner": "HOME",
+      "away": {
+        "teamId": 6,
+        "totalPoints": 98.4,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 2,
+            "player": {
+              "id": 4431299,
+              "fullName": "Rome Odunze",
+              "team": "CHI",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 14.700000000000001,
+            "player": {
+              "id": 4430737,
+              "fullName": "Kyren Williams",
+              "team": "LAR",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 20,
+            "player": {
+              "id": -16021,
+              "fullName": "Eagles D/ST",
+              "team": "PHI",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 1.6000000000000005,
+            "player": {
+              "id": 8439,
+              "fullName": "Aaron Rodgers",
+              "team": "FA",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 12.299999999999999,
+            "player": {
+              "id": 3150744,
+              "fullName": "Chase McLaughlin",
+              "team": "TB",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 15.4,
+            "player": {
+              "id": 4430027,
+              "fullName": "Sam LaPorta",
+              "team": "DET",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 15.5,
+            "player": {
+              "id": 3116406,
+              "fullName": "Tyreek Hill",
+              "team": "MIA",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 1.8,
+            "player": {
+              "id": 4361529,
+              "fullName": "Isiah Pacheco",
+              "team": "KC",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 4,
+            "player": {
+              "id": 4373678,
+              "fullName": "Khalil Shakir",
+              "team": "BUF",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 11.1,
+            "player": {
+              "id": 4362238,
+              "fullName": "Chase Brown",
+              "team": "CIN",
+              "position": "RB"
+            }
+          }
+        ]
+      },
+      "home": {
+        "teamId": 10,
+        "totalPoints": 102.1,
+        "adjustment": 0,
+        "roster": [
+          {
+            "appliedStatTotal": 9.2,
+            "player": {
+              "id": 3915416,
+              "fullName": "DJ Moore",
+              "team": "CHI",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 12.000000000000002,
+            "player": {
+              "id": 4360423,
+              "fullName": "Michael Penix Jr.",
+              "team": "ATL",
+              "position": "QB"
+            }
+          },
+          {
+            "appliedStatTotal": 5.8,
+            "player": {
+              "id": 4427366,
+              "fullName": "Breece Hall",
+              "team": "NYJ",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 8.3,
+            "player": {
+              "id": 2473037,
+              "fullName": "Jason Myers",
+              "team": "SEA",
+              "position": "K"
+            }
+          },
+          {
+            "appliedStatTotal": 2,
+            "player": {
+              "id": -16009,
+              "fullName": "Packers D/ST",
+              "team": "GB",
+              "position": "DST"
+            }
+          },
+          {
+            "appliedStatTotal": 24.000000000000004,
+            "player": {
+              "id": 3043078,
+              "fullName": "Derrick Henry",
+              "team": "BAL",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 10.100000000000001,
+            "player": {
+              "id": 4259545,
+              "fullName": "D'Andre Swift",
+              "team": "CHI",
+              "position": "RB"
+            }
+          },
+          {
+            "appliedStatTotal": 13.6,
+            "player": {
+              "id": 3116164,
+              "fullName": "Mike Gesicki",
+              "team": "CIN",
+              "position": "TE"
+            }
+          },
+          {
+            "appliedStatTotal": 9.7,
+            "player": {
+              "id": 3886598,
+              "fullName": "Jauan Jennings",
+              "team": "SF",
+              "position": "WR"
+            }
+          },
+          {
+            "appliedStatTotal": 7.4,
+            "player": {
+              "id": 4258173,
+              "fullName": "Nico Collins",
+              "team": "HOU",
+              "position": "WR"
+            }
+          }
+        ]
+      },
+      "playoffTierType": "LOSERS_CONSOLATION_LADDER"
+    }
+  ],
+  "teams": [
+    {
+      "id": 1,
+      "name": "Captain Max's Boat Buddies",
+      "abbrev": "BUDY",
+      "owners": [
+        {
+          "id": "{897A16DC-1FD5-47E3-BA16-DC1FD577E3EC}",
+          "displayName": "Oge1Kenobi",
+          "firstName": "Max",
+          "lastName": "Oge"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 10,
+          "ties": 0,
+          "losses": 4
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Taco Bell Run",
+      "abbrev": "TACO",
+      "owners": [
+        {
+          "id": "{4D74E82B-8E4D-463F-B4E8-2B8E4D163FF7}",
+          "displayName": "Stitchy308",
+          "firstName": "James",
+          "lastName": "Allan"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 5,
+          "ties": 0,
+          "losses": 9
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Mustashe Men",
+      "abbrev": "MM",
+      "owners": [
+        {
+          "id": "{4DE9137B-B4D6-4918-A913-7BB4D6C918D2}",
+          "displayName": "Crazyaids",
+          "firstName": "Anmol",
+          "lastName": "Madaan"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 7,
+          "ties": 0,
+          "losses": 7
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "Just Serving Chase",
+      "abbrev": "TARS",
+      "owners": [
+        {
+          "id": "{44E726A3-428E-4832-A726-A3428EB8326F}",
+          "displayName": "ricklypop",
+          "firstName": "Nick",
+          "lastName": "Tarsillo"
+        }
+      ],
+      "isEliminatedFromPlayoffs": false,
+      "record": {
+        "regularSeason": {
+          "wins": 8,
+          "ties": 0,
+          "losses": 6
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "Barefoot Bravehearts",
+      "abbrev": "Meep",
+      "owners": [
+        {
+          "id": "{6A25CFA0-1BF3-4ED6-A5CF-A01BF32ED68C}",
+          "displayName": "big_z_97",
+          "firstName": "Jered",
+          "lastName": "Zelikovsky"
+        },
+        {
+          "id": "{D74A3901-BE2C-4247-9725-B621B5952C05}",
+          "displayName": "ESPNFAN0082694703",
+          "firstName": "Jered",
+          "lastName": "Zelikovsky"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 10,
+          "ties": 0,
+          "losses": 4
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "Team Latwis",
+      "abbrev": "LAT",
+      "owners": [
+        {
+          "id": "{729E8B7C-9BDF-4ABF-A439-D6CB56D0F7F7}",
+          "displayName": "kevin latwis",
+          "firstName": "kev",
+          "lastName": "lat"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 6,
+          "ties": 0,
+          "losses": 8
+        }
+      }
+    },
+    {
+      "id": 8,
+      "name": "Ol Ironside",
+      "abbrev": "Fat",
+      "owners": [
+        {
+          "id": "{29EAF785-5D55-4E25-AAF7-855D55FE25A5}",
+          "displayName": "Crobs1074",
+          "firstName": "Chris",
+          "lastName": "Roberts"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 6,
+          "ties": 0,
+          "losses": 8
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "GIBBS me ACHANcE",
+      "abbrev": "GAme",
+      "owners": [
+        {
+          "id": "{3E79DC05-E5DC-47A0-A4DC-D4FACCC0466B}",
+          "displayName": "mikehig6",
+          "firstName": "Michael",
+          "lastName": "Higgins"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 7,
+          "ties": 0,
+          "losses": 7
+        }
+      }
+    },
+    {
+      "id": 10,
+      "name": "Cincinnati  Harambe",
+      "abbrev": "CH",
+      "owners": [
+        {
+          "id": "{E680803E-C7F7-4189-B52A-E1A169442170}",
+          "displayName": "mastamat13",
+          "firstName": "mathew",
+          "lastName": "dearaujo"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 6,
+          "ties": 0,
+          "losses": 8
+        }
+      }
+    },
+    {
+      "id": 11,
+      "name": "Nabers in Paris",
+      "abbrev": "NBRS",
+      "owners": [
+        {
+          "id": "{FFDD00F1-1336-4B1E-926E-94B54771EAB0}",
+          "displayName": "gpucis7171899",
+          "firstName": "Greg",
+          "lastName": "Puc'"
+        }
+      ],
+      "isEliminatedFromPlayoffs": true,
+      "record": {
+        "regularSeason": {
+          "wins": 5,
+          "ties": 0,
+          "losses": 9
+        }
+      }
+    }
+  ],
+  "hasPlayoffsStarted": true
+}

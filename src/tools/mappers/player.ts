@@ -2,11 +2,14 @@ import {
   getPosition,
   getTeamNameAndAbbr,
   PlayerData,
+  PlayerForScoringPeriod,
+  TeamPlayer,
   TeamRosterEntry,
 } from "../../espn";
 
-export function mapTeamRosterEntry(entry: TeamRosterEntry) {
-  const player = entry.playerPoolEntry.player;
+export function mapBasicPlayerInfo(
+  player: TeamPlayer | PlayerForScoringPeriod
+) {
   const team = getTeamNameAndAbbr(player.proTeamId);
   const position = getPosition(player.defaultPositionId);
   return {
@@ -14,6 +17,14 @@ export function mapTeamRosterEntry(entry: TeamRosterEntry) {
     fullName: player.fullName,
     team: team.abbr,
     position: position.abbr,
+  };
+}
+
+export function mapTeamRosterEntry(entry: TeamRosterEntry) {
+  const player = entry.playerPoolEntry.player;
+  const basicPlayerInfo = mapBasicPlayerInfo(player);
+  return {
+    ...basicPlayerInfo,
     injured: player.injured,
     injuryStatus: player.injuryStatus,
     isBenched: entry.lineupSlotId === undefined,

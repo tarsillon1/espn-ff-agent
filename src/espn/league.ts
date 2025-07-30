@@ -1,3 +1,4 @@
+import { writeFileSync } from "fs";
 import { cache } from "../utils";
 import { baseUrl } from "./config";
 import type { ESPNLeagueResponse, Member, Team } from "./types";
@@ -16,7 +17,7 @@ export async function getLeague({
   year,
 }: GetLeagueInput) {
   const res = await fetch(
-    `${baseUrl}/seasons/${year}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster&view=mSettings`,
+    `${baseUrl}/seasons/${year}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster&view=mSettings&view=mMatchupScore&view=mMatchup`,
     {
       headers: {
         Accept: "application/json",
@@ -32,6 +33,7 @@ export async function getLeague({
   }
 
   const data = await res.json();
+  writeFileSync("league.json", JSON.stringify(data, null, 2));
   return data as ESPNLeagueResponse;
 }
 
