@@ -8,6 +8,7 @@ export interface ESPNLeagueResponse {
   scoringPeriodId: number;
   seasonId: number;
   segmentId: number;
+  settings: LeagueSettings;
   status: LeagueStatus;
   teams: Team[];
   transactions: Transaction[];
@@ -181,7 +182,80 @@ export interface PlayerStats {
 export interface LeagueSettings {
   name: string;
   size: number;
-  // Add other settings properties as needed
+  // Scoring settings
+  scoringSettings?: ScoringSettings;
+  // Roster settings
+  rosterSettings?: RosterSettings;
+  // Schedule settings
+  scheduleSettings?: ScheduleSettings;
+  // Trade settings
+  tradeSettings?: TradeSettings;
+  // Waiver settings
+  waiverSettings?: WaiverSettings;
+  // Acquisition settings
+  acquisitionSettings?: AcquisitionSettings;
+  // Other common settings
+  [key: string]: any;
+}
+
+export interface ScoringSettings {
+  scoringPeriods?: ScoringPeriod[];
+  scoringRules?: ScoringRule[];
+  [key: string]: any;
+}
+
+export interface ScoringPeriod {
+  id: number;
+  name: string;
+  startDate: number;
+  endDate: number;
+}
+
+export interface ScoringRule {
+  statId: number;
+  statName: string;
+  value: number;
+  [key: string]: any;
+}
+
+export interface RosterSettings {
+  rosterPositions?: RosterPosition[];
+  rosterLocktimeType?: number;
+  [key: string]: any;
+}
+
+export interface RosterPosition {
+  positionId: number;
+  positionName: string;
+  count: number;
+  [key: string]: any;
+}
+
+export interface ScheduleSettings {
+  playoffTeamCount: number;
+}
+
+export interface TradeSettings {
+  allowTrades?: boolean;
+  allowVeto?: boolean;
+  vetoVotesRequired?: number;
+  [key: string]: any;
+}
+
+export interface WaiverSettings {
+  waiverType?: number;
+  waiverDay?: number;
+  waiverOrderType?: number;
+  [key: string]: any;
+}
+
+export interface AcquisitionSettings {
+  acquisitionType?: number;
+  acquisitionBudget?: number;
+  acquisitionBudgetSpent?: number;
+  acquisitionBudgetRemaining?: number;
+  acquisitionBudgetUsed?: number;
+  [key: string]: any;
 }
 
 // Enhanced Team interface with roster property
@@ -301,4 +375,171 @@ export interface TransactionCounter {
   paid: number;
   teamCharges: number;
   trades: number;
+}
+
+// League History Types
+// The history.json file contains an array of league snapshots over time
+export interface LeagueHistory extends Array<LeagueSnapshot> {}
+
+export interface LeagueSnapshot {
+  draftDetail: DraftDetail;
+  gameId: number;
+  id: number;
+  schedule: HistorySchedule[];
+  scoringPeriodId: number;
+  seasonId: number;
+  segmentId: number;
+  settings: LeagueSettings;
+  status: LeagueStatus;
+  teams: HistoryTeam[];
+}
+
+// Enhanced Schedule interface for history data
+export interface HistorySchedule {
+  away: HistoryScheduleTeam;
+  home: HistoryScheduleTeam;
+  id: number;
+  matchupPeriodId: number;
+  scoringPeriodId: number;
+  winner: string;
+}
+
+// Enhanced ScheduleTeam interface for history data
+export interface HistoryScheduleTeam {
+  gamesPlayed: number;
+  pointsByScoringPeriod: Record<string, number>;
+  teamId: number;
+  totalPoints: number;
+}
+
+// Enhanced Team interface for history data with mTeam view
+export interface HistoryTeam {
+  id: number;
+  abbrev: string;
+  currentProjectedRank: number;
+  divisionId: number;
+  draftDayProjectedRank: number;
+  isActive: boolean;
+  logo: string;
+  logoType: string;
+  name: string;
+  owners: string[];
+  playoffSeed: number;
+  points: number;
+  pointsAdjusted: number;
+  pointsDelta: number;
+  primaryOwner: string;
+  rankCalculatedFinal: number;
+  rankFinal: number;
+  record: HistoryTeamRecord;
+  roster: HistoryTeamRoster;
+  transactionCounter: HistoryTransactionCounter;
+  valuesByStat: Record<string, number>;
+  waiverRank: number;
+  watchList?: number[];
+}
+
+// Enhanced TeamRoster interface for history data
+export interface HistoryTeamRoster {
+  appliedStatTotal: number;
+  entries: HistoryRosterEntry[];
+}
+
+export interface HistoryRosterEntry {
+  acquisitionDate: number | null;
+  acquisitionType: string | null;
+  injuryStatus: string;
+  lineupSlotId: number;
+  pendingTransactionIds: number[] | null;
+  playerId: number;
+  playerPoolEntry: HistoryPlayerPoolEntry;
+  status: string;
+}
+
+export interface HistoryPlayerPoolEntry {
+  appliedStatTotal: number;
+  id: number;
+  keeperValue: number;
+  keeperValueFuture: number;
+  lineupLocked: boolean;
+  onTeamId: number;
+  player: HistoryPlayer;
+  rosterLocked: boolean;
+  tradeLocked: boolean;
+}
+
+export interface HistoryPlayer {
+  active: boolean;
+  defaultPositionId: number;
+  droppable: boolean;
+  eligibleSlots: number[];
+  firstName: string;
+  fullName: string;
+  id: number;
+  injured: boolean;
+  lastName: string;
+  proTeamId: number;
+  universeId: number;
+}
+
+// History-specific team record interface
+export interface HistoryTeamRecord {
+  away: RecordStats;
+  division: RecordStats;
+  home: RecordStats;
+  overall: RecordStats;
+}
+
+// History-specific transaction counter interface
+export interface HistoryTransactionCounter {
+  acquisitionBudgetSpent: number;
+  acquisitions: number;
+  drops: number;
+  matchupAcquisitionTotals: Record<string, number>;
+  misc: number;
+  moveToActive: number;
+  moveToIR: number;
+  paid: number;
+  teamCharges: number;
+  trades: number;
+}
+
+// Utility types for working with history data
+export interface LeagueHistoryStats {
+  totalSnapshots: number;
+  dateRange: {
+    earliest: Date;
+    latest: Date;
+  };
+  teams: {
+    [teamId: number]: {
+      totalGames: number;
+      totalWins: number;
+      totalLosses: number;
+      averagePoints: number;
+    };
+  };
+}
+
+export interface HistoryQueryOptions {
+  startDate?: Date;
+  endDate?: Date;
+  teamId?: number;
+  scoringPeriodId?: number;
+  matchupPeriodId?: number;
+}
+
+// Type guards for history data
+export function isLeagueHistory(data: any): data is LeagueHistory {
+  return Array.isArray(data) && data.length > 0 && "draftDetail" in data[0];
+}
+
+export function isLeagueSnapshot(data: any): data is LeagueSnapshot {
+  return (
+    data &&
+    typeof data === "object" &&
+    "draftDetail" in data &&
+    "teams" in data &&
+    "schedule" in data
+  );
 }

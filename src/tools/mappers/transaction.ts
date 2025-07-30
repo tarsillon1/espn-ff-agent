@@ -13,8 +13,8 @@ export function mapTransactionItem(
   const toTeam = findTeamById(league.teams, item.toTeamId);
   return {
     player: mapPlayerData(player),
-    fromTeam: mapTeam(fromTeam, league.members),
-    toTeam: mapTeam(toTeam, league.members),
+    fromTeam: mapTeam(fromTeam, league.members, league.settings),
+    toTeam: mapTeam(toTeam, league.members, league.settings),
     fromLineupSlotId: item.fromLineupSlotId,
     toLineupSlotId: item.toLineupSlotId,
     type: item.type,

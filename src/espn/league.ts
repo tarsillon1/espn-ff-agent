@@ -16,7 +16,7 @@ export async function getLeague({
   year,
 }: GetLeagueInput) {
   const res = await fetch(
-    `${baseUrl}/${year}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster`,
+    `${baseUrl}/seasons/${year}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster&view=mSettings`,
     {
       headers: {
         Accept: "application/json",

@@ -30,7 +30,7 @@ export async function getPlayers({
   espnSwid,
 }: GetPlayersInput): Promise<PlayerData[]> {
   const res = await fetch(
-    `${baseUrl}/${year}/segments/0/leagues/${leagueId}?${views}`,
+    `${baseUrl}/seasons/${year}/segments/0/leagues/${leagueId}?${views}`,
     {
       headers: {
         Cookie: `espn_s2=${espnS2}; SWID=${espnSwid}`,

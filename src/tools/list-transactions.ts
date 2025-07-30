@@ -9,7 +9,12 @@ import {
   PlayerData,
   Transaction,
 } from "../espn";
-import { mapTransactionItem, mapTeam, mapTeamOwner } from "./mappers";
+import {
+  mapTransactionItem,
+  mapTeam,
+  mapTeamOwner,
+  mapTeamBasicInfo,
+} from "./mappers";
 import { clean } from "../utils";
 
 function mapTransaction(
@@ -28,7 +33,7 @@ function mapTransaction(
     actingOwner: mapTeamOwner(
       findMemberById(league.members, transaction.memberId)
     ),
-    affectedTeam: mapTeam(
+    affectedRoster: mapTeamBasicInfo(
       findTeamById(league.teams, transaction.teamId),
       league.members
     ),

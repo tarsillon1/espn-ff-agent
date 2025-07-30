@@ -1,7 +1,7 @@
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 import { createCommentatorPrompt } from "../prompt";
-import { createFindPlayersTool } from "../tools";
+import { createFindPlayersTool, createLeagueAnalyticsTool } from "../tools";
 import { leagueId, espnS2, espnSwid, year } from "../espn";
 import { createListRostersTool } from "../tools/list-rosters";
 import { createListTransactionsTool } from "../tools/list-transactions";
@@ -17,6 +17,7 @@ export async function commentate(input: string) {
   const findPlayersTool = createFindPlayersTool(config);
   const listRostersTool = createListRostersTool(config);
   const listTransactionsTool = createListTransactionsTool(config);
+  const leagueAnalyticsTool = createLeagueAnalyticsTool(config);
 
   const result = await generateText({
     model: google("gemini-2.5-flash"),
@@ -26,6 +27,7 @@ export async function commentate(input: string) {
       findPlayers: findPlayersTool,
       listRosters: listRostersTool,
       listTransactions: listTransactionsTool,
+      leagueAnalytics: leagueAnalyticsTool,
     },
     maxSteps: 100,
   });

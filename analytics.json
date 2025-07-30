@@ -1,0 +1,2287 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Captain Max's Boat Buddies",
+      "abbrev": "BUDY",
+      "owners": [
+        {
+          "id": "{897A16DC-1FD5-47E3-BA16-DC1FD577E3EC}",
+          "displayName": "Oge1Kenobi",
+          "firstName": "Max",
+          "lastName": "Oge"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Taco Bell Run",
+      "abbrev": "TACO",
+      "owners": [
+        {
+          "id": "{4D74E82B-8E4D-463F-B4E8-2B8E4D163FF7}",
+          "displayName": "Stitchy308",
+          "firstName": "James",
+          "lastName": "Allan"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Mustashe Men",
+      "abbrev": "MM",
+      "owners": [
+        {
+          "id": "{4DE9137B-B4D6-4918-A913-7BB4D6C918D2}",
+          "displayName": "Crazyaids",
+          "firstName": "Anmol",
+          "lastName": "Madaan"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Just Serving Chase",
+      "abbrev": "TARS",
+      "owners": [
+        {
+          "id": "{44E726A3-428E-4832-A726-A3428EB8326F}",
+          "displayName": "ricklypop",
+          "firstName": "Nick",
+          "lastName": "Tarsillo"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Barefoot Bravehearts",
+      "abbrev": "Meep",
+      "owners": [
+        {
+          "id": "{6A25CFA0-1BF3-4ED6-A5CF-A01BF32ED68C}",
+          "displayName": "big_z_97",
+          "firstName": "Jered",
+          "lastName": "Zelikovsky"
+        },
+        {
+          "id": "{D74A3901-BE2C-4247-9725-B621B5952C05}",
+          "displayName": "ESPNFAN0082694703",
+          "firstName": "Jered",
+          "lastName": "Zelikovsky"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Team Latwis",
+      "abbrev": "LAT",
+      "owners": [
+        {
+          "id": "{729E8B7C-9BDF-4ABF-A439-D6CB56D0F7F7}",
+          "displayName": "kevin latwis",
+          "firstName": "kev",
+          "lastName": "lat"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Ol Ironside",
+      "abbrev": "Fat",
+      "owners": [
+        {
+          "id": "{29EAF785-5D55-4E25-AAF7-855D55FE25A5}",
+          "displayName": "Crobs1074",
+          "firstName": "Chris",
+          "lastName": "Roberts"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "name": "GIBBS me ACHANcE",
+      "abbrev": "GAme",
+      "owners": [
+        {
+          "id": "{3E79DC05-E5DC-47A0-A4DC-D4FACCC0466B}",
+          "displayName": "mikehig6",
+          "firstName": "Michael",
+          "lastName": "Higgins"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Cincinnati  Harambe",
+      "abbrev": "CH",
+      "owners": [
+        {
+          "id": "{E680803E-C7F7-4189-B52A-E1A169442170}",
+          "displayName": "mastamat13",
+          "firstName": "mathew",
+          "lastName": "dearaujo"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Nabers in Paris",
+      "abbrev": "NBRS",
+      "owners": [
+        {
+          "id": "{FFDD00F1-1336-4B1E-926E-94B54771EAB0}",
+          "displayName": "gpucis7171899",
+          "firstName": "Greg",
+          "lastName": "Puc'"
+        }
+      ]
+    }
+  ],
+  "analytics": {
+    "teams": {
+      "1": {
+        "teamId": 1,
+        "totalWins": 106,
+        "totalLosses": 49,
+        "totalTies": 0,
+        "winPercentage": 0.6838709677419355,
+        "averagePointsScored": 124.81096774193549,
+        "totalPointsScored": 19345.7,
+        "totalGamesPlayed": 155,
+        "playoffAppearances": 8,
+        "championshipAppearances": 5,
+        "championshipsWon": 4,
+        "seasons": [
+          {
+            "seasonId": 2015,
+            "wins": 12,
+            "losses": 3,
+            "ties": 0,
+            "pointsScored": 1783,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 1,
+            "totalPoints": 1783
+          },
+          {
+            "seasonId": 2016,
+            "wins": 11,
+            "losses": 3,
+            "ties": 0,
+            "pointsScored": 1592,
+            "gamesPlayed": 14,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 1,
+            "totalPoints": 1592
+          },
+          {
+            "seasonId": 2017,
+            "wins": 11,
+            "losses": 4,
+            "ties": 0,
+            "pointsScored": 1519,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 5,
+            "totalPoints": 1519
+          },
+          {
+            "seasonId": 2018,
+            "wins": 12,
+            "losses": 3,
+            "ties": 0,
+            "pointsScored": 2170.2999999999997,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 2,
+            "totalPoints": 2170.3
+          },
+          {
+            "seasonId": 2019,
+            "wins": 7,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1773.8,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 10,
+            "totalPoints": 1379.6
+          },
+          {
+            "seasonId": 2020,
+            "wins": 11,
+            "losses": 4,
+            "ties": 0,
+            "pointsScored": 2178.2000000000003,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 1,
+            "totalPoints": 1807.5000000000002
+          },
+          {
+            "seasonId": 2021,
+            "wins": 12,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 2179.2,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1829.2
+          },
+          {
+            "seasonId": 2022,
+            "wins": 13,
+            "losses": 3,
+            "ties": 0,
+            "pointsScored": 2128.8,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 1,
+            "totalPoints": 1907.7
+          },
+          {
+            "seasonId": 2023,
+            "wins": 6,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1978.6000000000004,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 9,
+            "totalPoints": 1666.7000000000003
+          },
+          {
+            "seasonId": 2024,
+            "wins": 11,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 2042.8,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 1,
+            "totalPoints": 1763.8
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 2,
+            "wins": 11,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.6111111111111112
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 12,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.7058823529411765
+          },
+          {
+            "opponentTeamId": 4,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 15,
+            "losses": 4,
+            "ties": 0,
+            "totalGames": 19,
+            "winPercentage": 0.7894736842105263
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 17,
+            "losses": 2,
+            "ties": 0,
+            "totalGames": 19,
+            "winPercentage": 0.8947368421052632
+          },
+          {
+            "opponentTeamId": 6,
+            "wins": 8,
+            "losses": 4,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.6666666666666666
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.6
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 11,
+            "losses": 3,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.7857142857142857
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 5,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.4166666666666667
+          }
+        ]
+      },
+      "2": {
+        "teamId": 2,
+        "totalWins": 81,
+        "totalLosses": 76,
+        "totalTies": 0,
+        "winPercentage": 0.5159235668789809,
+        "averagePointsScored": 115.18980891719745,
+        "totalPointsScored": 18084.8,
+        "totalGamesPlayed": 157,
+        "playoffAppearances": 7,
+        "championshipAppearances": 2,
+        "championshipsWon": 1,
+        "seasons": [
+          {
+            "seasonId": 2015,
+            "wins": 3,
+            "losses": 12,
+            "ties": 0,
+            "pointsScored": 1355,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1355
+          },
+          {
+            "seasonId": 2016,
+            "wins": 10,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 1660,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1660
+          },
+          {
+            "seasonId": 2017,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1460,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1460
+          },
+          {
+            "seasonId": 2018,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1584.5,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1584.5
+          },
+          {
+            "seasonId": 2019,
+            "wins": 10,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 1764.8,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1409.1999999999998
+          },
+          {
+            "seasonId": 2020,
+            "wins": 5,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1840.9999999999998,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 11,
+            "totalPoints": 1611.4999999999998
+          },
+          {
+            "seasonId": 2021,
+            "wins": 11,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 2041.3,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 1,
+            "totalPoints": 1771.6999999999998
+          },
+          {
+            "seasonId": 2022,
+            "wins": 12,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 2248.8,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 2,
+            "totalPoints": 1863.8
+          },
+          {
+            "seasonId": 2023,
+            "wins": 8,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1928.5,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1570.9999999999998
+          },
+          {
+            "seasonId": 2024,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2200.9,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 9,
+            "totalPoints": 1734.4
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 1,
+            "wins": 7,
+            "losses": 11,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.3888888888888889
+          },
+          {
+            "opponentTeamId": 4,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 9,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5625
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 11,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 20,
+            "winPercentage": 0.55
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 7,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.4666666666666667
+          },
+          {
+            "opponentTeamId": 6,
+            "wins": 7,
+            "losses": 11,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.3888888888888889
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 10,
+            "losses": 4,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.7142857142857143
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.6
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 7,
+            "losses": 6,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.5384615384615384
+          }
+        ]
+      },
+      "3": {
+        "teamId": 3,
+        "totalWins": 82,
+        "totalLosses": 75,
+        "totalTies": 0,
+        "winPercentage": 0.5222929936305732,
+        "averagePointsScored": 115.871974522293,
+        "totalPointsScored": 18191.9,
+        "totalGamesPlayed": 157,
+        "playoffAppearances": 8,
+        "championshipAppearances": 1,
+        "championshipsWon": 0,
+        "seasons": [
+          {
+            "seasonId": 2015,
+            "wins": 10,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 1656,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1656
+          },
+          {
+            "seasonId": 2016,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1675,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1675
+          },
+          {
+            "seasonId": 2017,
+            "wins": 10,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 1492,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 2,
+            "totalPoints": 1492
+          },
+          {
+            "seasonId": 2018,
+            "wins": 7,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1639.4999999999998,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1639.5
+          },
+          {
+            "seasonId": 2019,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1985.2000000000003,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1580.1000000000001
+          },
+          {
+            "seasonId": 2020,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1586.6000000000004,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1390.5000000000002
+          },
+          {
+            "seasonId": 2021,
+            "wins": 4,
+            "losses": 13,
+            "ties": 0,
+            "pointsScored": 1933.3,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 9,
+            "totalPoints": 1625.4
+          },
+          {
+            "seasonId": 2022,
+            "wins": 8,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 2042.1000000000004,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1707.2000000000003
+          },
+          {
+            "seasonId": 2023,
+            "wins": 10,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 2118,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 2,
+            "totalPoints": 1859
+          },
+          {
+            "seasonId": 2024,
+            "wins": 9,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 2064.2,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1650.6
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 4,
+            "wins": 9,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 1,
+            "wins": 5,
+            "losses": 12,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.29411764705882354
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 7,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.4375
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 8,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.47058823529411764
+          },
+          {
+            "opponentTeamId": 6,
+            "wins": 13,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 20,
+            "winPercentage": 0.65
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 9,
+            "losses": 4,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.6923076923076923
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 8,
+            "losses": 4,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.6666666666666666
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 9,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5625
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 3,
+            "losses": 10,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.23076923076923078
+          }
+        ]
+      },
+      "4": {
+        "teamId": 4,
+        "totalWins": 87,
+        "totalLosses": 72,
+        "totalTies": 0,
+        "winPercentage": 0.5471698113207547,
+        "averagePointsScored": 119.5320754716981,
+        "totalPointsScored": 19005.6,
+        "totalGamesPlayed": 159,
+        "playoffAppearances": 10,
+        "championshipAppearances": 3,
+        "championshipsWon": 1,
+        "seasons": [
+          {
+            "seasonId": 2015,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1714,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1714
+          },
+          {
+            "seasonId": 2016,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1587,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1587
+          },
+          {
+            "seasonId": 2017,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1336,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1336
+          },
+          {
+            "seasonId": 2018,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1781.9,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1781.9
+          },
+          {
+            "seasonId": 2019,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1784.9999999999998,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1438.9999999999998
+          },
+          {
+            "seasonId": 2020,
+            "wins": 10,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 2141.1000000000004,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 2,
+            "totalPoints": 1755.3000000000002
+          },
+          {
+            "seasonId": 2021,
+            "wins": 8,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 2069.5,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1731.1000000000001
+          },
+          {
+            "seasonId": 2022,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2071.3,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1721.6000000000001
+          },
+          {
+            "seasonId": 2023,
+            "wins": 11,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 2248.5000000000005,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1811.0000000000002
+          },
+          {
+            "seasonId": 2024,
+            "wins": 11,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 2271.3,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 3,
+            "totalPoints": 1791.3999999999999
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 3,
+            "wins": 9,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 1,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 6,
+            "wins": 8,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.6153846153846154
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 11,
+            "losses": 4,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.7333333333333333
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 9,
+            "losses": 12,
+            "ties": 0,
+            "totalGames": 21,
+            "winPercentage": 0.42857142857142855
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 8,
+            "losses": 4,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.6666666666666666
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 8,
+            "losses": 11,
+            "ties": 0,
+            "totalGames": 19,
+            "winPercentage": 0.42105263157894735
+          }
+        ]
+      },
+      "5": {
+        "teamId": 5,
+        "totalWins": 81,
+        "totalLosses": 74,
+        "totalTies": 0,
+        "winPercentage": 0.5225806451612903,
+        "averagePointsScored": 115.75741935483869,
+        "totalPointsScored": 17942.399999999998,
+        "totalGamesPlayed": 155,
+        "playoffAppearances": 8,
+        "championshipAppearances": 4,
+        "championshipsWon": 1,
+        "seasons": [
+          {
+            "seasonId": 2015,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1648,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 2,
+            "totalPoints": 1648
+          },
+          {
+            "seasonId": 2016,
+            "wins": 7,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1362,
+            "gamesPlayed": 14,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 2,
+            "totalPoints": 1362
+          },
+          {
+            "seasonId": 2017,
+            "wins": 10,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 1379,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1379
+          },
+          {
+            "seasonId": 2018,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1947.7,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 7,
+            "totalPoints": 1947.7
+          },
+          {
+            "seasonId": 2019,
+            "wins": 7,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1630.6,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1315.9
+          },
+          {
+            "seasonId": 2020,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1783.7,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1518.6000000000001
+          },
+          {
+            "seasonId": 2021,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2093.9,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1731.5000000000002
+          },
+          {
+            "seasonId": 2022,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1890.6999999999998,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1714.4999999999998
+          },
+          {
+            "seasonId": 2023,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2044.1999999999998,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 10,
+            "totalPoints": 1641.8
+          },
+          {
+            "seasonId": 2024,
+            "wins": 10,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 2162.6,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 2,
+            "totalPoints": 1892.7
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 6,
+            "wins": 9,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.6428571428571429
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 10,
+            "losses": 6,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.625
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 9,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.5294117647058824
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.5333333333333333
+          },
+          {
+            "opponentTeamId": 1,
+            "wins": 2,
+            "losses": 17,
+            "ties": 0,
+            "totalGames": 19,
+            "winPercentage": 0.10526315789473684
+          },
+          {
+            "opponentTeamId": 4,
+            "wins": 12,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 21,
+            "winPercentage": 0.5714285714285714
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 6,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 11,
+            "winPercentage": 0.5454545454545454
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 8,
+            "losses": 6,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.5714285714285714
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 8,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.47058823529411764
+          }
+        ]
+      },
+      "6": {
+        "teamId": 6,
+        "totalWins": 73,
+        "totalLosses": 84,
+        "totalTies": 0,
+        "winPercentage": 0.46496815286624205,
+        "averagePointsScored": 114.4764331210191,
+        "totalPointsScored": 17972.8,
+        "totalGamesPlayed": 157,
+        "playoffAppearances": 5,
+        "championshipAppearances": 1,
+        "championshipsWon": 0,
+        "seasons": [
+          {
+            "seasonId": 2015,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1697,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1697
+          },
+          {
+            "seasonId": 2016,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1514,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1514
+          },
+          {
+            "seasonId": 2017,
+            "wins": 4,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1347,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 10,
+            "totalPoints": 1347
+          },
+          {
+            "seasonId": 2018,
+            "wins": 4,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1586.3999999999999,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 12,
+            "totalPoints": 1586.4
+          },
+          {
+            "seasonId": 2019,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1847.3999999999999,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1419.6999999999998
+          },
+          {
+            "seasonId": 2020,
+            "wins": 7,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1771.3999999999999,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1544
+          },
+          {
+            "seasonId": 2021,
+            "wins": 10,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 2102.4,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1772.6
+          },
+          {
+            "seasonId": 2022,
+            "wins": 6,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1835.0000000000002,
+            "gamesPlayed": 16,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1575.3000000000002
+          },
+          {
+            "seasonId": 2023,
+            "wins": 10,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 2373.1,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1967
+          },
+          {
+            "seasonId": 2024,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1899.1000000000001,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1583.4
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 5,
+            "wins": 5,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.35714285714285715
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 13,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.7222222222222222
+          },
+          {
+            "opponentTeamId": 4,
+            "wins": 5,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.38461538461538464
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 7,
+            "losses": 13,
+            "ties": 0,
+            "totalGames": 20,
+            "winPercentage": 0.35
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 11,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.6111111111111112
+          },
+          {
+            "opponentTeamId": 1,
+            "wins": 4,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.3333333333333333
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 10,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.5882352941176471
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 2,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 11,
+            "winPercentage": 0.18181818181818182
+          }
+        ]
+      },
+      "8": {
+        "teamId": 8,
+        "totalWins": 62,
+        "totalLosses": 96,
+        "totalTies": 0,
+        "winPercentage": 0.3924050632911392,
+        "averagePointsScored": 104.3974683544304,
+        "totalPointsScored": 16494.800000000003,
+        "totalGamesPlayed": 158,
+        "playoffAppearances": 5,
+        "championshipAppearances": 0,
+        "championshipsWon": 0,
+        "seasons": [
+          {
+            "seasonId": 2015,
+            "wins": 1,
+            "losses": 14,
+            "ties": 0,
+            "pointsScored": 464,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 464
+          },
+          {
+            "seasonId": 2016,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1438,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 9,
+            "totalPoints": 1438
+          },
+          {
+            "seasonId": 2017,
+            "wins": 7,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1291,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 9,
+            "totalPoints": 1291
+          },
+          {
+            "seasonId": 2018,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1727.8,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 10,
+            "totalPoints": 1727.8
+          },
+          {
+            "seasonId": 2019,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1604.7,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 1,
+            "totalPoints": 1302.1
+          },
+          {
+            "seasonId": 2020,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1969.7,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1629.5
+          },
+          {
+            "seasonId": 2021,
+            "wins": 8,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 2051,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1679.5
+          },
+          {
+            "seasonId": 2022,
+            "wins": 5,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1781.6999999999998,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1587.9999999999998
+          },
+          {
+            "seasonId": 2023,
+            "wins": 6,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1986.7,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1692.4999999999998
+          },
+          {
+            "seasonId": 2024,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2180.2,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1795.3999999999999
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 6,
+            "wins": 5,
+            "losses": 13,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.2777777777777778
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 6,
+            "losses": 10,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.375
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 9,
+            "losses": 11,
+            "ties": 0,
+            "totalGames": 20,
+            "winPercentage": 0.45
+          },
+          {
+            "opponentTeamId": 1,
+            "wins": 4,
+            "losses": 15,
+            "ties": 0,
+            "totalGames": 19,
+            "winPercentage": 0.21052631578947367
+          },
+          {
+            "opponentTeamId": 4,
+            "wins": 4,
+            "losses": 11,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.26666666666666666
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 4,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.3076923076923077
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 7,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.4666666666666667
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 8,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.6153846153846154
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 5,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 10,
+            "winPercentage": 0.5
+          }
+        ]
+      },
+      "9": {
+        "teamId": 9,
+        "totalWins": 61,
+        "totalLosses": 81,
+        "totalTies": 0,
+        "winPercentage": 0.4295774647887324,
+        "averagePointsScored": 110.53028169014084,
+        "totalPointsScored": 15695.3,
+        "totalGamesPlayed": 142,
+        "playoffAppearances": 3,
+        "championshipAppearances": 0,
+        "championshipsWon": 0,
+        "seasons": [
+          {
+            "seasonId": 2016,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1454,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1454
+          },
+          {
+            "seasonId": 2017,
+            "wins": 10,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 1568,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 1,
+            "totalPoints": 1568
+          },
+          {
+            "seasonId": 2018,
+            "wins": 5,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1531.4000000000003,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 11,
+            "totalPoints": 1531.4
+          },
+          {
+            "seasonId": 2019,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1613.7999999999997,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 11,
+            "totalPoints": 1317.1
+          },
+          {
+            "seasonId": 2020,
+            "wins": 5,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1731.7,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 12,
+            "totalPoints": 1501
+          },
+          {
+            "seasonId": 2021,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2100.8,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1691.9
+          },
+          {
+            "seasonId": 2022,
+            "wins": 7,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 1676.8,
+            "gamesPlayed": 16,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 10,
+            "totalPoints": 1431
+          },
+          {
+            "seasonId": 2023,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1989.3,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1657.6
+          },
+          {
+            "seasonId": 2024,
+            "wins": 8,
+            "losses": 9,
+            "ties": 0,
+            "pointsScored": 2029.5000000000002,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1636.1000000000001
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 1,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.4
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 5,
+            "losses": 6,
+            "ties": 0,
+            "totalGames": 11,
+            "winPercentage": 0.45454545454545453
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 4,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.3333333333333333
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 6,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.4
+          },
+          {
+            "opponentTeamId": 6,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.4117647058823529
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 5,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.38461538461538464
+          },
+          {
+            "opponentTeamId": 4,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 9,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 5,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 10,
+            "winPercentage": 0.5
+          }
+        ]
+      },
+      "10": {
+        "teamId": 10,
+        "totalWins": 60,
+        "totalLosses": 83,
+        "totalTies": 0,
+        "winPercentage": 0.4195804195804196,
+        "averagePointsScored": 110.75594405594406,
+        "totalPointsScored": 15838.1,
+        "totalGamesPlayed": 143,
+        "playoffAppearances": 3,
+        "championshipAppearances": 0,
+        "championshipsWon": 0,
+        "seasons": [
+          {
+            "seasonId": 2016,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1622,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1622
+          },
+          {
+            "seasonId": 2017,
+            "wins": 4,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1229,
+            "gamesPlayed": 15,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 11,
+            "totalPoints": 1229
+          },
+          {
+            "seasonId": 2018,
+            "wins": 5,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1690.8,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1690.8
+          },
+          {
+            "seasonId": 2019,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "pointsScored": 1859,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 4,
+            "totalPoints": 1518.2
+          },
+          {
+            "seasonId": 2020,
+            "wins": 10,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1737.2,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1375.4
+          },
+          {
+            "seasonId": 2021,
+            "wins": 6,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1921.9,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 10,
+            "totalPoints": 1534.7
+          },
+          {
+            "seasonId": 2022,
+            "wins": 5,
+            "losses": 11,
+            "ties": 0,
+            "pointsScored": 1788.3000000000002,
+            "gamesPlayed": 16,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 9,
+            "totalPoints": 1563.7
+          },
+          {
+            "seasonId": 2023,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2094.2999999999997,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 8,
+            "totalPoints": 1689.6999999999998
+          },
+          {
+            "seasonId": 2024,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 1895.6,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 7,
+            "totalPoints": 1589
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 4,
+            "wins": 4,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.3333333333333333
+          },
+          {
+            "opponentTeamId": 6,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 4,
+            "losses": 10,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.2857142857142857
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 8,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 15,
+            "winPercentage": 0.5333333333333333
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 6,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.42857142857142855
+          },
+          {
+            "opponentTeamId": 1,
+            "wins": 3,
+            "losses": 11,
+            "ties": 0,
+            "totalGames": 14,
+            "winPercentage": 0.21428571428571427
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 7,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 16,
+            "winPercentage": 0.4375
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 9,
+            "losses": 9,
+            "ties": 0,
+            "totalGames": 18,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 11,
+            "wins": 1,
+            "losses": 10,
+            "ties": 0,
+            "totalGames": 11,
+            "winPercentage": 0.09090909090909091
+          }
+        ]
+      },
+      "11": {
+        "teamId": 11,
+        "totalWins": 78,
+        "totalLosses": 49,
+        "totalTies": 0,
+        "winPercentage": 0.6141732283464567,
+        "averagePointsScored": 120.70393700787403,
+        "totalPointsScored": 15329.400000000001,
+        "totalGamesPlayed": 127,
+        "playoffAppearances": 6,
+        "championshipAppearances": 3,
+        "championshipsWon": 3,
+        "seasons": [
+          {
+            "seasonId": 2017,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1423,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 6,
+            "totalPoints": 1423
+          },
+          {
+            "seasonId": 2018,
+            "wins": 9,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1743.3000000000002,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 5,
+            "totalPoints": 1743.3
+          },
+          {
+            "seasonId": 2019,
+            "wins": 11,
+            "losses": 4,
+            "ties": 0,
+            "pointsScored": 1941.3999999999999,
+            "gamesPlayed": 15,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 2,
+            "totalPoints": 1520.5
+          },
+          {
+            "seasonId": 2020,
+            "wins": 8,
+            "losses": 8,
+            "ties": 0,
+            "pointsScored": 1942.8999999999996,
+            "gamesPlayed": 16,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 9,
+            "totalPoints": 1548.1999999999998
+          },
+          {
+            "seasonId": 2021,
+            "wins": 11,
+            "losses": 5,
+            "ties": 0,
+            "pointsScored": 2180.1000000000004,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 2,
+            "totalPoints": 1893.0000000000002
+          },
+          {
+            "seasonId": 2022,
+            "wins": 11,
+            "losses": 6,
+            "ties": 0,
+            "pointsScored": 1967.1999999999998,
+            "gamesPlayed": 17,
+            "madePlayoffs": true,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 3,
+            "totalPoints": 1659.9999999999998
+          },
+          {
+            "seasonId": 2023,
+            "wins": 12,
+            "losses": 4,
+            "ties": 0,
+            "pointsScored": 2051,
+            "gamesPlayed": 16,
+            "madePlayoffs": true,
+            "madeChampionship": true,
+            "wonChampionship": true,
+            "playoffSeed": 1,
+            "totalPoints": 1783.3999999999999
+          },
+          {
+            "seasonId": 2024,
+            "wins": 7,
+            "losses": 10,
+            "ties": 0,
+            "pointsScored": 2080.5,
+            "gamesPlayed": 17,
+            "madePlayoffs": false,
+            "madeChampionship": false,
+            "wonChampionship": false,
+            "playoffSeed": 10,
+            "totalPoints": 1647.2
+          }
+        ],
+        "headToHeadRecords": [
+          {
+            "opponentTeamId": 4,
+            "wins": 11,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 19,
+            "winPercentage": 0.5789473684210527
+          },
+          {
+            "opponentTeamId": 9,
+            "wins": 5,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 10,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 5,
+            "wins": 9,
+            "losses": 8,
+            "ties": 0,
+            "totalGames": 17,
+            "winPercentage": 0.5294117647058824
+          },
+          {
+            "opponentTeamId": 10,
+            "wins": 10,
+            "losses": 1,
+            "ties": 0,
+            "totalGames": 11,
+            "winPercentage": 0.9090909090909091
+          },
+          {
+            "opponentTeamId": 1,
+            "wins": 7,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 12,
+            "winPercentage": 0.5833333333333334
+          },
+          {
+            "opponentTeamId": 8,
+            "wins": 5,
+            "losses": 5,
+            "ties": 0,
+            "totalGames": 10,
+            "winPercentage": 0.5
+          },
+          {
+            "opponentTeamId": 2,
+            "wins": 6,
+            "losses": 7,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.46153846153846156
+          },
+          {
+            "opponentTeamId": 6,
+            "wins": 9,
+            "losses": 2,
+            "ties": 0,
+            "totalGames": 11,
+            "winPercentage": 0.8181818181818182
+          },
+          {
+            "opponentTeamId": 3,
+            "wins": 10,
+            "losses": 3,
+            "ties": 0,
+            "totalGames": 13,
+            "winPercentage": 0.7692307692307693
+          }
+        ]
+      }
+    },
+    "totalSeasons": 10,
+    "dateRange": {
+      "earliest": "2024-06-12T01:36:01.785Z",
+      "latest": "2024-06-12T01:36:01.785Z"
+    }
+  }
+}
