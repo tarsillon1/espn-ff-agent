@@ -1,6 +1,6 @@
 import { nflBaseUrl } from "./config";
 
-export interface BulkPlayerPlaysInput {
+export interface PlayerPlaysInput {
   year: number;
   week: number;
   players: Array<{
@@ -29,7 +29,7 @@ export async function getPlayerPlays({
   year,
   week,
   players,
-}: BulkPlayerPlaysInput): Promise<PlayerPlaysResult[]> {
+}: PlayerPlaysInput): Promise<PlayerPlaysResult[]> {
   const gamesUrl = `${nflBaseUrl}/scoreboard?week=${week}&dates=${year}`;
   const gamesResponse = await fetch(gamesUrl);
 

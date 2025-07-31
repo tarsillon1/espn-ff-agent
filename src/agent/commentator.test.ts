@@ -2,7 +2,7 @@ import { commentate } from "./commentator";
 
 it("should commentate", async () => {
   const result = await commentate(
-    "can you give me a scoring update for this week?"
+    "Create an update on the latest free agency period"
   );
   console.log(result.text);
   expect(result).toBeDefined();
