@@ -11,9 +11,8 @@ import {
 } from "../espn";
 import {
   mapTransactionItem,
-  mapTeam,
-  mapTeamOwner,
-  mapTeamBasicInfo,
+  mapRosterBasicInfo,
+  mapRosterOwner,
 } from "./mappers";
 import { clean } from "../utils";
 
@@ -30,10 +29,10 @@ function mapTransaction(
     date: transaction.proposedDate
       ? new Date(transaction.proposedDate).toISOString()
       : undefined,
-    actingOwner: mapTeamOwner(
+    actingOwner: mapRosterOwner(
       findMemberById(league.members, transaction.memberId)
     ),
-    affectedRoster: mapTeamBasicInfo(
+    affectedRoster: mapRosterBasicInfo(
       findTeamById(league.teams, transaction.teamId),
       league.members
     ),

@@ -1,6 +1,5 @@
 import { baseUrl } from "./config";
 import { LeagueHistory } from "./types";
-import { writeFileSync } from "fs";
 
 const getPath = (leagueId: string) =>
   `/leagueHistory/${leagueId}?view=mMatchup&view=mTeam&view=mSettings`;
@@ -29,8 +28,6 @@ export async function getLeagueHistory(
   }
 
   const data = await res.json();
-
-  writeFileSync("history.json", JSON.stringify(data, null, 2));
 
   return data as LeagueHistory;
 }

@@ -7,7 +7,7 @@ import {
   getTeamNameAndAbbr,
   getPosition,
 } from "../../espn";
-import { mapTeamBasicInfo } from "./team";
+import { mapRosterBasicInfo } from "./team";
 
 export function mapScheduleTeam(
   scheduleTeam: ScheduleTeam,
@@ -16,7 +16,7 @@ export function mapScheduleTeam(
 ) {
   const team = findTeamById(teams, scheduleTeam.teamId);
   return {
-    team: mapTeamBasicInfo(team, members),
+    roster: mapRosterBasicInfo(team, members),
     adjustment: scheduleTeam.adjustment,
     totalPoints: scheduleTeam.totalPoints,
   };

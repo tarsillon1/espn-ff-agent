@@ -1,7 +1,7 @@
 import { findPlayerById, findTeamById } from "../../espn";
 import { ESPNLeagueResponse, PlayerData, TransactionItem } from "../../espn";
 import { mapPlayerData } from "./player";
-import { mapTeam } from "./team";
+import { mapRosterBasicInfo } from "./team";
 
 export function mapTransactionItem(
   item: TransactionItem,
@@ -13,8 +13,8 @@ export function mapTransactionItem(
   const toTeam = findTeamById(league.teams, item.toTeamId);
   return {
     player: mapPlayerData(player),
-    fromTeam: mapTeam(fromTeam, league.members, league.settings),
-    toTeam: mapTeam(toTeam, league.members, league.settings),
+    fromTeam: mapRosterBasicInfo(fromTeam, league.members),
+    toTeam: mapRosterBasicInfo(toTeam, league.members),
     fromLineupSlotId: item.fromLineupSlotId,
     toLineupSlotId: item.toLineupSlotId,
     type: item.type,

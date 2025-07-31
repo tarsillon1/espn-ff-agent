@@ -5,19 +5,18 @@ import {
   Team,
   TransactionCounter,
 } from "../../espn";
-import { clean } from "../../utils";
 import { mapTeamRosterEntry } from "./player";
 
-export function mapTeamOwner(member: Member | undefined) {
+export function mapRosterOwner(member: Member | undefined) {
   if (!member) {
     return undefined;
   }
-  return clean({
+  return {
     id: member.id,
     displayName: member.displayName,
     firstName: member?.firstName,
     lastName: member?.lastName,
-  });
+  };
 }
 
 export function mapTransactionCounter(
@@ -34,7 +33,7 @@ export function mapTransactionCounter(
   };
 }
 
-export function mapTeamBasicInfo(team: Team | undefined, members: Member[]) {
+export function mapRosterBasicInfo(team: Team | undefined, members: Member[]) {
   if (!team) {
     return undefined;
   }
@@ -44,12 +43,12 @@ export function mapTeamBasicInfo(team: Team | undefined, members: Member[]) {
     abbrev: team.abbrev,
     owners: team.owners.map((owner) => {
       const member = findMemberById(members, owner);
-      return mapTeamOwner(member);
+      return mapRosterOwner(member);
     }),
   };
 }
 
-export function mapTeam(
+export function mapRoster(
   team: Team | undefined,
   members: Member[],
   settings: LeagueSettings
@@ -57,9 +56,9 @@ export function mapTeam(
   if (!team) {
     return undefined;
   }
-  const teamBasicInfo = mapTeamBasicInfo(team, members);
+  const rosterBasicInfo = mapRosterBasicInfo(team, members);
   return {
-    ...teamBasicInfo,
+    ...rosterBasicInfo,
     transactionCounter: mapTransactionCounter(
       team.transactionCounter,
       settings

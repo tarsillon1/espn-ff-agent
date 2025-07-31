@@ -25,7 +25,7 @@ export async function commentate(input: string) {
   const listMatchupsTool = createListMatchupsTool(config);
 
   const result = await generateText({
-    model: google("gemini-2.5-pro"),
+    model: google("gemini-2.5-flash"),
     system: createCommentatorPrompt(),
     messages: [{ role: "user", content: input }],
     tools: {
@@ -37,6 +37,8 @@ export async function commentate(input: string) {
     },
     maxSteps: 100,
   });
+
+  console.log(result.usage);
 
   return result;
 }

@@ -4,3 +4,4 @@ export * from "./types";
 export * from "./positions";
 export * from "./teams";
 export * from "./config";
+export * from "./player-plays";

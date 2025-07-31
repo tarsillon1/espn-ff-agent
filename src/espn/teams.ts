@@ -1,4 +1,4 @@
-export const teams = {
+export const idToTeam = {
   [0]: { name: "Free Agent", abbr: "FA" },
   [1]: { name: "Atlanta Falcons", abbr: "ATL" },
   [2]: { name: "Buffalo Bills", abbr: "BUF" },
@@ -34,10 +34,22 @@ export const teams = {
   [34]: { name: "Houston Texans", abbr: "HOU" },
 };
 
+export const abbrToId = Object.fromEntries(
+  Object.entries(idToTeam).map(([id, team]) => [team.abbr, id])
+);
+
 export function getTeamNameAndAbbr(teamId: number) {
-  const team = teams[teamId as keyof typeof teams];
+  const team = idToTeam[teamId as keyof typeof idToTeam];
   if (!team) {
     throw new Error(`Invalid team ID: ${teamId}`);
   }
   return team;
+}
+
+export function getTeamIdFromAbbr(abbr: string) {
+  const id = abbrToId[abbr as keyof typeof abbrToId];
+  if (!id) {
+    throw new Error(`Invalid team abbreviation: ${abbr}`);
+  }
+  return id;
 }

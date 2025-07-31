@@ -1,12 +1,6 @@
 import z from "zod";
-import {
-  ESPNLeagueResponse,
-  findMemberById,
-  getLeagueCached,
-  GetLeagueInput,
-  Team,
-} from "../espn";
-import { mapTeam } from "./mappers";
+import { getLeagueCached, GetLeagueInput } from "../espn";
+import { mapRoster } from "./mappers";
 
 export function createListRostersTool(input: GetLeagueInput) {
   return {
@@ -16,7 +10,7 @@ export function createListRostersTool(input: GetLeagueInput) {
     execute: async () => {
       const league = await getLeagueCached(input);
       return league.teams.map((team) =>
-        mapTeam(team, league.members, league.settings)
+        mapRoster(team, league.members, league.settings)
       );
     },
   };

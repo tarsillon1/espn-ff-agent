@@ -13,7 +13,7 @@ import {
 
 import MiniSearch, { SearchResult } from "minisearch";
 import { cache } from "../utils";
-import { mapTeamOwner } from "./mappers";
+import { mapRosterOwner } from "./mappers";
 
 const findPlayersParameters = z.object({
   query: z
@@ -83,7 +83,7 @@ function mapSearchResultToPlayerDocument(
             rosterName: roster.name,
             owners: roster.owners.map((owner) => {
               const member = findMemberById(league.members, owner);
-              return mapTeamOwner(member);
+              return mapRosterOwner(member);
             }),
           }
         : undefined,

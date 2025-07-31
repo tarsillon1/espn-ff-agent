@@ -1,9 +1,10 @@
 import z from "zod";
+
 import { analyzeLeagueHistory } from "../espn/analytics";
 import { getLeagueHistory } from "../espn/history";
 import { GetLeagueInput, getLeagueCached } from "../espn";
-import { mapTeamBasicInfo } from "./mappers";
-import { writeFileSync } from "fs";
+import { mapRosterBasicInfo } from "./mappers";
+
 export function createLeagueAnalyticsTool(input: GetLeagueInput) {
   return {
     description:
@@ -14,15 +15,13 @@ export function createLeagueAnalyticsTool(input: GetLeagueInput) {
       const leagueData = await getLeagueCached(input);
       const activeTeamIds = leagueData.teams.map((team) => team.id);
       const analytics = analyzeLeagueHistory(history, activeTeamIds);
+
       const output = {
-        teams: leagueData.teams.map((team) =>
-          mapTeamBasicInfo(team, leagueData.members)
+        rosters: leagueData.teams.map((team) =>
+          mapRosterBasicInfo(team, leagueData.members)
         ),
         analytics: analytics,
       };
-
-      writeFileSync("analytics.json", JSON.stringify(output, null, 2));
-
       return output;
     },
   };
