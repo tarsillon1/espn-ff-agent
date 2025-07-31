@@ -1,14 +1,14 @@
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
-import { createCommentatorPrompt } from "../prompt";
+import { createCommentatorPrompt } from "./prompt";
 import {
   createFindPlayersTool,
   createLeagueAnalyticsTool,
   createListMatchupsTool,
-} from "../tools";
-import { leagueId, espnS2, espnSwid, year } from "../espn";
-import { createListRostersTool } from "../tools/list-rosters";
-import { createListTransactionsTool } from "../tools/list-transactions";
+} from "./tools";
+import { leagueId, espnS2, espnSwid, year } from "@/espn";
+import { createListRostersTool } from "./tools/list-rosters";
+import { createListTransactionsTool } from "./tools/list-transactions";
 
 export async function commentate(input: string) {
   const config = {

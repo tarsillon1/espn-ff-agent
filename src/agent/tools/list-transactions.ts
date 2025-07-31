@@ -14,7 +14,7 @@ import {
   mapRosterBasicInfo,
   mapRosterOwner,
 } from "./mappers";
-import { clean } from "../utils";
+import { clean } from "../../utils";
 
 function mapTransaction(
   transaction: Transaction,

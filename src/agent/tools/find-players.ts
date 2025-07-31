@@ -9,10 +9,10 @@ import {
   GetPlayersInput,
   getPosition,
   getTeamNameAndAbbr,
-} from "../espn";
+} from "@/espn";
 
 import MiniSearch, { SearchResult } from "minisearch";
-import { cache } from "../utils";
+import { cache } from "../../utils";
 import { mapRosterOwner } from "./mappers";
 
 const findPlayersParameters = z.object({

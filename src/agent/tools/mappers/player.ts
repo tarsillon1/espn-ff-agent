@@ -5,7 +5,7 @@ import {
   PlayerForScoringPeriod,
   TeamPlayer,
   TeamRosterEntry,
-} from "../../espn";
+} from "@/espn";
 
 export function mapBasicPlayerInfo(
   player: TeamPlayer | PlayerForScoringPeriod

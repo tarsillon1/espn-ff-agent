@@ -4,7 +4,7 @@ import {
   Member,
   Team,
   TransactionCounter,
-} from "../../espn";
+} from "@/espn";
 import { mapTeamRosterEntry } from "./player";
 
 export function mapRosterOwner(member: Member | undefined) {

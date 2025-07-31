@@ -1,5 +1,5 @@
 import { writeFileSync } from "fs";
-import { cache } from "../utils";
+import { cache } from "@/utils";
 import { baseUrl } from "./config";
 import type { ESPNLeagueResponse, Member, Team } from "./types";
 

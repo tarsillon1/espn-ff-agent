@@ -5,3 +5,5 @@ export * from "./positions";
 export * from "./teams";
 export * from "./config";
 export * from "./player-plays";
+export * from "./history";
+export * from "./analytics";

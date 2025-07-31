@@ -6,7 +6,7 @@ import {
   Team,
   getTeamNameAndAbbr,
   getPosition,
-} from "../../espn";
+} from "@/espn";
 import { mapRosterBasicInfo } from "./team";
 
 export function mapScheduleTeam(

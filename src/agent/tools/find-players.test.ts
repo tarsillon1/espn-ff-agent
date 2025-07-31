@@ -1,5 +1,5 @@
 import { createFindPlayersTool } from "./find-players";
-import { leagueId, espnS2, espnSwid } from "../espn";
+import { leagueId, espnS2, espnSwid } from "@/espn";
 
 const tool = createFindPlayersTool({
   year: 2025,

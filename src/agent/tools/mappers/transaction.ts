@@ -1,5 +1,10 @@
-import { findPlayerById, findTeamById } from "../../espn";
-import { ESPNLeagueResponse, PlayerData, TransactionItem } from "../../espn";
+import {
+  findPlayerById,
+  findTeamById,
+  ESPNLeagueResponse,
+  PlayerData,
+  TransactionItem,
+} from "@/espn";
 import { mapPlayerData } from "./player";
 import { mapRosterBasicInfo } from "./team";
 

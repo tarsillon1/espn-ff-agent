@@ -1,5 +1,5 @@
 import z from "zod";
-import { getLeagueCached, GetLeagueInput } from "../espn";
+import { getLeagueCached, GetLeagueInput } from "@/espn";
 import { mapRoster } from "./mappers";
 
 export function createListRostersTool(input: GetLeagueInput) {

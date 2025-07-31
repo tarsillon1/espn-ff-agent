@@ -1,8 +1,7 @@
 import z from "zod";
 
-import { analyzeLeagueHistory } from "../espn/analytics";
-import { getLeagueHistory } from "../espn/history";
-import { GetLeagueInput, getLeagueCached } from "../espn";
+import { analyzeLeagueHistory, getLeagueHistory } from "@/espn";
+import { GetLeagueInput, getLeagueCached } from "@/espn";
 import { mapRosterBasicInfo } from "./mappers";
 
 export function createLeagueAnalyticsTool(input: GetLeagueInput) {

@@ -8,9 +8,9 @@ import {
   Team,
   PlayDetails,
   getTeamIdFromAbbr,
-} from "../espn";
+} from "@/espn";
 import { mapMatchupWithScores, mapRosterBasicInfo } from "./mappers";
-import { clean } from "../utils";
+import { clean } from "@/utils";
 import { writeFileSync } from "fs";
 
 function isPlayoffMatchup(matchup: Schedule) {
