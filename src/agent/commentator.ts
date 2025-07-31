@@ -10,7 +10,10 @@ import { leagueId, espnS2, espnSwid, year } from "@/espn";
 import { createListRostersTool } from "./tools/list-rosters";
 import { createListTransactionsTool } from "./tools/list-transactions";
 
-export async function commentate(input: string) {
+export async function generateCommentaryText(
+  input: string,
+  system = createCommentatorPrompt()
+) {
   const config = {
     year,
     leagueId,
@@ -26,7 +29,7 @@ export async function commentate(input: string) {
 
   const result = await generateText({
     model: google("gemini-2.5-flash"),
-    system: createCommentatorPrompt(),
+    system,
     messages: [{ role: "user", content: input }],
     tools: {
       findPlayers: findPlayersTool,

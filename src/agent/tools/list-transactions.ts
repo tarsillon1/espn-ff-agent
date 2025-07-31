@@ -8,7 +8,7 @@ import {
   getPlayersCached,
   PlayerData,
   Transaction,
-} from "../espn";
+} from "@/espn";
 import {
   mapTransactionItem,
   mapRosterBasicInfo,
