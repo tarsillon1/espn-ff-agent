@@ -41,7 +41,7 @@ export async function generateCommentaryText(
     maxSteps: 100,
   });
 
-  console.log(result.usage);
+  console.log("generate text usage", result.usage);
 
   return result;
 }

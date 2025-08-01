@@ -11,7 +11,6 @@ import {
 } from "@/espn";
 import { mapMatchupWithScores, mapRosterBasicInfo } from "./mappers";
 import { clean } from "@/utils";
-import { writeFileSync } from "fs";
 
 function isPlayoffMatchup(matchup: Schedule) {
   return matchup.playoffTierType !== "NONE";
@@ -129,7 +128,6 @@ export function createListMatchupsTool(input: GetLeagueInput) {
       teams: mapTeamsWithRecord(league.teams, league.members, league.schedule),
       hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
     };
-    writeFileSync("matchups.json", JSON.stringify(output, null, 2));
     return output;
   }
 

@@ -1,31 +1,46 @@
 import * as cdk from "aws-cdk-lib";
-import * as lambda from "aws-cdk-lib/aws-lambda";
 import * as apigateway from "aws-cdk-lib/aws-apigateway";
 import * as iam from "aws-cdk-lib/aws-iam";
 import * as path from "path";
 import { Construct } from "constructs";
+import { aws_lambda_nodejs } from "aws-cdk-lib";
+import { Runtime } from "aws-cdk-lib/aws-lambda";
 
 export class FFDiscordBotStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const discordBotFunction = new lambda.Function(
+    const askLambda = new aws_lambda_nodejs.NodejsFunction(this, "AskLambda", {
+      runtime: Runtime.NODEJS_20_X,
+      handler: "handler",
+      entry: path.join(__dirname, "../../src/discord/lambdas/ask.ts"),
+      timeout: cdk.Duration.minutes(15),
+      memorySize: 512,
+      environment: {
+        ESPN_SWID: process.env.ESPN_SWID || "",
+        ESPN_S2: process.env.ESPN_S2 || "",
+        ESPN_LEAGUE_ID: process.env.ESPN_LEAGUE_ID || "",
+        ESPN_YEAR: process.env.ESPN_YEAR || "",
+        GOOGLE_API_KEY: process.env.GOOGLE_API_KEY || "",
+        GOOGLE_GENERATIVE_AI_API_KEY:
+          process.env.GOOGLE_GENERATIVE_AI_API_KEY || "",
+        GOOGLE_TTS_API_KEY: process.env.GOOGLE_TTS_API_KEY || "",
+      },
+    });
+
+    const discordInteractionLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
-      "FFDiscordBotFunction",
+      "FFDiscordInteractionLambda",
       {
-        runtime: lambda.Runtime.NODEJS_18_X,
-        handler: "lambda.handler",
-        code: lambda.Code.fromAsset(path.join(__dirname, "../../src/discord")),
-        timeout: cdk.Duration.seconds(30),
+        runtime: Runtime.NODEJS_20_X,
+        handler: "handler",
+        entry: path.join(__dirname, "../../src/discord/lambdas/interaction.ts"),
+        timeout: cdk.Duration.seconds(60),
         memorySize: 512,
         environment: {
-          DISCORD_TOKEN: process.env.DISCORD_TOKEN || "",
           DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID || "",
-          ESPN_SWID: process.env.ESPN_SWID || "",
-          ESPN_S2: process.env.ESPN_S2 || "",
-          LEAGUE_ID: process.env.LEAGUE_ID || "",
-          ESPN_YEAR: process.env.ESPN_YEAR || "",
-          GOOGLE_API_KEY: process.env.GOOGLE_API_KEY || "",
+          DISCORD_PUBLIC_KEY: process.env.DISCORD_PUBLIC_KEY || "",
+          ASK_LAMBDA_NAME: askLambda.functionName,
         },
       }
     );
@@ -46,7 +61,9 @@ export class FFDiscordBotStack extends cdk.Stack {
     });
 
     const webhook = api.root.addResource("discord").addResource("webhook");
-    const integration = new apigateway.LambdaIntegration(discordBotFunction);
+    const integration = new apigateway.LambdaIntegration(
+      discordInteractionLambda
+    );
     webhook.addMethod("POST", integration);
 
     new cdk.CfnOutput(this, "ApiGatewayUrl", {
@@ -55,9 +72,16 @@ export class FFDiscordBotStack extends cdk.Stack {
         "Discord webhook URL to configure in Discord Developer Portal",
     });
 
-    discordBotFunction.addPermission("ApiGatewayInvoke", {
+    discordInteractionLambda.addPermission("ApiGatewayInvoke", {
       principal: new iam.ServicePrincipal("apigateway.amazonaws.com"),
-      sourceArn: `${api.url}/*/*`,
+      sourceArn: `${api.arnForExecuteApi()}/*/*`,
     });
+
+    discordInteractionLambda.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ["lambda:InvokeFunction"],
+        resources: [askLambda.functionArn],
+      })
+    );
   }
 }

@@ -1,4 +1,3 @@
-import { writeFileSync } from "fs";
 import { cache } from "@/utils";
 import { baseUrl } from "./config";
 import type { ESPNLeagueResponse, Member, Team } from "./types";
@@ -33,7 +32,6 @@ export async function getLeague({
   }
 
   const data = await res.json();
-  writeFileSync("league.json", JSON.stringify(data, null, 2));
   return data as ESPNLeagueResponse;
 }
 
