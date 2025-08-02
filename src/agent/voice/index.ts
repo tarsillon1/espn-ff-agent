@@ -13,7 +13,7 @@ export async function generateVoice(style: string, text: string) {
     apiKey,
   });
 
-  const model = "gemini-2.5-pro-preview-tts";
+  const model = "gemini-2.5-flash-preview-tts";
   const contents = [
     {
       role: "user",

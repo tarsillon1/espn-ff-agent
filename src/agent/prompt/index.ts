@@ -1,2 +1,2 @@
-export * from "./commentator";
-export * from "./sports-announcer";
+export * from "./podcast";
+export * from "./podcast-style";

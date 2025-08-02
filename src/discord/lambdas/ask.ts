@@ -1,7 +1,7 @@
-import { generateCommentaryText } from "@/agent/commentator";
+import { generateFFText } from "@/agent/fantasy-football";
 import { chunkAndSendFollowup, sendAudioFollowup } from "../followup";
 import { generateVoice } from "@/agent/voice";
-import { sportsAnnouncerPrompt } from "@/agent/prompt";
+import { podcastStylePrompt } from "@/agent/prompt";
 
 // this is a manually invoked lambda
 export async function handler({
@@ -14,13 +14,13 @@ export async function handler({
   prompt: string;
 }) {
   try {
-    const response = await generateCommentaryText(prompt);
+    const response = await generateFFText(prompt);
 
     await chunkAndSendFollowup(applicationId, token, response.text);
 
     console.log("generating voice for commentary");
 
-    const voice = await generateVoice(sportsAnnouncerPrompt, response.text);
+    const voice = await generateVoice(podcastStylePrompt, response.text);
 
     console.log("sending file followup");
 

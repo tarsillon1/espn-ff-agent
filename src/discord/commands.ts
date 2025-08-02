@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { discordToken } from "./config";
+import { discordToken, discordClientId } from "./config";
 
 interface DiscordCommand {
   name: string;

@@ -166,7 +166,8 @@ export interface ScheduleTeam {
   teamId: number;
   tiebreak: number;
   totalPoints: number;
-  rosterForMatchupPeriod: RosterForMatchupPeriod;
+  rosterForMatchupPeriod?: RosterForMatchupPeriod;
+  rosterForScoringPeriod?: RosterForMatchupPeriod;
 }
 
 // Types for rosterForMatchupPeriod structure

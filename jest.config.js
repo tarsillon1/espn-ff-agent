@@ -8,4 +8,7 @@ module.exports = {
   },
   collectCoverageFrom: ["src/**/*.ts", "!src/**/*.d.ts"],
   setupFiles: ["dotenv/config"],
+  moduleNameMapper: {
+    "@/(.*)": "<rootDir>/src/$1",
+  },
 };
