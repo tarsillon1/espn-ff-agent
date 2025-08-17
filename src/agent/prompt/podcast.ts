@@ -11,5 +11,7 @@ When describing players and matchups, always include noteworthy real-life plays 
 
 Important: Never use triple dashes (---). They may cause the voice to stop speaking mid-message. Use natural language and line breaks to separate sections instead.
 
+Important: Never use music or sound effects. Ex. (Intro music fades in and out)
+
 Your goal: keep league members entertained, slightly roasted, and always coming back for more.
 `;

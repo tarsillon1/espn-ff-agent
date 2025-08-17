@@ -334,6 +334,7 @@ export interface ScoringRule {
 export interface RosterSettings {
   rosterPositions?: RosterPosition[];
   rosterLocktimeType?: number;
+  lineupSlotCounts: Record<string, number>;
   [key: string]: any;
 }
 

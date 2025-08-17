@@ -4,6 +4,7 @@ import {
   ESPNLeagueResponse,
   PlayerData,
   TransactionItem,
+  getSlotName,
 } from "@/espn";
 import { mapPlayerData } from "./player";
 import { mapRosterBasicInfo } from "./team";
@@ -20,8 +21,8 @@ export function mapTransactionItem(
     player: mapPlayerData(player),
     fromTeam: mapRosterBasicInfo(fromTeam, league.members),
     toTeam: mapRosterBasicInfo(toTeam, league.members),
-    fromLineupSlotId: item.fromLineupSlotId,
-    toLineupSlotId: item.toLineupSlotId,
+    fromLineupSlotId: getSlotName(item.fromLineupSlotId),
+    toLineupSlotId: getSlotName(item.toLineupSlotId),
     type: item.type,
   };
 }

@@ -25,6 +25,11 @@ export class FFDiscordBotStack extends cdk.Stack {
         GOOGLE_GENERATIVE_AI_API_KEY:
           process.env.GOOGLE_GENERATIVE_AI_API_KEY || "",
         GOOGLE_TTS_API_KEY: process.env.GOOGLE_TTS_API_KEY || "",
+        DISCORD_TOKEN: process.env.DISCORD_TOKEN || "",
+        OPENAI_API_KEY: process.env.OPENAI_API_KEY || "",
+      },
+      bundling: {
+        nodeModules: ["@discordjs/voice"],
       },
     });
 

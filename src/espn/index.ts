@@ -7,3 +7,4 @@ export * from "./config";
 export * from "./player-plays";
 export * from "./history";
 export * from "./analytics";
+export * from "./slot";

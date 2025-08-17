@@ -19,6 +19,7 @@ interface DiscordInteraction {
   application_id: string;
   token: string;
   channel_id: string;
+  guild_id: string;
   member?: {
     user: {
       id: string;
@@ -53,6 +54,9 @@ async function ask(interaction: DiscordInteraction) {
       applicationId: interaction.application_id,
       token: interaction.token,
       prompt: question,
+      voiceChannelId: interaction.channel_id,
+      guildId: interaction.guild_id,
+      memberId: interaction.member?.user.id,
     }),
   });
   await lambdaClient.send(command);

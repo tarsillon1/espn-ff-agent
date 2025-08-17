@@ -1,7 +1,7 @@
 export async function sendAudioFollowup(
   applicationId: string,
   interactionToken: string,
-  fileBuffer: Buffer,
+  fileBuffer: ArrayBuffer,
   filename: string,
   content = "Here's your file!"
 ) {
