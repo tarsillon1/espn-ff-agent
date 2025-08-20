@@ -14,7 +14,7 @@ interface DiscordInteraction {
     name?: string;
     options?: Array<{
       name: string;
-      value: string;
+      value: string | number;
     }>;
   };
   application_id: string;
@@ -37,7 +37,6 @@ async function ask(interaction: DiscordInteraction) {
   const question =
     interaction.data?.options?.find((opt) => opt.name === "question")?.value ||
     "";
-
   if (!question) {
     return {
       type: 4,
@@ -47,10 +46,17 @@ async function ask(interaction: DiscordInteraction) {
       },
     };
   }
+  if (typeof question !== "string") {
+    return {
+      type: 4,
+      data: {
+        content: "Please provide a valid question.",
+      },
+    };
+  }
 
-  const seasonStr =
-    interaction.data?.options?.find((opt) => opt.name === "season")?.value;
-  if (seasonStr && isNaN(Number(seasonStr))) {
+  const season = interaction.data?.options?.find((opt) => opt.name === "season")?.value;
+  if (season && typeof season !== "number") {
     return {
       type: 4,
       data: {
@@ -58,7 +64,6 @@ async function ask(interaction: DiscordInteraction) {
       },
     };
   }
-  const season = seasonStr ? Number(seasonStr) : undefined;
 
   const event: AskLambdaEvent = {
     applicationId: interaction.application_id,
@@ -67,7 +72,7 @@ async function ask(interaction: DiscordInteraction) {
     voiceChannelId: interaction.channel_id,
     guildId: interaction.guild_id,
     memberId: interaction.member?.user.id,
-    season,
+    season: season ? Number(season) : undefined,
   };
 
   const command = new InvokeCommand({

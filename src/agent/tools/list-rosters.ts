@@ -9,7 +9,7 @@ export function createListRostersTool(input: GetLeagueInput) {
     parameters: z.object({}),
     execute: async () => {
       const league = await getLeagueCached(input);
-      return league.teams.map((team) =>
+      return (league?.teams || []).map((team) =>
         mapRoster(team, league.members, league.settings)
       );
     },

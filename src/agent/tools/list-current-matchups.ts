@@ -20,7 +20,7 @@ function getPlayerKey(fullName: string, team: string) {
 }
 
 async function enrichMatchupsWithPlayerPlays(
-  year: number,
+  season: number,
   currentPeriodId: number,
   matchups: ReturnType<typeof mapMatchupWithScores>[]
 ) {
@@ -55,7 +55,7 @@ async function enrichMatchupsWithPlayerPlays(
   }
 
   const playerPlayResults = await getPlayerPlays({
-    year,
+    season,
     week: currentPeriodId,
     players: playersQuery,
   });
@@ -91,10 +91,7 @@ export function createListCurrentMatchupsTool(input: GetLeagueInput) {
     const league = await getLeagueCached(input);
 
     const currentMatchup = league.schedule?.find(hasRoster);
-    const currentPeriodId = getPeriodId(currentMatchup);
-    if (!currentPeriodId) {
-      throw new Error("No current period found. Please try again later.");
-    }
+    const currentPeriodId = getPeriodId(currentMatchup) || 1;
 
     const mappedMatchups =
       league.schedule

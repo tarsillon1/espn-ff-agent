@@ -46,7 +46,7 @@ export function createListTransactionsTool(input: GetLeagueInput) {
   async function listTransactions() {
     const league = await getLeagueCached(input);
     const players = await getPlayersCached(input);
-    const transactions = league.transactions.map((transaction) =>
+    const transactions = (league?.transactions || []).map((transaction) =>
       mapTransaction(transaction, players, league)
     );
     return clean(transactions);

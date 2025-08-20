@@ -5,7 +5,7 @@ const mockGetLeagueInput = {
   espnS2: "test-espn-s2",
   espnSwid: "test-espn-swid",
   leagueId: "123456",
-  year: 2024,
+  season: 2024,
 };
 
 it("should create a tool with correct structure", () => {
