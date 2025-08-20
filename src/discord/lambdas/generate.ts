@@ -20,6 +20,7 @@ async function processGenerateEvent({
   memberId,
   season,
   system,
+  search,
 }: GenerateLambdaEvent) {
   console.log("generating text");
 
@@ -27,6 +28,7 @@ async function processGenerateEvent({
     prompt,
     season,
     system,
+    search,
   });
   await chunkAndSendFollowup(applicationId, token, response.text);
 
@@ -41,27 +43,34 @@ async function processGenerateEvent({
     script: response.text,
   };
 
-  await sqs.send(new SendMessageCommand({
-    QueueUrl: VOIP_SQS_QUEUE_URL,
-    MessageBody: JSON.stringify(voipEvent),
-    MessageGroupId: guildId, 
-  }));
+  await sqs.send(
+    new SendMessageCommand({
+      QueueUrl: VOIP_SQS_QUEUE_URL,
+      MessageBody: JSON.stringify(voipEvent),
+      MessageGroupId: guildId,
+    })
+  );
 }
 
 export async function handler(sqsEvent: SQSEvent) {
-  console.log("Processing Generate SQS event:", JSON.stringify(sqsEvent, null, 2));
+  console.log(
+    "Processing Generate SQS event:",
+    JSON.stringify(sqsEvent, null, 2)
+  );
 
   const batchItemFailures: { itemIdentifier: string }[] = [];
 
-  await Promise.all(sqsEvent.Records.map(async (record) => {
-    try {
-      const generateEvent: GenerateLambdaEvent = JSON.parse(record.body);
-      await processGenerateEvent(generateEvent);  
-    } catch (err) {
-      console.error("Failed to generate commentary", err);
-      batchItemFailures.push({ itemIdentifier: record.messageId });
-    }
-  }));
+  await Promise.all(
+    sqsEvent.Records.map(async (record) => {
+      try {
+        const generateEvent: GenerateLambdaEvent = JSON.parse(record.body);
+        await processGenerateEvent(generateEvent);
+      } catch (err) {
+        console.error("Failed to generate commentary", err);
+        batchItemFailures.push({ itemIdentifier: record.messageId });
+      }
+    })
+  );
 
   return batchItemFailures.length > 0 ? { batchItemFailures } : undefined;
 }

@@ -1,12 +1,13 @@
 import { google } from "@ai-sdk/google";
-import { generateText } from "ai";
-import { createPodcastPrompt } from "./prompt";
+import { generateText, ToolSet } from "ai";
+import { createPodcastPrompt, searchGroundingPrompt } from "./prompt";
 import {
   createFindPlayersTool,
   createLeagueAnalyticsTool,
   createListCurrentMatchupsTool,
 } from "./tools";
 import { leagueId, espnS2, espnSwid } from "@/espn";
+
 import { createListRostersTool } from "./tools/list-rosters";
 import { createListTransactionsTool } from "./tools/list-transactions";
 import { createListNFLHeadlinesTool } from "./tools/nfl-headlines";
@@ -16,12 +17,14 @@ type GenerateFFTextInput = {
   prompt: string;
   season?: number;
   system?: string;
+  search?: boolean;
 };
 
 export async function generateFFText({
   prompt,
   season = new Date().getFullYear(),
   system = createPodcastPrompt(),
+  search = true,
 }: GenerateFFTextInput) {
   const config = {
     season,
@@ -41,10 +44,7 @@ export async function generateFFText({
   const grounding = {
     role: "system",
     content: `
-    If the user asks about a player, team, or situation,
-    ALWAYS call 'search' first to fetch relevant articles
-    before answering. Do not rely on your internal knowledge.
-
+    ${search ? searchGroundingPrompt : ""}
     Grounding data: ${JSON.stringify({
       recentNFLHeadlines,
       fantasyLeagueRosters,
@@ -57,17 +57,21 @@ export async function generateFFText({
   const leagueAnalyticsTool = createLeagueAnalyticsTool(config);
   const listCurrentMatchupsTool = createListCurrentMatchupsTool(config);
 
+  const tools: ToolSet = {
+    findPlayers: findPlayersTool,
+    listTransactions: listTransactionsTool,
+    leagueAnalytics: leagueAnalyticsTool,
+    listMatchups: listCurrentMatchupsTool,
+  };
+  if (search) {
+    tools.search = searchTool;
+  }
+
   const result = await generateText({
     model: google("gemini-2.5-pro"),
     system,
     messages: [grounding, { role: "user", content: prompt }],
-    tools: {
-      search: searchTool,
-      findPlayers: findPlayersTool,
-      listTransactions: listTransactionsTool,
-      leagueAnalytics: leagueAnalyticsTool,
-      listMatchups: listCurrentMatchupsTool,
-    },
+    tools,
     maxSteps: 100,
     temperature: 0.5,
   });

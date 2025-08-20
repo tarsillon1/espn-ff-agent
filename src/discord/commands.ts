@@ -25,13 +25,20 @@ const commands: DiscordCommand[] = [
       {
         name: "question",
         description: "Your question about the league",
-        type: 3, 
+        type: 3,
         required: true,
       },
       {
         name: "season",
         description: `The season of the league (default: ${new Date().getFullYear()})`,
-        type: 4, 
+        type: 4,
+        required: false,
+      },
+      {
+        name: "search",
+        description:
+          "If true will use web searches to answer questions (default: true)",
+        type: 5,
         required: false,
       },
     ],

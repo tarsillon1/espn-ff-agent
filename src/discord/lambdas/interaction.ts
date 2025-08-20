@@ -62,12 +62,26 @@ async function ask(interaction: DiscordInteraction) {
     };
   }
 
-  const season = interaction.data?.options?.find((opt) => opt.name === "season")?.value;
+  const season = interaction.data?.options?.find(
+    (opt) => opt.name === "season"
+  )?.value;
   if (season && typeof season !== "number") {
     return {
       type: 4,
       data: {
         content: "Please provide a valid season.",
+      },
+    };
+  }
+
+  const search = interaction.data?.options?.find(
+    (opt) => opt.name === "search"
+  )?.value;
+  if (search && typeof search !== "boolean") {
+    return {
+      type: 4,
+      data: {
+        content: "Please provide a valid search value.",
       },
     };
   }
@@ -80,12 +94,15 @@ async function ask(interaction: DiscordInteraction) {
     guildId: interaction.guild_id,
     memberId: interaction.member?.user.id,
     season: season ? Number(season) : undefined,
+    search: typeof search === "boolean" ? search : undefined,
   };
 
-  await sqs.send(new SendMessageCommand({
-    QueueUrl: GENERATE_SQS_QUEUE_URL,
-    MessageBody: JSON.stringify(event),
-  }));
+  await sqs.send(
+    new SendMessageCommand({
+      QueueUrl: GENERATE_SQS_QUEUE_URL,
+      MessageBody: JSON.stringify(event),
+    })
+  );
 
   return { type: 5 };
 }

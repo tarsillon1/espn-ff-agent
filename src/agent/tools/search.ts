@@ -9,18 +9,23 @@ export function createSearchTool() {
   async function search({ query }: { query: string }) {
     console.log("searching", query);
 
-    const response = await tvly.search(query, {
-      topic: "news",
-      maxResults: 10,
-      searchDepth: "basic",
-    });
+    try {
+      const response = await tvly.search(query, {
+        topic: "news",
+        maxResults: 10,
+        searchDepth: "basic",
+      });
 
-    return response.results.map((result) => ({
-      title: result.title,
-      content: result.content,
-      published: result.publishedDate,
-      link: result.url,
-    }));
+      return response.results.map((result) => ({
+        title: result.title,
+        content: result.content,
+        published: result.publishedDate,
+        link: result.url,
+      }));
+    } catch (error) {
+      console.error("Failed to search", error);
+      return { error: "Failed to search" };
+    }
   }
 
   return {
