@@ -3,7 +3,7 @@ import { espnS2, espnSwid, leagueId } from "./config";
 
 it("should get players ", async () => {
   const res = await getPlayers({
-    year: 2025,
+    season: 2025,
     leagueId,
     espnS2,
     espnSwid,

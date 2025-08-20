@@ -2,6 +2,7 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { verifyDiscordRequest } from "../verify";
 import { askLambdaName, discordPublicKey } from "../config";
 import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
+import { AskLambdaEvent } from "../types";
 
 const lambdaClient = new LambdaClient({
   region: "us-east-1",
@@ -47,17 +48,32 @@ async function ask(interaction: DiscordInteraction) {
     };
   }
 
+  const seasonStr =
+    interaction.data?.options?.find((opt) => opt.name === "season")?.value;
+  if (seasonStr && isNaN(Number(seasonStr))) {
+    return {
+      type: 4,
+      data: {
+        content: "Please provide a valid season.",
+      },
+    };
+  }
+  const season = seasonStr ? Number(seasonStr) : undefined;
+
+  const event: AskLambdaEvent = {
+    applicationId: interaction.application_id,
+    token: interaction.token,
+    prompt: question,
+    voiceChannelId: interaction.channel_id,
+    guildId: interaction.guild_id,
+    memberId: interaction.member?.user.id,
+    season,
+  };
+
   const command = new InvokeCommand({
     FunctionName: askLambdaName,
     InvocationType: "Event",
-    Payload: JSON.stringify({
-      applicationId: interaction.application_id,
-      token: interaction.token,
-      prompt: question,
-      voiceChannelId: interaction.channel_id,
-      guildId: interaction.guild_id,
-      memberId: interaction.member?.user.id,
-    }),
+    Payload: JSON.stringify(event),
   });
   await lambdaClient.send(command);
 

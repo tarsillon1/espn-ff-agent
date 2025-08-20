@@ -3,7 +3,7 @@ import { baseUrl } from "./config";
 import type { PlayerData } from "./types";
 
 export type GetPlayersInput = {
-  year: number;
+  season: number;
   leagueId: string;
   espnS2: string;
   espnSwid: string;
@@ -24,13 +24,13 @@ const filterHeaderValue = JSON.stringify({
 });
 
 export async function getPlayers({
-  year,
+  season,
   leagueId,
   espnS2,
   espnSwid,
 }: GetPlayersInput): Promise<PlayerData[]> {
   const res = await fetch(
-    `${baseUrl}/seasons/${year}/segments/0/leagues/${leagueId}?${views}`,
+    `${baseUrl}/seasons/${season}/segments/0/leagues/${leagueId}?${views}`,
     {
       headers: {
         Cookie: `espn_s2=${espnS2}; SWID=${espnSwid}`,

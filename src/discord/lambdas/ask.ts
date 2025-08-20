@@ -1,37 +1,11 @@
+import type { AskLambdaEvent } from "../types";
+
 import { generateFFText } from "@/agent/fantasy-football";
 import { chunkAndSendFollowup, sendAudioFollowup } from "../followup";
 import { streamVoice } from "@/agent/voice/openai";
 import { podcastStylePrompt } from "@/agent/prompt";
 import { createVoipClient, findVoiceChannel } from "../voip";
 import { Readable } from "stream";
-
-// Helper function to convert web ReadableStream to Buffer
-async function webStreamToBuffer(webStream: ReadableStream): Promise<Buffer> {
-  const reader = webStream.getReader();
-  const chunks: Uint8Array[] = [];
-
-  try {
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      chunks.push(value);
-    }
-  } finally {
-    reader.releaseLock();
-  }
-
-  // Concatenate all chunks into a single buffer
-  const totalLength = chunks.reduce((acc, chunk) => acc + chunk.length, 0);
-  const buffer = Buffer.allocUnsafe(totalLength);
-  let offset = 0;
-
-  for (const chunk of chunks) {
-    buffer.set(chunk, offset);
-    offset += chunk.length;
-  }
-
-  return buffer;
-}
 
 // this is a manually invoked lambda
 export async function handler({
@@ -41,18 +15,17 @@ export async function handler({
   voiceChannelId,
   guildId,
   memberId,
-}: {
-  applicationId: string;
-  token: string;
-  prompt: string;
-  voiceChannelId: string;
-  guildId: string;
-  memberId: string;
-}) {
+  season,
+  system,
+}: AskLambdaEvent) {
   try {
     console.log("generating text");
 
-    const response = await generateFFText(prompt);
+    const response = await generateFFText({
+      prompt,
+      season,
+      system,
+    });
     await chunkAndSendFollowup(applicationId, token, response.text);
 
     console.log("generating voice for commentary");

@@ -12,7 +12,7 @@ import { AudioPlayerStatus, NoSubscriberBehavior } from "@discordjs/voice";
 export async function findVoiceChannel(
   guildId: string,
   voiceChannelId: string,
-  memberId: string
+  memberId?: string
 ) {
   const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],

@@ -1,7 +1,7 @@
 import { nflBaseUrl } from "./config";
 
 export interface PlayerPlaysInput {
-  year: number;
+  season: number;
   week: number;
   players: Array<{
     playerName: string;
@@ -26,11 +26,11 @@ export interface PlayerPlaysResult {
 }
 
 export async function getPlayerPlays({
-  year,
+  season,
   week,
   players,
 }: PlayerPlaysInput): Promise<PlayerPlaysResult[]> {
-  const gamesUrl = `${nflBaseUrl}/scoreboard?week=${week}&dates=${year}`;
+  const gamesUrl = `${nflBaseUrl}/scoreboard?week=${week}&dates=${season}`;
   const gamesResponse = await fetch(gamesUrl);
 
   if (!gamesResponse.ok) {

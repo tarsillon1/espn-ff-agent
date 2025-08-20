@@ -6,17 +6,17 @@ export type GetLeagueInput = {
   espnS2: string;
   espnSwid: string;
   leagueId: string;
-  year: number;
+  season: number;
 };
 
 export async function getLeague({
   espnS2,
   espnSwid,
   leagueId,
-  year,
+  season,
 }: GetLeagueInput) {
   const res = await fetch(
-    `${baseUrl}/seasons/${year}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster&view=mSettings&view=mMatchupScore&view=mMatchup`,
+    `${baseUrl}/seasons/${season}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster&view=mSettings&view=mMatchupScore&view=mMatchup`,
     {
       headers: {
         Accept: "application/json",

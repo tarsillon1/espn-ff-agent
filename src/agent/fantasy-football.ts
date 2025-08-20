@@ -6,16 +6,23 @@ import {
   createLeagueAnalyticsTool,
   createListCurrentMatchupsTool,
 } from "./tools";
-import { leagueId, espnS2, espnSwid, year } from "@/espn";
+import { leagueId, espnS2, espnSwid } from "@/espn";
 import { createListRostersTool } from "./tools/list-rosters";
 import { createListTransactionsTool } from "./tools/list-transactions";
 
-export async function generateFFText(
-  input: string,
-  system = createPodcastPrompt()
-) {
+type GenerateFFTextInput = {
+  prompt: string;
+  season?: number;
+  system?: string;
+}
+
+export async function generateFFText({
+  prompt,
+  season = new Date().getFullYear(),
+  system = createPodcastPrompt(),
+}: GenerateFFTextInput) {
   const config = {
-    year,
+    season,
     leagueId,
     espnS2,
     espnSwid,
@@ -30,7 +37,7 @@ export async function generateFFText(
   const result = await generateText({
     model: google("gemini-2.5-flash"),
     system,
-    messages: [{ role: "user", content: input }],
+    messages: [{ role: "user", content: prompt }],
     tools: {
       findPlayers: findPlayersTool,
       listRosters: listRostersTool,

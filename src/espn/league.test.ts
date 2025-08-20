@@ -7,7 +7,7 @@ it("should get league", async () => {
     espnS2,
     espnSwid,
     leagueId,
-    year: 2024,
+    season: 2024,
   });
 
   expect(res.id).toBeDefined();

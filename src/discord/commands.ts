@@ -25,8 +25,14 @@ const commands: DiscordCommand[] = [
       {
         name: "question",
         description: "Your question about the league",
-        type: 3, // STRING type
+        type: 3, 
         required: true,
+      },
+      {
+        name: "season",
+        description: `The season of the league (default: ${new Date().getFullYear()})`,
+        type: 4, 
+        required: false,
       },
     ],
   },
