@@ -46,6 +46,7 @@ export async function generateFFText({
       listMatchups: listCurrentMatchupsTool,
     },
     maxSteps: 100,
+    temperature: 0.5,
   });
 
   console.log("generate text usage", result.usage);

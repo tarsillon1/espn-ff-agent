@@ -76,7 +76,7 @@ async function ask(interaction: DiscordInteraction) {
     applicationId: interaction.application_id,
     token: interaction.token,
     prompt: question,
-    voiceChannelId: interaction.channel_id,
+    channelId: interaction.channel_id,
     guildId: interaction.guild_id,
     memberId: interaction.member?.user.id,
     season: season ? Number(season) : undefined,

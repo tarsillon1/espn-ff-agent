@@ -2,7 +2,7 @@ export type GenerateLambdaEvent = {
   applicationId: string;
   token: string;
   prompt: string;
-  voiceChannelId: string;
+  channelId: string;
   guildId: string;
   memberId?: string;
   season?: number;
@@ -12,7 +12,7 @@ export type GenerateLambdaEvent = {
 export type VoipLambdaEvent = {
   applicationId: string;
   token: string;
-  voiceChannelId: string;
+  channelId: string;
   guildId: string;
   memberId?: string;
   script: string;
