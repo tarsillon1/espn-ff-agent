@@ -29,7 +29,6 @@ export class FFDiscordBotStack extends cdk.Stack {
       retentionPeriod: cdk.Duration.days(4),
     });
 
-
     const discordInteractionLambda = new aws_lambda_nodejs.NodejsFunction(
       this,
       "FFDiscordInteractionLambda",
@@ -67,6 +66,7 @@ export class FFDiscordBotStack extends cdk.Stack {
           GOOGLE_TTS_API_KEY: process.env.GOOGLE_TTS_API_KEY || "",
           DISCORD_TOKEN: process.env.DISCORD_TOKEN || "",
           OPENAI_API_KEY: process.env.OPENAI_API_KEY || "",
+          SERPER_API_KEY: process.env.SERPER_API_KEY || "",
           VOIP_SQS_QUEUE_URL: voipQueue.queueUrl,
         },
       }
@@ -108,7 +108,11 @@ export class FFDiscordBotStack extends cdk.Stack {
 
     voipLambda.addToRolePolicy(
       new iam.PolicyStatement({
-        actions: ["sqs:ReceiveMessage", "sqs:DeleteMessage", "sqs:GetQueueAttributes"],
+        actions: [
+          "sqs:ReceiveMessage",
+          "sqs:DeleteMessage",
+          "sqs:GetQueueAttributes",
+        ],
         resources: [voipQueue.queueArn],
       })
     );
@@ -122,9 +126,7 @@ export class FFDiscordBotStack extends cdk.Stack {
     );
 
     // Create event source mapping for voip queue
-    voipLambda.addEventSource(
-        new lambdaEventSources.SqsEventSource(voipQueue)
-    );
+    voipLambda.addEventSource(new lambdaEventSources.SqsEventSource(voipQueue));
 
     const api = new apigateway.RestApi(this, "FFDiscordBotApi", {
       restApiName: "Discord Bot API",

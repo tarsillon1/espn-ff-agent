@@ -10,6 +10,7 @@ import { leagueId, espnS2, espnSwid } from "@/espn";
 import { createListRostersTool } from "./tools/list-rosters";
 import { createListTransactionsTool } from "./tools/list-transactions";
 import { createListNFLHeadlinesTool } from "./tools/nfl-headlines";
+import { createSearchTool } from "./tools/search";
 
 type GenerateFFTextInput = {
   prompt: string;
@@ -40,12 +41,17 @@ export async function generateFFText({
   const grounding = {
     role: "system",
     content: `
+    If the user asks about a player, team, or situation,
+    ALWAYS call 'search' first to fetch relevant articles
+    before answering. Do not rely on your internal knowledge.
+
     Grounding data: ${JSON.stringify({
       recentNFLHeadlines,
       fantasyLeagueRosters,
     })}`,
   } as const;
 
+  const searchTool = createSearchTool();
   const findPlayersTool = createFindPlayersTool(config);
   const listTransactionsTool = createListTransactionsTool(config);
   const leagueAnalyticsTool = createLeagueAnalyticsTool(config);
@@ -56,6 +62,7 @@ export async function generateFFText({
     system,
     messages: [grounding, { role: "user", content: prompt }],
     tools: {
+      search: searchTool,
       findPlayers: findPlayersTool,
       listTransactions: listTransactionsTool,
       leagueAnalytics: leagueAnalyticsTool,

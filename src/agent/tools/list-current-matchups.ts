@@ -125,13 +125,7 @@ export function createListCurrentMatchupsTool(input: GetLeagueInput) {
       hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
     };
 
-    const summary = await summarize({
-      content: output,
-      model: "gemini-2.5-flash",
-      system: summarizeMatchupsPrompt,
-    });
-
-    return summary;
+    return output;
   }
 
   return {
