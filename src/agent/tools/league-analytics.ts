@@ -6,6 +6,7 @@ import { mapRosterBasicInfo } from "./mappers";
 
 export function createLeagueAnalyticsTool(input: GetLeagueInput) {
   return {
+    name: "leagueAnalytics",
     description:
       "Get comprehensive historical analytics for the league, including team performance, head-to-head records, playoff appearances, and championships. The data is enriched with team names and owner information. Teams are marked as active or inactive based on current league membership.",
     parameters: z.object({}),

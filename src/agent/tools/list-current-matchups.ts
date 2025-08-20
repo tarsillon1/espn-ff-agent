@@ -14,6 +14,7 @@ import {
   mapMatchupWithScores,
 } from "./mappers";
 import { clean } from "@/utils";
+import { summarize, summarizePrompt } from "./summarize";
 
 function getPlayerKey(fullName: string, team: string) {
   return `${fullName}-${team}`;
@@ -84,6 +85,21 @@ function hasRoster(matchup: Schedule) {
   return !!awayRoster?.length && !!homeRoster?.length;
 }
 
+const summarizeMatchupsPrompt =
+  summarizePrompt +
+  `
+You will be provided a list of Fantasy Football league matchups for the current scoring period.
+The response will be provided to another LLM that will use it to ground their response in the context of all league matchups.
+Respond with a list of bullet points that includes:
+- Date of the matchup
+- Players for each team
+- Fantasy points scored for each player
+- Notable / highlight real life plays for players that scored fantasy points.
+- Matchup statuses (winners, losers, undecided)
+- Matchup scores
+- Playoff, championship, and consolidation bracket status (if applicable)
+`;
+
 export function createListCurrentMatchupsTool(input: GetLeagueInput) {
   async function listCurrentMatchups() {
     console.log("listing matchups");
@@ -109,7 +125,13 @@ export function createListCurrentMatchupsTool(input: GetLeagueInput) {
       hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
     };
 
-    return output;
+    const summary = await summarize({
+      content: output,
+      model: "gemini-2.5-flash",
+      system: summarizeMatchupsPrompt,
+    });
+
+    return summary;
   }
 
   return {

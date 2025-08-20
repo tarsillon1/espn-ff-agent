@@ -15,6 +15,17 @@ import {
   mapRosterOwner,
 } from "./mappers";
 import { clean } from "../../utils";
+import { summarize, summarizePrompt } from "./summarize";
+
+const summarizeTransactionsPrompt =
+  summarizePrompt +
+  `
+You will be provided a list of fantasy football league transactions.
+The response will be provided to another LLM that will use it to ground their response in the context of all league transactions.
+Make sure to include all transactions with the date they were proposed.
+Response should be formatted in a bulleted list highlighting all facts that can be deduced from the transactions.
+Response should be concise but leave out as little information as possible.
+`;
 
 function mapTransaction(
   transaction: Transaction,

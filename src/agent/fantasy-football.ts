@@ -9,12 +9,13 @@ import {
 import { leagueId, espnS2, espnSwid } from "@/espn";
 import { createListRostersTool } from "./tools/list-rosters";
 import { createListTransactionsTool } from "./tools/list-transactions";
+import { createListNFLHeadlinesTool } from "./tools/nfl-headlines";
 
 type GenerateFFTextInput = {
   prompt: string;
   season?: number;
   system?: string;
-}
+};
 
 export async function generateFFText({
   prompt,
@@ -28,19 +29,34 @@ export async function generateFFText({
     espnSwid,
   };
 
-  const findPlayersTool = createFindPlayersTool(config);
   const listRostersTool = createListRostersTool(config);
+  const listNFLHeadlinesTool = createListNFLHeadlinesTool();
+
+  const [fantasyLeagueRosters, recentNFLHeadlines] = await Promise.all([
+    listRostersTool.execute?.(),
+    listNFLHeadlinesTool.execute?.(),
+  ]);
+
+  const grounding = {
+    role: "system",
+    content: `
+    Grounding data: ${JSON.stringify({
+      recentNFLHeadlines,
+      fantasyLeagueRosters,
+    })}`,
+  } as const;
+
+  const findPlayersTool = createFindPlayersTool(config);
   const listTransactionsTool = createListTransactionsTool(config);
   const leagueAnalyticsTool = createLeagueAnalyticsTool(config);
   const listCurrentMatchupsTool = createListCurrentMatchupsTool(config);
 
   const result = await generateText({
-    model: google("gemini-2.5-flash"),
+    model: google("gemini-2.5-pro"),
     system,
-    messages: [{ role: "user", content: prompt }],
+    messages: [grounding, { role: "user", content: prompt }],
     tools: {
       findPlayers: findPlayersTool,
-      listRosters: listRostersTool,
       listTransactions: listTransactionsTool,
       leagueAnalytics: leagueAnalyticsTool,
       listMatchups: listCurrentMatchupsTool,

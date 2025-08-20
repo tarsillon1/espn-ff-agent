@@ -104,7 +104,13 @@ export function createFindPlayersTool(input: GetPlayersInput) {
     query,
     limit,
   }: z.infer<typeof findPlayersParameters>) {
-    const search = await createPlayerIndexCached(input);
+    console.log("finding players", query, limit);
+
+    const search =
+      (await createPlayerIndexCached(input)) ||
+      new MiniSearch({
+        fields: [],
+      });
     const league = await getLeagueCached(input);
     const results = search
       .search(query)
@@ -114,6 +120,7 @@ export function createFindPlayersTool(input: GetPlayersInput) {
   }
 
   return {
+    name: "findPlayers",
     description:
       "Find players that match the query. Includes information such as the player's name, team, position, injury status and benched status.",
     parameters: findPlayersParameters,
