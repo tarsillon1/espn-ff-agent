@@ -1,4 +1,4 @@
-export type AskLambdaEvent = {
+export type GenerateLambdaEvent = {
   applicationId: string;
   token: string;
   prompt: string;
@@ -7,4 +7,14 @@ export type AskLambdaEvent = {
   memberId?: string;
   season?: number;
   system?: string;
+}
+
+export type VoipLambdaEvent = {
+  applicationId: string;
+  token: string;
+  voiceChannelId: string;
+  guildId: string;
+  memberId?: string;
+  script: string;
+  style?: string;
 }

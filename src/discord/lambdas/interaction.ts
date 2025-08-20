@@ -2,9 +2,16 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { verifyDiscordRequest } from "../verify";
 import { askLambdaName, discordPublicKey } from "../config";
 import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
-import { AskLambdaEvent } from "../types";
+import { GenerateLambdaEvent } from "../types";
+import { SendMessageCommand, SQSClient } from "@aws-sdk/client-sqs";
 
 const lambdaClient = new LambdaClient({
+  region: "us-east-1",
+});
+
+const GENERATE_SQS_QUEUE_URL = process.env.GENERATE_SQS_QUEUE_URL;
+
+const sqs = new SQSClient({
   region: "us-east-1",
 });
 
@@ -65,7 +72,7 @@ async function ask(interaction: DiscordInteraction) {
     };
   }
 
-  const event: AskLambdaEvent = {
+  const event: GenerateLambdaEvent = {
     applicationId: interaction.application_id,
     token: interaction.token,
     prompt: question,
@@ -75,12 +82,10 @@ async function ask(interaction: DiscordInteraction) {
     season: season ? Number(season) : undefined,
   };
 
-  const command = new InvokeCommand({
-    FunctionName: askLambdaName,
-    InvocationType: "Event",
-    Payload: JSON.stringify(event),
-  });
-  await lambdaClient.send(command);
+  await sqs.send(new SendMessageCommand({
+    QueueUrl: GENERATE_SQS_QUEUE_URL,
+    MessageBody: JSON.stringify(event),
+  }));
 
   return { type: 5 };
 }

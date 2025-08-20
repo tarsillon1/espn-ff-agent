@@ -1,36 +1,19 @@
-import type { AskLambdaEvent } from "../types";
-
-import { generateFFText } from "@/agent/fantasy-football";
-import { chunkAndSendFollowup, sendAudioFollowup } from "../followup";
 import { streamVoice } from "@/agent/voice/openai";
-import { podcastStylePrompt } from "@/agent/prompt";
+import { VoipLambdaEvent } from "../types";
 import { createVoipClient, findVoiceChannel } from "../voip";
 import { Readable } from "stream";
+import { sendAudioFollowup } from "../followup";
 
-// this is a manually invoked lambda
 export async function handler({
   applicationId,
   token,
-  prompt,
   voiceChannelId,
   guildId,
   memberId,
-  season,
-  system,
-}: AskLambdaEvent) {
-  try {
-    console.log("generating text");
-
-    const response = await generateFFText({
-      prompt,
-      season,
-      system,
-    });
-    await chunkAndSendFollowup(applicationId, token, response.text);
-
-    console.log("generating voice for commentary");
-
-    const voice = await streamVoice(podcastStylePrompt, response.text);
+  script,
+  style
+}: VoipLambdaEvent) {
+    const voice = await streamVoice(script, style);
     const [voipStream, followupStream] = voice.tee();
 
     console.log("creating voip client");
@@ -60,7 +43,4 @@ export async function handler({
       await new Response(followupStream).arrayBuffer(),
       "commentary.wav"
     );
-  } catch (err) {
-    console.error("Failed to generate commentary", err);
-  }
 }

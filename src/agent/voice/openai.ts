@@ -1,10 +1,11 @@
 import OpenAI from "openai";
+import { podcastStylePrompt } from "../prompt";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-export async function streamVoice(instructions: string, input: string) {
+export async function streamVoice( input: string, instructions = podcastStylePrompt) {
   const response = await openai.audio.speech.create({
     model: "gpt-4o-mini-tts",
     voice: "verse",
