@@ -66,7 +66,7 @@ export class FFDiscordBotStack extends cdk.Stack {
           GOOGLE_TTS_API_KEY: process.env.GOOGLE_TTS_API_KEY || "",
           DISCORD_TOKEN: process.env.DISCORD_TOKEN || "",
           OPENAI_API_KEY: process.env.OPENAI_API_KEY || "",
-          SERPER_API_KEY: process.env.SERPER_API_KEY || "",
+          TAVILY_API_KEY: process.env.TAVILY_API_KEY || "",
           VOIP_SQS_QUEUE_URL: voipQueue.queueUrl,
         },
       }
