@@ -15,15 +15,13 @@ export async function getLeague({
   leagueId,
   season,
 }: GetLeagueInput) {
-  const res = await fetch(
-    `${baseUrl}/seasons/${season}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster&view=mSettings&view=mMatchupScore&view=mMatchup`,
-    {
-      headers: {
-        Accept: "application/json",
-        Cookie: `espn_s2=${espnS2}; SWID=${espnSwid}`,
-      },
-    }
-  );
+  const url = `${baseUrl}/seasons/${season}/segments/0/leagues/${leagueId}?view=mTransactions2&view=mTeam&view=mRoster&view=mSettings&view=mMatchupScore&view=mMatchup&view=mDraftDetail`;
+  const res = await fetch(url, {
+    headers: {
+      Accept: "application/json",
+      Cookie: `espn_s2=${espnS2}; SWID=${espnSwid}`,
+    },
+  });
 
   if (!res.ok) {
     throw new Error(

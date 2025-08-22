@@ -1,5 +1,5 @@
 export function cache<T>(fn: (...args: any[]) => Promise<T>, ttl: number) {
-  const cache = new Map<string, { result: T; expiresAt: number }>();
+  const cache = new Map<string, { result: Promise<T>; expiresAt: number }>();
   return async (...args: any[]) => {
     const key = JSON.stringify(args);
     if (cache.has(key)) {
@@ -8,7 +8,7 @@ export function cache<T>(fn: (...args: any[]) => Promise<T>, ttl: number) {
         return cached.result;
       }
     }
-    const result = await fn(...args);
+    const result = fn(...args);
     cache.set(key, { result, expiresAt: Date.now() + ttl });
     return result;
   };

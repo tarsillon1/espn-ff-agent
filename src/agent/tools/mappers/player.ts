@@ -3,12 +3,13 @@ import {
   getTeamNameAndAbbr,
   PlayerData,
   PlayerForScoringPeriod,
+  PlayerInfo,
   TeamPlayer,
   TeamRosterEntry,
 } from "@/espn";
 
 export function mapBasicPlayerInfo(
-  player: TeamPlayer | PlayerForScoringPeriod
+  player: TeamPlayer | PlayerForScoringPeriod | PlayerInfo
 ) {
   const team = getTeamNameAndAbbr(player.proTeamId);
   const position = getPosition(player.defaultPositionId);

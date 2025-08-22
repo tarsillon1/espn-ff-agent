@@ -1,5 +1,5 @@
 import z from "zod";
-import { getLeagueCached, GetLeagueInput } from "@/espn";
+import { getLeagueCached, GetLeagueInput, getPlayersCached } from "@/espn";
 import { mapRoster } from "./mappers";
 
 export function createListRostersTool(input: GetLeagueInput) {
@@ -10,8 +10,10 @@ export function createListRostersTool(input: GetLeagueInput) {
     parameters: z.object({}),
     execute: async () => {
       const league = await getLeagueCached(input);
+      const players = await getPlayersCached(input);
+      const playerMap = new Map(players.map((p) => [p.player.id, p]));
       return (league?.teams || []).map((team) =>
-        mapRoster(team, league.members, league.settings)
+        mapRoster(team, league, playerMap)
       );
     },
   };

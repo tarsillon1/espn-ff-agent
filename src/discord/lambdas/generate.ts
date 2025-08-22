@@ -30,9 +30,6 @@ async function processGenerateEvent({
     system,
     search,
   });
-  await chunkAndSendFollowup(applicationId, token, response.text);
-
-  console.log("generating voice for commentary");
 
   const voipEvent: VoipLambdaEvent = {
     applicationId,
@@ -43,13 +40,16 @@ async function processGenerateEvent({
     script: response.text,
   };
 
-  await sqs.send(
-    new SendMessageCommand({
-      QueueUrl: VOIP_SQS_QUEUE_URL,
-      MessageBody: JSON.stringify(voipEvent),
-      MessageGroupId: guildId,
-    })
-  );
+  await Promise.all([
+    chunkAndSendFollowup(applicationId, token, response.text),
+    sqs.send(
+      new SendMessageCommand({
+        QueueUrl: VOIP_SQS_QUEUE_URL,
+        MessageBody: JSON.stringify(voipEvent),
+        MessageGroupId: guildId,
+      })
+    ),
+  ]);
 }
 
 export async function handler(sqsEvent: SQSEvent) {

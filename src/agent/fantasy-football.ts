@@ -12,6 +12,7 @@ import { createListRostersTool } from "./tools/list-rosters";
 import { createListTransactionsTool } from "./tools/list-transactions";
 import { createListNFLHeadlinesTool } from "./tools/nfl-headlines";
 import { createSearchTool } from "./tools/search";
+import { createDraftRecapPrompt } from "./prompt";
 
 type GenerateFFTextInput = {
   prompt: string;
@@ -23,7 +24,7 @@ type GenerateFFTextInput = {
 export async function generateFFText({
   prompt,
   season = new Date().getFullYear(),
-  system = createPodcastPrompt(),
+  system = createDraftRecapPrompt(),
   search = true,
 }: GenerateFFTextInput) {
   const config = {
@@ -48,6 +49,7 @@ export async function generateFFText({
     Grounding data: ${JSON.stringify({
       recentNFLHeadlines,
       fantasyLeagueRosters,
+      fantasyLeagueYear: season,
     })}`,
   } as const;
 

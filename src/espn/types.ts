@@ -16,9 +16,26 @@ export interface ESPNLeagueResponse {
   scheduleForScoringPeriod?: ScheduleForScoringPeriod[]; // Added for mMatchupScore view
 }
 
+export interface DraftPick {
+  autoDraftTypeId: number;
+  bidAmount: number;
+  id: number;
+  keeper: boolean;
+  lineupSlotId: number;
+  nominatingTeamId: number;
+  overallPickNumber: number;
+  playerId: number;
+  reservedForKeeper: boolean;
+  roundId: number;
+  roundPickNumber: number;
+  teamId: number;
+  tradeLocked: boolean;
+}
+
 export interface DraftDetail {
   drafted: boolean;
   inProgress: boolean;
+  picks: DraftPick[];
 }
 
 export interface LeagueStatus {

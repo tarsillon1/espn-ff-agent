@@ -1,11 +1,14 @@
 import {
+  DraftDetail,
+  ESPNLeagueResponse,
   findMemberById,
   LeagueSettings,
   Member,
+  PlayerData,
   Team,
   TransactionCounter,
 } from "@/espn";
-import { mapTeamRosterEntry } from "./player";
+import { mapBasicPlayerInfo, mapTeamRosterEntry } from "./player";
 
 export function mapRosterOwner(member: Member | undefined) {
   if (!member) {
@@ -50,19 +53,28 @@ export function mapRosterBasicInfo(team: Team | undefined, members: Member[]) {
 
 export function mapRoster(
   team: Team | undefined,
-  members: Member[],
-  settings: LeagueSettings
+  league: Pick<ESPNLeagueResponse, "draftDetail" | "members" | "settings">,
+  playersMap: Map<number, PlayerData>
 ) {
   if (!team) {
     return undefined;
   }
-  const rosterBasicInfo = mapRosterBasicInfo(team, members);
+  const picks = league.draftDetail.picks.filter((p) => p.teamId === team.id);
+  const rosterBasicInfo = mapRosterBasicInfo(team, league.members);
   return {
     ...rosterBasicInfo,
     transactionCounter: mapTransactionCounter(
       team.transactionCounter,
-      settings
+      league.settings
     ),
-    players: team.roster.entries.map(mapTeamRosterEntry),
+    rosteredPlayers: team.roster.entries.map(mapTeamRosterEntry),
+    draftPicks: picks.map((p) => {
+      const player = playersMap.get(p.playerId);
+      return {
+        pickNumber: p.overallPickNumber,
+        round: p.roundId,
+        player: player ? mapBasicPlayerInfo(player.player) : "unknown",
+      };
+    }),
   };
 }
