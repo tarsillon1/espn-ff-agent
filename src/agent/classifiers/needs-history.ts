@@ -13,6 +13,9 @@ History data is needed when discussing fantasy team's:
 - Record
 - Points scored
 - Playoff appearances
+- Historical performance
+
+It is better to give a false positive than a false negative.
 
 Respond with a JSON object with a single property "needsHistory" that is a boolean indicating if fantasy football history data is required to answer.
 `;
@@ -24,7 +27,7 @@ export type NeedsHistoryInput = {
 
 export async function needsHistory(input: NeedsHistoryInput) {
   const response = await google.models.generateContent({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash-lite",
     config: {
       systemInstruction: needsHistorySystemInstruction,
       responseMimeType: "application/json",
@@ -54,6 +57,10 @@ export async function needsHistory(input: NeedsHistoryInput) {
 
   const result = JSON.parse(response.text || "{}");
   const needsHistory = !!result.needsHistory;
-  console.log("needsHistory", needsHistory);
+  console.log("needsHistory", {
+    needsHistory,
+    result,
+    usage: response.usageMetadata,
+  });
   return needsHistory;
 }

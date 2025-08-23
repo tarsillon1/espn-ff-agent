@@ -30,7 +30,7 @@ export type NeedsPlaysInput = {
 
 export async function needsPlays(input: NeedsPlaysInput) {
   const response = await google.models.generateContent({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash-lite",
     config: {
       systemInstruction: needsPlaysSystemInstruction,
       responseMimeType: "application/json",
@@ -59,6 +59,9 @@ export async function needsPlays(input: NeedsPlaysInput) {
 
   const result = JSON.parse(response.text || "{}");
   const needsPlays = !!result.needsPlays;
-  console.log("needsPlays", needsPlays);
+  console.log("needsPlays", {
+    needsPlays,
+    usage: response.usageMetadata,
+  });
   return needsPlays;
 }

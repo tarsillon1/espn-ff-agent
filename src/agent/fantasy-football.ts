@@ -6,12 +6,16 @@ import {
   getDraft,
   getLeagueAnalytics,
   listCurrentMatchups,
-  listNFLHeadlines,
   listRosters,
   listTransactions,
 } from "./tools";
 import { google } from "./google";
-import { needsDraft, needsHistory, needsPlays } from "./classifiers";
+import {
+  needsDraft,
+  needsHistory,
+  needsMatchups,
+  needsPlays,
+} from "./classifiers";
 
 const groundingSystemInstruction = `
 The 'fantasyLeague.draft' field contains all players that were drafted by players.
@@ -33,8 +37,6 @@ The 'recentNFLPlays' field contains the most recent plays from live NFL games.
 const researchSystemInstruction = `
 ALWAYS use the 'googleSearch' tool before providing commentary on players.
 Always assume your internal knowledge is outdated unless proven otherwise by research.
-
-When providing commentary on matchups use the 'googleSearch' tool to find real life notable plays and stats for players.
 `;
 
 type GenerateFFTextInput = {
@@ -68,8 +70,8 @@ export async function generateFFText({
 }: GenerateFFTextInput) {
   const config = { season, leagueId, espnS2, espnSwid };
 
-  const listCurrentMatchupsPromise = listCurrentMatchups(config);
-  const playsPromise = listCurrentMatchupsPromise.then((matchups) =>
+  const matchupsPromise = listCurrentMatchups(config);
+  const playsPromise = matchupsPromise.then((matchups) =>
     findPlays(season, matchups.week, matchups.matchups)
   );
 
@@ -80,33 +82,30 @@ export async function generateFFText({
 
   const [
     rosters,
-    matchups,
     transactions,
-    headlines,
     includePlays,
     includeDraft,
     includeHistory,
+    includeMatchups,
   ] = await Promise.all([
     listRosters(config),
-    listCurrentMatchupsPromise,
     listTransactions(config),
-    listNFLHeadlines(),
     needsPlays(classify),
     needsDraft(classify),
     needsHistory(classify),
+    needsMatchups(classify),
   ]);
 
   const grounding: Record<string, unknown> = {
     nfl: {
-      headlines,
       plays: includePlays ? await playsPromise : undefined,
     },
     fantasyLeague: {
       draft: includeDraft ? await draftPromise : undefined,
       history: includeHistory ? await historyPromise : undefined,
+      matchups: includeMatchups ? await matchupsPromise : undefined,
       season,
       rosters,
-      matchups,
       transactions,
     },
   };

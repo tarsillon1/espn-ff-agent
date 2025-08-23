@@ -20,7 +20,7 @@ export type NeedsDraftInput = {
 
 export async function needsDraft(input: NeedsDraftInput) {
   const response = await google.models.generateContent({
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-flash-lite",
     config: {
       systemInstruction: needsDraftSystemInstruction,
       responseMimeType: "application/json",
@@ -50,6 +50,9 @@ export async function needsDraft(input: NeedsDraftInput) {
 
   const result = JSON.parse(response.text || "{}");
   const needsDraft = !!result.needsDraft;
-  console.log("needsDraft", needsDraft);
+  console.log("needsDraft", {
+    needsDraft,
+    usage: response.usageMetadata,
+  });
   return needsDraft;
 }
