@@ -1,27 +1,21 @@
 import { analyzeLeagueHistory, getLeagueHistory } from "@/espn";
 import { GetLeagueInput, getLeagueCached } from "@/espn";
-import { mapRosterBasicInfo } from "./mappers";
 import { Type, type CallableTool } from "@google/genai";
 
-async function leagueAnalytics(input: GetLeagueInput) {
+export async function getLeagueAnalytics(input: GetLeagueInput) {
+  console.log("getting league analytics");
+
   const history = await getLeagueHistory(input);
   const leagueData = await getLeagueCached(input);
   const activeTeamIds = leagueData.teams.map((team) => team.id);
   const analytics = analyzeLeagueHistory(history, activeTeamIds);
-
-  const output = {
-    rosters: leagueData.teams.map((team) =>
-      mapRosterBasicInfo(team, leagueData.members)
-    ),
-    analytics: analytics,
-  };
-  return output;
+  return analytics;
 }
 
 const leagueAnalyticsToolName = "leagueAnalytics";
 
 export function createLeagueAnalyticsTool(input: GetLeagueInput): CallableTool {
-  const leagueAnalyticsBinded = leagueAnalytics.bind(null, input);
+  const leagueAnalyticsBinded = getLeagueAnalytics.bind(null, input);
   return {
     callTool: async (functionCalls) => {
       const results = await Promise.all(

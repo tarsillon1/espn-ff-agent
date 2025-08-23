@@ -1,4 +1,4 @@
-import { getLeagueCached, GetLeagueInput, getPlayersCached } from "@/espn";
+import { getLeagueCached, GetLeagueInput } from "@/espn";
 import { mapRoster } from "./mappers";
 import { Type, type CallableTool } from "@google/genai";
 
@@ -6,11 +6,7 @@ const listRostersToolName = "listRosters";
 
 export async function listRosters(input: GetLeagueInput) {
   const league = await getLeagueCached(input);
-  const players = await getPlayersCached(input);
-  const playerMap = new Map(players.map((p) => [p.player.id, p]));
-  return (league?.teams || []).map((team) =>
-    mapRoster(team, league, playerMap)
-  );
+  return (league?.teams || []).map((team) => mapRoster(team, league));
 }
 
 export function createListRostersTool(input: GetLeagueInput): CallableTool {

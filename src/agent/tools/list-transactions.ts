@@ -43,7 +43,7 @@ function mapTransaction(
   };
 }
 
-async function listTransactions(input: GetLeagueInput) {
+export async function listTransactions(input: GetLeagueInput) {
   const league = await getLeagueCached(input);
   const players = await getPlayersCached(input);
   const transactions = (league?.transactions || []).map((transaction) =>

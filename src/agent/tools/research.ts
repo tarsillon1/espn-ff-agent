@@ -10,7 +10,7 @@ const genai = new GoogleGenAI({
   apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
 });
 
-const systemInstruction = `
+export const researchSystemInstruction = `
 You an assistant responsible for providing real world data to ground another LLM assistant.
 You will be provided with the system instruction of the other LLM assistant, the user's request and some grounding data.
 Your goal is to search and extract content from the web for the latest information to ground the other LLM assistant.
@@ -20,9 +20,14 @@ Provide a summary that is as detailed as possible of all the information you hav
 export type ResearchInput = {
   prompt: string;
   grounding: object;
+  system?: string;
 };
 
-export async function research({ prompt, grounding }: ResearchInput) {
+export async function research({
+  prompt,
+  grounding,
+  system = researchSystemInstruction,
+}: ResearchInput) {
   console.log("researching", prompt);
 
   const contents: Content[] = [
@@ -40,7 +45,7 @@ export async function research({ prompt, grounding }: ResearchInput) {
   const reasearch = await genai.models.generateContent({
     model: "gemini-2.5-flash",
     config: {
-      systemInstruction,
+      systemInstruction: system,
       temperature: 0.5,
       tools: [{ googleSearch: {} }],
     },
@@ -52,7 +57,15 @@ export async function research({ prompt, grounding }: ResearchInput) {
   return reasearch.text;
 }
 
-export function createResearchTool(grounding: object): CallableTool {
+export type CreateResearchToolInput = {
+  grounding: object;
+  system?: string;
+};
+
+export function createResearchTool({
+  grounding,
+  system = researchSystemInstruction,
+}: CreateResearchToolInput): CallableTool {
   return {
     callTool: async (functionCalls: FunctionCall[]) => {
       const results = await Promise.all(
@@ -70,7 +83,7 @@ export function createResearchTool(grounding: object): CallableTool {
               },
             };
           }
-          const result = await research({ prompt, grounding });
+          const result = await research({ prompt, grounding, system });
           return {
             functionResponse: {
               id: call.id,

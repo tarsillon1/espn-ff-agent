@@ -19,7 +19,7 @@ function getPlayerKey(fullName: string, team: string) {
   return `${fullName}-${team}`;
 }
 
-async function enrichMatchupsWithPlayerPlays(
+async function mapMatchupPlays(
   season: number,
   currentPeriodId: number,
   matchups: ReturnType<typeof mapMatchupWithScores>[]
@@ -51,7 +51,7 @@ async function enrichMatchupsWithPlayerPlays(
     })
   );
   if (playersQuery.length === 0) {
-    return matchups;
+    return [];
   }
 
   const playerPlayResults = await getPlayerPlays({
@@ -60,15 +60,29 @@ async function enrichMatchupsWithPlayerPlays(
     players: playersQuery,
   });
 
-  for (const { playerName, teamId, plays } of playerPlayResults) {
-    const key = getPlayerKey(playerName, teamId);
-    const player = scoringPeriodPlayers.get(key);
-    if (player) {
-      player.plays = plays;
-    }
-  }
-
-  return matchups;
+  return playerPlayResults.map(
+    ({
+      play: {
+        text,
+        time,
+        down,
+        distance,
+        quarter,
+        timeRemaining,
+        yardLine,
+        gameId,
+      },
+    }) => ({
+      text,
+      time,
+      down,
+      distance,
+      quarter,
+      timeRemaining,
+      yardLine,
+      gameId,
+    })
+  );
 }
 
 function getRoster(matchup: ScheduleTeam) {
@@ -84,7 +98,7 @@ function hasRoster(matchup: Schedule) {
   return !!awayRoster?.length && !!homeRoster?.length;
 }
 
-async function listCurrentMatchups(input: GetLeagueInput) {
+export async function listCurrentMatchups(input: GetLeagueInput) {
   console.log("listing matchups");
 
   const league = await getLeagueCached(input);
@@ -92,19 +106,19 @@ async function listCurrentMatchups(input: GetLeagueInput) {
   const currentMatchup = league.schedule?.find(hasRoster);
   const currentPeriodId = getPeriodId(currentMatchup) || 1;
 
-  const mappedMatchups =
+  const matchups =
     league.schedule
       ?.filter((schedule) => getPeriodId(schedule) === currentPeriodId)
       ?.map((matchup) => mapMatchupWithScores(matchup, league)) || [];
-  const matchups = clean(
-    await enrichMatchupsWithPlayerPlays(
-      league.seasonId,
-      currentPeriodId,
-      mappedMatchups
-    )
+  const plays = await mapMatchupPlays(
+    league.seasonId,
+    currentPeriodId,
+    matchups
   );
   return {
     matchups,
+    plays,
+    week: currentPeriodId,
     hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
   };
 }

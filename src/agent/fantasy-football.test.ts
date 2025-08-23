@@ -2,7 +2,7 @@ import { generateFFText } from "./fantasy-football";
 
 it("should generate a response", async () => {
   const response = await generateFFText({
-    prompt: "is CJ stroud in the 10th a good pick?",
+    prompt: "how are the matchups looking this week?",
     season: 2024,
   });
   console.log(response.text);

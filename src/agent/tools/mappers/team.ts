@@ -1,21 +1,19 @@
 import {
-  DraftDetail,
   ESPNLeagueResponse,
   findMemberById,
   LeagueSettings,
   Member,
-  PlayerData,
   Team,
   TransactionCounter,
 } from "@/espn";
-import { mapBasicPlayerInfo, mapTeamRosterEntry } from "./player";
+import { mapTeamRosterEntry } from "./player";
 
 export function mapRosterOwner(member: Member | undefined) {
   if (!member) {
     return undefined;
   }
   return {
-    id: member.id,
+    ownerId: member.id,
     displayName: member.displayName,
     firstName: member?.firstName,
     lastName: member?.lastName,
@@ -41,7 +39,7 @@ export function mapRosterBasicInfo(team: Team | undefined, members: Member[]) {
     return undefined;
   }
   return {
-    id: team.id,
+    teamId: team.id,
     name: team.name,
     abbrev: team.abbrev,
     owners: team.owners.map((owner) => {
@@ -53,13 +51,11 @@ export function mapRosterBasicInfo(team: Team | undefined, members: Member[]) {
 
 export function mapRoster(
   team: Team | undefined,
-  league: Pick<ESPNLeagueResponse, "draftDetail" | "members" | "settings">,
-  playersMap: Map<number, PlayerData>
+  league: Pick<ESPNLeagueResponse, "members" | "settings">
 ) {
   if (!team) {
     return undefined;
   }
-  const picks = league.draftDetail.picks.filter((p) => p.teamId === team.id);
   const rosterBasicInfo = mapRosterBasicInfo(team, league.members);
   return {
     ...rosterBasicInfo,
@@ -67,15 +63,6 @@ export function mapRoster(
       team.transactionCounter,
       league.settings
     ),
-    rosteredPlayers: team.roster.entries.map(mapTeamRosterEntry),
-    draftPicks: picks.map((p) => {
-      const player = playersMap.get(p.playerId);
-      return {
-        pickNumber: p.overallPickNumber,
-        round: p.roundId,
-        player: player ? mapBasicPlayerInfo(player.player) : undefined,
-        hasSelected: !!player,
-      };
-    }),
+    players: team.roster.entries.map(mapTeamRosterEntry),
   };
 }

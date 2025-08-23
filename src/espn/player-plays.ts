@@ -17,19 +17,24 @@ export interface PlayDetails {
   quarter: number;
   timeRemaining: string;
   yardLine?: number;
+  gameId: string;
+  driveId?: string;
+  playId: string;
 }
 
-export interface PlayerPlaysResult {
-  playerName: string;
-  teamId: string;
-  plays: PlayDetails[];
+export interface PlayWithPlayers {
+  play: PlayDetails;
+  playersInvolved: Array<{
+    playerName: string;
+    teamId: string;
+  }>;
 }
 
 export async function getPlayerPlays({
   season,
   week,
   players,
-}: PlayerPlaysInput): Promise<PlayerPlaysResult[]> {
+}: PlayerPlaysInput): Promise<PlayWithPlayers[]> {
   const gamesUrl = `${nflBaseUrl}/scoreboard?week=${week}&dates=${season}`;
   const gamesResponse = await fetch(gamesUrl);
 
@@ -40,37 +45,41 @@ export async function getPlayerPlays({
   const gamesData = (await gamesResponse.json()) as any;
   const allGames = gamesData.events || [];
 
-  const results: PlayerPlaysResult[] = players.map((player) => ({
-    playerName: player.playerName,
-    teamId: player.teamId,
-    plays: [],
-  }));
+  const allPlays: PlayWithPlayers[] = [];
 
   for (const game of allGames) {
-    const gamePlays = await getBulkPlayerPlaysFromGame(game.id, players);
-
-    for (let i = 0; i < players.length; i++) {
-      results[i].plays.push(...gamePlays[i]);
-    }
+    const gamePlays = await getPlaysFromGame(game.id, players);
+    allPlays.push(...gamePlays);
   }
 
-  return results;
+  // Sort plays by game, quarter, and time
+  allPlays.sort((a, b) => {
+    if (a.play.gameId !== b.play.gameId) {
+      return a.play.gameId.localeCompare(b.play.gameId);
+    }
+    if (a.play.quarter !== b.play.quarter) {
+      return a.play.quarter - b.play.quarter;
+    }
+    return a.play.time.localeCompare(b.play.time);
+  });
+
+  return allPlays;
 }
 
-async function getBulkPlayerPlaysFromGame(
+async function getPlaysFromGame(
   gameId: string,
   players: Array<{ playerName: string; teamId: string }>
-): Promise<PlayDetails[][]> {
+): Promise<PlayWithPlayers[]> {
   try {
     const summaryUrl = `${nflBaseUrl}/summary?event=${gameId}`;
     const response = await fetch(summaryUrl);
 
     if (!response.ok) {
-      return players.map(() => []);
+      return [];
     }
 
     const data = (await response.json()) as any;
-    const playerPlays: PlayDetails[][] = players.map(() => []);
+    const playsWithPlayers: PlayWithPlayers[] = [];
 
     // Check drives for all plays
     if (data.drives) {
@@ -82,32 +91,47 @@ async function getBulkPlayerPlaysFromGame(
 
         // For each play, check if any of our players are involved
         for (const play of drive.plays) {
-          for (let i = 0; i < players.length; i++) {
-            const player = players[i];
+          const playersInvolved: Array<{ playerName: string; teamId: string }> =
+            [];
+
+          // Check which players are involved in this play
+          for (const player of players) {
             if (
               drive.team.id === player.teamId &&
               isPlayerInPlay(play.text, player.playerName)
             ) {
-              const playDetails: PlayDetails = {
-                text: play.text,
-                time: play.clock?.displayValue || "",
-                down: play.start?.down || undefined,
-                distance: play.start?.distance || undefined,
-                quarter: play.period?.number || 1,
-                timeRemaining: play.clock?.displayValue || "",
-                yardLine: play.start?.yardLine || undefined,
-              };
-              playerPlays[i].push(playDetails);
+              playersInvolved.push(player);
             }
+          }
+
+          // Only include plays where at least one of our players is involved
+          if (playersInvolved.length > 0) {
+            const playDetails: PlayDetails = {
+              text: play.text,
+              time: play.clock?.displayValue || "",
+              down: play.start?.down || undefined,
+              distance: play.start?.distance || undefined,
+              quarter: play.period?.number || 1,
+              timeRemaining: play.clock?.displayValue || "",
+              yardLine: play.start?.yardLine || undefined,
+              gameId: gameId,
+              driveId: drive.id,
+              playId: play.id,
+            };
+
+            playsWithPlayers.push({
+              play: playDetails,
+              playersInvolved,
+            });
           }
         }
       }
     }
 
-    return playerPlays;
+    return playsWithPlayers;
   } catch (error) {
     // Continue with other games even if one fails
-    return players.map(() => []);
+    return [];
   }
 }
 
