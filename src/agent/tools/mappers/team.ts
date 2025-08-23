@@ -73,7 +73,8 @@ export function mapRoster(
       return {
         pickNumber: p.overallPickNumber,
         round: p.roundId,
-        player: player ? mapBasicPlayerInfo(player.player) : "unknown",
+        player: player ? mapBasicPlayerInfo(player.player) : undefined,
+        hasSelected: !!player,
       };
     }),
   };

@@ -35,7 +35,7 @@ const commands: DiscordCommand[] = [
         required: false,
       },
       {
-        name: "search",
+        name: "research",
         description:
           "If true will use web searches to answer questions (default: true)",
         type: 5,

@@ -1,4 +1,3 @@
-import { z } from "zod";
 import {
   getPlayerPlays,
   getLeagueCached,
@@ -14,7 +13,7 @@ import {
   mapMatchupWithScores,
 } from "./mappers";
 import { clean } from "@/utils";
-import { summarize, summarizePrompt } from "./summarize";
+import { Type, type CallableTool } from "@google/genai";
 
 function getPlayerKey(fullName: string, team: string) {
   return `${fullName}-${team}`;
@@ -85,54 +84,72 @@ function hasRoster(matchup: Schedule) {
   return !!awayRoster?.length && !!homeRoster?.length;
 }
 
-const summarizeMatchupsPrompt =
-  summarizePrompt +
-  `
-You will be provided a list of Fantasy Football league matchups for the current scoring period.
-The response will be provided to another LLM that will use it to ground their response in the context of all league matchups.
-Respond with a list of bullet points that includes:
-- Date of the matchup
-- Players for each team
-- Fantasy points scored for each player
-- Notable / highlight real life plays for players that scored fantasy points.
-- Matchup statuses (winners, losers, undecided)
-- Matchup scores
-- Playoff, championship, and consolidation bracket status (if applicable)
-`;
+async function listCurrentMatchups(input: GetLeagueInput) {
+  console.log("listing matchups");
 
-export function createListCurrentMatchupsTool(input: GetLeagueInput) {
-  async function listCurrentMatchups() {
-    console.log("listing matchups");
+  const league = await getLeagueCached(input);
 
-    const league = await getLeagueCached(input);
+  const currentMatchup = league.schedule?.find(hasRoster);
+  const currentPeriodId = getPeriodId(currentMatchup) || 1;
 
-    const currentMatchup = league.schedule?.find(hasRoster);
-    const currentPeriodId = getPeriodId(currentMatchup) || 1;
-
-    const mappedMatchups =
-      league.schedule
-        ?.filter((schedule) => getPeriodId(schedule) === currentPeriodId)
-        ?.map((matchup) => mapMatchupWithScores(matchup, league)) || [];
-    const matchups = clean(
-      await enrichMatchupsWithPlayerPlays(
-        league.seasonId,
-        currentPeriodId,
-        mappedMatchups
-      )
-    );
-    const output = {
-      matchups,
-      hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
-    };
-
-    return output;
-  }
-
+  const mappedMatchups =
+    league.schedule
+      ?.filter((schedule) => getPeriodId(schedule) === currentPeriodId)
+      ?.map((matchup) => mapMatchupWithScores(matchup, league)) || [];
+  const matchups = clean(
+    await enrichMatchupsWithPlayerPlays(
+      league.seasonId,
+      currentPeriodId,
+      mappedMatchups
+    )
+  );
   return {
-    name: "listCurrentMatchups",
-    description:
-      "List matchups in the league for the current scoring period. Includes matchups, teams, and scores. Players are listed with their name, team, position, injury status, free agent budget remaining, transaction counter, and lineup (bench or starting) status. Also includes scoring plays from live games for each player.",
-    parameters: z.object({}),
-    execute: listCurrentMatchups,
+    matchups,
+    hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
+  };
+}
+
+const listCurrentMatchupsToolName = "listCurrentMatchups";
+
+export function createListCurrentMatchupsTool(
+  input: GetLeagueInput
+): CallableTool {
+  const listCurrentMatchupsBinded = listCurrentMatchups.bind(null, input);
+  return {
+    callTool: async (functionCalls) => {
+      const results = await Promise.all(
+        functionCalls.map(async (call) => {
+          if (call.name !== listCurrentMatchupsToolName) {
+            return undefined;
+          }
+
+          const results = await listCurrentMatchupsBinded();
+          return {
+            functionResponse: {
+              id: call.id,
+              name: call.name,
+              response: { results },
+            },
+          };
+        })
+      );
+      return results.filter((result) => !!result);
+    },
+    tool: async () => {
+      return {
+        functionDeclarations: [
+          {
+            name: listCurrentMatchupsToolName,
+            description:
+              "List matchups in the league for the current scoring period",
+            parameters: {
+              type: Type.OBJECT,
+              properties: {},
+              required: [],
+            },
+          },
+        ],
+      };
+    },
   };
 }

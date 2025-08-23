@@ -74,14 +74,14 @@ async function ask(interaction: DiscordInteraction) {
     };
   }
 
-  const search = interaction.data?.options?.find(
-    (opt) => opt.name === "search"
+  const research = interaction.data?.options?.find(
+    (opt) => opt.name === "research"
   )?.value;
-  if (search && typeof search !== "boolean") {
+  if (research && typeof research !== "boolean") {
     return {
       type: 4,
       data: {
-        content: "Please provide a valid search value.",
+        content: "Please provide a valid research value.",
       },
     };
   }
@@ -94,7 +94,7 @@ async function ask(interaction: DiscordInteraction) {
     guildId: interaction.guild_id,
     memberId: interaction.member?.user.id,
     season: season ? Number(season) : undefined,
-    search: typeof search === "boolean" ? search : undefined,
+    research: typeof research === "boolean" ? research : undefined,
   };
 
   await sqs.send(

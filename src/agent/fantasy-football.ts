@@ -1,31 +1,33 @@
-import { google } from "@ai-sdk/google";
-import { generateText, ToolSet } from "ai";
-import { createPodcastPrompt, searchGroundingPrompt } from "./prompt";
+import { Content, GoogleGenAI } from "@google/genai";
+import { createPodcastPrompt } from "./prompt";
 import {
   createFindPlayersTool,
   createLeagueAnalyticsTool,
   createListCurrentMatchupsTool,
+  createListTransactionsTool,
+  listNFLHeadlines,
+  listRosters,
+  combineTools,
+  createResearchTool,
 } from "./tools";
 import { leagueId, espnS2, espnSwid } from "@/espn";
 
-import { createListRostersTool } from "./tools/list-rosters";
-import { createListTransactionsTool } from "./tools/list-transactions";
-import { createListNFLHeadlinesTool } from "./tools/nfl-headlines";
-import { createSearchTool } from "./tools/search";
-import { createDraftRecapPrompt } from "./prompt";
+const genai = new GoogleGenAI({
+  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
+});
 
 type GenerateFFTextInput = {
   prompt: string;
   season?: number;
   system?: string;
-  search?: boolean;
+  research?: boolean;
 };
 
 export async function generateFFText({
   prompt,
   season = new Date().getFullYear(),
-  system = createDraftRecapPrompt(),
-  search = true,
+  system = createPodcastPrompt(),
+  research = true,
 }: GenerateFFTextInput) {
   const config = {
     season,
@@ -34,51 +36,67 @@ export async function generateFFText({
     espnSwid,
   };
 
-  const listRostersTool = createListRostersTool(config);
-  const listNFLHeadlinesTool = createListNFLHeadlinesTool();
-
   const [fantasyLeagueRosters, recentNFLHeadlines] = await Promise.all([
-    listRostersTool.execute?.(),
-    listNFLHeadlinesTool.execute?.(),
+    listRosters(config),
+    listNFLHeadlines(),
   ]);
 
-  const grounding = {
-    role: "system",
-    content: `
-    ${search ? searchGroundingPrompt : ""}
-    Grounding data: ${JSON.stringify({
-      recentNFLHeadlines,
-      fantasyLeagueRosters,
-      fantasyLeagueYear: season,
-    })}`,
-  } as const;
+  const groundingData = {
+    recentNFLHeadlines,
+    fantasyLeagueRosters,
+    fantasyLeagueYear: season,
+  };
 
-  const searchTool = createSearchTool();
+  const researchTool = createResearchTool(groundingData);
+
+  const webResearch = research
+    ? await researchTool.callTool([
+        {
+          name: "research",
+          args: { prompt },
+        },
+      ])
+    : null;
+
+  const researchInstruction = research
+    ? `\nALWAYS use the 'research' tool before providing commentary on players. Always assume your internal knowledge is outdated unless proven otherwise by research.`
+    : "";
+
+  const groundingInstruction = `\nGrounding data: ${JSON.stringify({
+    ...groundingData,
+    webResearch,
+  })}`;
+
+  const systemInstruction = system + researchInstruction + groundingInstruction;
+
   const findPlayersTool = createFindPlayersTool(config);
   const listTransactionsTool = createListTransactionsTool(config);
   const leagueAnalyticsTool = createLeagueAnalyticsTool(config);
   const listCurrentMatchupsTool = createListCurrentMatchupsTool(config);
 
-  const tools: ToolSet = {
-    findPlayers: findPlayersTool,
-    listTransactions: listTransactionsTool,
-    leagueAnalytics: leagueAnalyticsTool,
-    listMatchups: listCurrentMatchupsTool,
-  };
-  if (search) {
-    tools.search = searchTool;
+  const tools = [
+    findPlayersTool,
+    listTransactionsTool,
+    leagueAnalyticsTool,
+    listCurrentMatchupsTool,
+  ];
+  if (research) {
+    tools.push(researchTool);
   }
 
-  const result = await generateText({
-    model: google("gemini-2.5-pro"),
-    system,
-    messages: [grounding, { role: "user", content: prompt }],
-    tools,
-    maxSteps: 100,
-    temperature: 0.5,
+  const contents: Content[] = [{ role: "user", parts: [{ text: prompt }] }];
+
+  const result = await genai.models.generateContent({
+    model: "gemini-2.5-pro",
+    config: {
+      systemInstruction,
+      temperature: 0.5,
+      tools: [combineTools(tools)],
+    },
+    contents,
   });
 
-  console.log("generate text usage", result.usage);
+  console.log("generate text usage", result.usageMetadata?.promptTokenCount);
 
   return result;
 }

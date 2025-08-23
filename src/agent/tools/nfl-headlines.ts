@@ -1,16 +1,48 @@
-import { z } from "zod";
 import { getHeadlines } from "@/espn/headlines";
+import { Type, type CallableTool } from "@google/genai";
 
-export function createListNFLHeadlinesTool() {
-  async function listNFLHeadlines() {
-    console.log("listing nfl headlines");
-    return getHeadlines();
-  }
+export async function listNFLHeadlines() {
+  console.log("listing nfl headlines");
+  return getHeadlines();
+}
 
+const listNFLHeadlinesToolName = "listNFLHeadlines";
+
+export function createListNFLHeadlinesTool(): CallableTool {
   return {
-    name: "listNFLHeadlines",
-    description: "List most recent NFL headlines.",
-    parameters: z.object({}),
-    execute: listNFLHeadlines,
+    callTool: async (functionCalls) => {
+      const results = await Promise.all(
+        functionCalls.map(async (call) => {
+          if (call.name !== listNFLHeadlinesToolName) {
+            return undefined;
+          }
+
+          const results = await listNFLHeadlines();
+          return {
+            functionResponse: {
+              id: call.id,
+              name: call.name,
+              response: { results },
+            },
+          };
+        })
+      );
+      return results.filter((result) => !!result);
+    },
+    tool: async () => {
+      return {
+        functionDeclarations: [
+          {
+            name: listNFLHeadlinesToolName,
+            description: "List most recent NFL headlines.",
+            parameters: {
+              type: Type.OBJECT,
+              properties: {},
+              required: [],
+            },
+          },
+        ],
+      };
+    },
   };
 }

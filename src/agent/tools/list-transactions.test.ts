@@ -10,7 +10,12 @@ it("should list transcations", async () => {
     espnSwid: espnSwid,
     season: 2024,
   });
-  const transactions = await listTransactions.execute();
+  const transactions = await listTransactions.callTool([
+    {
+      name: "listTransactions",
+      args: {},
+    },
+  ]);
   console.log(transactions);
   expect(transactions).toBeDefined();
 });

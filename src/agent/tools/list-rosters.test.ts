@@ -7,7 +7,7 @@ it("should list rosters", async () => {
     espnS2: espnS2,
     espnSwid: espnSwid,
     season: 2024,
-  }).execute();
+  }).callTool([{ id: "1", name: "listRosters" }]);
 
   expect(rosters).toBeDefined();
 });

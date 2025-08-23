@@ -20,7 +20,7 @@ async function processGenerateEvent({
   memberId,
   season,
   system,
-  search,
+  research,
 }: GenerateLambdaEvent) {
   console.log("generating text");
 
@@ -28,7 +28,7 @@ async function processGenerateEvent({
     prompt,
     season,
     system,
-    search,
+    research,
   });
 
   const voipEvent: VoipLambdaEvent = {
@@ -37,11 +37,11 @@ async function processGenerateEvent({
     channelId,
     guildId,
     memberId,
-    script: response.text,
+    script: response.text ?? "",
   };
 
   await Promise.all([
-    chunkAndSendFollowup(applicationId, token, response.text),
+    chunkAndSendFollowup(applicationId, token, response.text ?? ""),
     sqs.send(
       new SendMessageCommand({
         QueueUrl: VOIP_SQS_QUEUE_URL,

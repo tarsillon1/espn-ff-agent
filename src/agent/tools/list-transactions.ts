@@ -15,17 +15,7 @@ import {
   mapRosterOwner,
 } from "./mappers";
 import { clean } from "../../utils";
-import { summarize, summarizePrompt } from "./summarize";
-
-const summarizeTransactionsPrompt =
-  summarizePrompt +
-  `
-You will be provided a list of fantasy football league transactions.
-The response will be provided to another LLM that will use it to ground their response in the context of all league transactions.
-Make sure to include all transactions with the date they were proposed.
-Response should be formatted in a bulleted list highlighting all facts that can be deduced from the transactions.
-Response should be concise but leave out as little information as possible.
-`;
+import { Type, type CallableTool } from "@google/genai";
 
 function mapTransaction(
   transaction: Transaction,
@@ -53,20 +43,55 @@ function mapTransaction(
   };
 }
 
-export function createListTransactionsTool(input: GetLeagueInput) {
-  async function listTransactions() {
-    const league = await getLeagueCached(input);
-    const players = await getPlayersCached(input);
-    const transactions = (league?.transactions || []).map((transaction) =>
-      mapTransaction(transaction, players, league)
-    );
-    return clean(transactions);
-  }
+async function listTransactions(input: GetLeagueInput) {
+  const league = await getLeagueCached(input);
+  const players = await getPlayersCached(input);
+  const transactions = (league?.transactions || []).map((transaction) =>
+    mapTransaction(transaction, players, league)
+  );
+  return clean(transactions);
+}
 
+const listTransactionsToolName = "listTransactions";
+
+export function createListTransactionsTool(
+  input: GetLeagueInput
+): CallableTool {
+  const listTransactionsBinded = listTransactions.bind(null, input);
   return {
-    name: "listTransactions",
-    description: "List all transactions in the league",
-    parameters: z.object({}),
-    execute: listTransactions,
+    callTool: async (functionCalls) => {
+      const results = await Promise.all(
+        functionCalls.map(async (call) => {
+          if (call.name !== listTransactionsToolName) {
+            return undefined;
+          }
+
+          const results = await listTransactionsBinded();
+          return {
+            functionResponse: {
+              id: call.id,
+              name: call.name,
+              response: { results },
+            },
+          };
+        })
+      );
+      return results.filter((result) => !!result);
+    },
+    tool: async () => {
+      return {
+        functionDeclarations: [
+          {
+            name: listTransactionsToolName,
+            description: "List all transactions in the league",
+            parameters: {
+              type: Type.OBJECT,
+              properties: {},
+              required: [],
+            },
+          },
+        ],
+      };
+    },
   };
 }

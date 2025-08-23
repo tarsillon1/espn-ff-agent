@@ -10,6 +10,8 @@ it("should list current matchups", async () => {
     espnSwid: espnSwid,
     season: 2024,
   });
-  const matchups = await listCurrentMatchups.execute();
+  const matchups = await listCurrentMatchups.callTool([
+    { id: "1", name: "listCurrentMatchups" },
+  ]);
   expect(matchups).toBeDefined();
 });

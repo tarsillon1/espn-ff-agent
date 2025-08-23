@@ -7,7 +7,7 @@ export type GenerateLambdaEvent = {
   memberId?: string;
   season?: number;
   system?: string;
-  search?: boolean;
+  research?: boolean;
 };
 
 export type VoipLambdaEvent = {
