@@ -1,27 +1,40 @@
-import { espnS2, espnSwid, leagueId } from "@/espn";
+import {
+  espnS2,
+  espnSwid,
+  findPlaysForSchedrule,
+  getLeagueCached,
+  getLeagueHistory,
+  getPlayersCached,
+  leagueId,
+} from "@/espn";
 import { Content, ToolListUnion } from "@google/genai";
 import { createPodcastPrompt } from "./prompt";
-import {
-  findPlays,
-  getDraft,
-  getLeagueAnalytics,
-  listCurrentMatchups,
-  listRosters,
-  listTransactions,
-} from "./tools";
 import { google } from "./google";
 import {
   needsDraft,
   needsHistory,
   needsMatchups,
   needsPlays,
+  needsTransactions,
+  needsRosters,
 } from "./classifiers";
+import {
+  mapDraft,
+  mapMatchups,
+  mapTransactions,
+  mapLeagueHistory,
+  mapTeams,
+  mapRosters,
+  mapPlays,
+} from "./mappers";
 
 const groundingSystemInstruction = `
 The 'fantasyLeague.draft' field contains all players that were drafted by players.
 This is historical data and does not reflect current roster status.
 
-The 'fantasyLeague.rosters' field contains all players that are actively rostered by players.
+The 'fantasyLeague.teams' field contains all teams in the fantasy league and their owners.
+
+The 'fantasyLeague.rosters' field contains all NFL players that are currently rostered by fantasy league teams.
 
 The 'fantasyLeague.matchups' field contains the current matchups for the week.
 
@@ -32,6 +45,16 @@ The 'fantasyLeague.history' field contains all historical data for the league.
 The 'recentNFLHeadlines' field contains the most recent headlines from the NFL.
 
 The 'recentNFLPlays' field contains the most recent plays from live NFL games.
+
+IMPORTANT: Never use triple dashes (---). They may cause the voice to stop speaking mid-message. Use natural language and line breaks to separate sections instead.
+
+IMPORTANT: Never use music or sound effects. (ex. (Intro music fades in and out))
+
+IMPORTANT: Never use parentheses.
+
+IMPORTANT: Never use colons to specify speakers. (ex. "Host:")
+
+IMPORTANT: Never use dramatic pauses.
 `;
 
 const researchSystemInstruction = `
@@ -70,30 +93,46 @@ export async function generateFFText({
 }: GenerateFFTextInput) {
   const config = { season, leagueId, espnS2, espnSwid };
 
-  const matchupsPromise = listCurrentMatchups(config);
-  const playsPromise = matchupsPromise.then((matchups) =>
-    findPlays(season, matchups.week, matchups.matchups)
-  );
+  const leaguePromise = getLeagueCached(config);
+  const playersPromise = getPlayersCached(config);
+  const leagueHistoryPromise = getLeagueHistory(config);
 
-  const draftPromise = getDraft(config);
-  const historyPromise = getLeagueAnalytics(config);
+  const matchupsPromise = leaguePromise.then(mapMatchups);
+  const playsPromise = Promise.all([leaguePromise, matchupsPromise])
+    .then(([league, matchups]) =>
+      findPlaysForSchedrule(season, matchups.week, league)
+    )
+    .then(mapPlays);
+  const draftPromise = Promise.all([leaguePromise, playersPromise]).then(
+    ([league, players]) => mapDraft(league, players)
+  );
+  const historyPromise = Promise.all([
+    leagueHistoryPromise,
+    leaguePromise,
+  ]).then(([history, league]) => mapLeagueHistory(history, league));
+  const teamsPromise = leaguePromise.then(mapTeams);
+  const rostersPromise = leaguePromise.then(mapRosters);
+
+  const transactionsPromise = Promise.all([leaguePromise, playersPromise]).then(
+    ([league, players]) => mapTransactions(league.transactions, players, league)
+  );
 
   const classify = { systemPrompt: system, userPrompt: prompt };
 
   const [
-    rosters,
-    transactions,
     includePlays,
     includeDraft,
     includeHistory,
     includeMatchups,
+    includeTransactions,
+    includeRosters,
   ] = await Promise.all([
-    listRosters(config),
-    listTransactions(config),
     needsPlays(classify),
     needsDraft(classify),
     needsHistory(classify),
     needsMatchups(classify),
+    needsTransactions(classify),
+    needsRosters(classify),
   ]);
 
   const grounding: Record<string, unknown> = {
@@ -104,9 +143,10 @@ export async function generateFFText({
       draft: includeDraft ? await draftPromise : undefined,
       history: includeHistory ? await historyPromise : undefined,
       matchups: includeMatchups ? await matchupsPromise : undefined,
+      transactions: includeTransactions ? await transactionsPromise : undefined,
+      rosters: includeRosters ? await rostersPromise : undefined,
       season,
-      rosters,
-      transactions,
+      teams: await teamsPromise,
     },
   };
 
@@ -135,7 +175,7 @@ export async function generateFFText({
   }
 
   const result = await google.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: "gemini-2.5-pro",
     config: {
       systemInstruction,
       temperature: 0.5,

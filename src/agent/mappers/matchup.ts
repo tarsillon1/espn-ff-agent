@@ -1,15 +1,11 @@
 import {
   Schedule,
   ScheduleTeam,
-  findTeamById,
-  Member,
-  Team,
   getTeamNameAndAbbr,
   getPosition,
   ESPNLeagueResponse,
   RosterEntryForMatchupPeriod,
 } from "@/espn";
-import { mapRosterBasicInfo } from "./team";
 
 export function getPeriodId(schedule: Schedule | undefined) {
   return schedule?.scoringPeriodId || schedule?.matchupPeriodId;
@@ -52,14 +48,9 @@ function isEliminatedFromPlayoffs(
   });
 }
 
-export function mapScheduleTeam(
-  scheduleTeam: ScheduleTeam,
-  teams: Team[],
-  members: Member[]
-) {
-  const team = findTeamById(teams, scheduleTeam.teamId);
+export function mapScheduleTeam(scheduleTeam: ScheduleTeam) {
   return {
-    roster: mapRosterBasicInfo(team, members),
+    teamId: scheduleTeam.teamId,
     adjustment: scheduleTeam.adjustment,
     totalPoints: scheduleTeam.totalPoints,
   };
@@ -76,6 +67,8 @@ export function mapRosterForPeriod(entry: RosterEntryForMatchupPeriod) {
       fullName: entry.playerPoolEntry.player.fullName,
       team: team.abbr,
       position: position.abbr,
+      injured: entry.playerPoolEntry.player.injured,
+      injuryStatus: entry.playerPoolEntry.player.injuryStatus,
       lineupLocked: entry.playerPoolEntry.lineupLocked,
     },
   };
@@ -84,7 +77,7 @@ export function mapRosterForPeriod(entry: RosterEntryForMatchupPeriod) {
 export function mapScheduleTeamWithScores(
   scheduleTeam: ScheduleTeam | undefined,
   isWinner: boolean,
-  league: ESPNLeagueResponse
+  league: Pick<ESPNLeagueResponse, "schedule">
 ) {
   if (!scheduleTeam) {
     return undefined;
@@ -109,7 +102,7 @@ export function mapScheduleTeamWithScores(
 
 export function mapMatchupWithScores(
   matchup: Schedule,
-  league: ESPNLeagueResponse
+  league: Pick<ESPNLeagueResponse, "schedule">
 ) {
   const output = {
     id: matchup.id,
@@ -131,5 +124,33 @@ export function mapMatchupWithScores(
       matchup.winner === "HOME",
       league
     ),
+  };
+}
+
+function getRoster(matchup: ScheduleTeam) {
+  return (
+    matchup?.rosterForMatchupPeriod?.entries ||
+    matchup?.rosterForScoringPeriod?.entries
+  );
+}
+
+function hasRoster(matchup: Schedule) {
+  const awayRoster = getRoster(matchup.away);
+  const homeRoster = getRoster(matchup.home);
+  return !!awayRoster?.length && !!homeRoster?.length;
+}
+
+export function mapMatchups(league: Pick<ESPNLeagueResponse, "schedule">) {
+  const currentMatchup = league.schedule?.find(hasRoster);
+  const currentPeriodId = getPeriodId(currentMatchup) || 1;
+
+  const matchups =
+    league.schedule
+      ?.filter((schedule) => getPeriodId(schedule) === currentPeriodId)
+      ?.map((matchup) => mapMatchupWithScores(matchup, league)) || [];
+  return {
+    matchups,
+    week: currentPeriodId,
+    hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
   };
 }

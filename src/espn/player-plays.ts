@@ -1,4 +1,9 @@
 import { nflBaseUrl } from "./config";
+import {
+  ESPNLeagueResponse,
+  PlayerForMatchupPeriod,
+  ScheduleTeam,
+} from "./types";
 
 export interface PlayerPlaysInput {
   season: number;
@@ -155,4 +160,64 @@ function isPlayerInPlay(playText: string, playerName: string): boolean {
   const lowerPlayText = playText.toLowerCase();
   const nameVariations = getPlayerNameVariations(playerName);
   return nameVariations.some((variation) => lowerPlayText.includes(variation));
+}
+
+function getPlayerKey(fullName: string, team: string) {
+  return `${fullName}-${team}`;
+}
+
+function getSchedruleTeamRoster(schedule: ScheduleTeam) {
+  return schedule?.rosterForScoringPeriod || schedule?.rosterForMatchupPeriod;
+}
+
+export async function findPlaysForSchedrule(
+  season: number,
+  week: number,
+  league: Pick<ESPNLeagueResponse, "schedule">
+) {
+  console.log("finding plays", season, week);
+
+  const scoringPeriodPlayers = new Map<
+    string,
+    { player: PlayerForMatchupPeriod; plays?: PlayDetails[] }
+  >();
+
+  for (const matchup of league.schedule || []) {
+    const period = matchup.scoringPeriodId || matchup.matchupPeriodId;
+    if (period !== week) {
+      continue;
+    }
+    const rosters = [
+      getSchedruleTeamRoster(matchup.home),
+      getSchedruleTeamRoster(matchup.away),
+    ];
+    for (const roster of rosters) {
+      for (const player of roster?.entries || []) {
+        const teamId = player.playerPoolEntry.player.proTeamId;
+        const key = getPlayerKey(
+          player.playerPoolEntry.player.fullName,
+          teamId.toString()
+        );
+        scoringPeriodPlayers.set(key, {
+          player: player.playerPoolEntry.player,
+        });
+      }
+    }
+  }
+
+  const playersQuery = Array.from(scoringPeriodPlayers.values()).map(
+    (player) => ({
+      playerName: player.player.fullName,
+      teamId: player.player.proTeamId.toString(),
+    })
+  );
+  if (playersQuery.length === 0) {
+    return [];
+  }
+
+  return getPlayerPlays({
+    season,
+    week,
+    players: playersQuery,
+  });
 }

@@ -1,11 +1,10 @@
-import { getLeagueCached, GetLeagueInput, getPlayersCached } from "@/espn";
-import { mapBasicPlayerInfo } from "./mappers";
+import { ESPNLeagueResponse, PlayerData } from "@/espn";
+import { mapBasicPlayerInfo } from "./player";
 
-export async function getDraft(input: GetLeagueInput) {
-  const [league, players] = await Promise.all([
-    getLeagueCached(input),
-    getPlayersCached(input),
-  ]);
+export async function mapDraft(
+  league: Pick<ESPNLeagueResponse, "draftDetail" | "teams">,
+  players: PlayerData[]
+) {
   const {
     draftDetail: { drafted, inProgress, picks },
     teams,

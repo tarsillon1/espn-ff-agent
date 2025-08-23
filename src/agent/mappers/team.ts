@@ -34,7 +34,10 @@ export function mapTransactionCounter(
   };
 }
 
-export function mapRosterBasicInfo(team: Team | undefined, members: Member[]) {
+export function mapTeam(
+  team: Team | undefined,
+  league: Pick<ESPNLeagueResponse, "members" | "settings">
+) {
   if (!team) {
     return undefined;
   }
@@ -43,26 +46,34 @@ export function mapRosterBasicInfo(team: Team | undefined, members: Member[]) {
     name: team.name,
     abbrev: team.abbrev,
     owners: team.owners.map((owner) => {
-      const member = findMemberById(members, owner);
+      const member = findMemberById(league.members, owner);
       return mapRosterOwner(member);
     }),
-  };
-}
-
-export function mapRoster(
-  team: Team | undefined,
-  league: Pick<ESPNLeagueResponse, "members" | "settings">
-) {
-  if (!team) {
-    return undefined;
-  }
-  const rosterBasicInfo = mapRosterBasicInfo(team, league.members);
-  return {
-    ...rosterBasicInfo,
     transactionCounter: mapTransactionCounter(
       team.transactionCounter,
       league.settings
     ),
+  };
+}
+
+export function mapTeams(
+  league: Pick<ESPNLeagueResponse, "teams" | "members" | "settings">
+) {
+  return league.teams.map((team) => mapTeam(team, league));
+}
+
+export function mapRoster(team: Team | undefined) {
+  if (!team) {
+    return undefined;
+  }
+  return {
+    teamId: team.id,
     players: team.roster.entries.map(mapTeamRosterEntry),
   };
+}
+
+export function mapRosters(
+  league: Pick<ESPNLeagueResponse, "teams" | "settings">
+) {
+  return league.teams.map((team) => mapRoster(team));
 }

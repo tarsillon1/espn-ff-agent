@@ -15,8 +15,6 @@ History data is needed when discussing fantasy team's:
 - Playoff appearances
 - Historical performance
 
-It is better to give a false positive than a false negative.
-
 Respond with a JSON object with a single property "needsHistory" that is a boolean indicating if fantasy football history data is required to answer.
 `;
 
