@@ -1,10 +1,7 @@
 import {
-  getPlayerPlays,
   getLeagueCached,
   GetLeagueInput,
   Schedule,
-  PlayDetails,
-  getTeamIdFromAbbr,
   ScheduleTeam,
 } from "@/espn";
 import {
@@ -12,78 +9,6 @@ import {
   hasPlayoffsStarted,
   mapMatchupWithScores,
 } from "./mappers";
-import { clean } from "@/utils";
-import { Type, type CallableTool } from "@google/genai";
-
-function getPlayerKey(fullName: string, team: string) {
-  return `${fullName}-${team}`;
-}
-
-async function mapMatchupPlays(
-  season: number,
-  currentPeriodId: number,
-  matchups: ReturnType<typeof mapMatchupWithScores>[]
-) {
-  const scoringPeriodPlayers = new Map<
-    string,
-    { player: { fullName: string; team: string }; plays?: PlayDetails[] }
-  >();
-
-  for (const matchup of matchups) {
-    const period = matchup.scoringPeriodId || matchup.matchupPeriodId;
-    if (period !== currentPeriodId) {
-      continue;
-    }
-    const rosters = [matchup.home?.roster, matchup.away?.roster];
-    for (const roster of rosters) {
-      for (const player of roster?.players || []) {
-        const teamId = getTeamIdFromAbbr(player.player.team);
-        const key = getPlayerKey(player.player.fullName, teamId);
-        scoringPeriodPlayers.set(key, player);
-      }
-    }
-  }
-
-  const playersQuery = Array.from(scoringPeriodPlayers.values()).map(
-    (player) => ({
-      playerName: player.player.fullName,
-      teamId: getTeamIdFromAbbr(player.player.team),
-    })
-  );
-  if (playersQuery.length === 0) {
-    return [];
-  }
-
-  const playerPlayResults = await getPlayerPlays({
-    season,
-    week: currentPeriodId,
-    players: playersQuery,
-  });
-
-  return playerPlayResults.map(
-    ({
-      play: {
-        text,
-        time,
-        down,
-        distance,
-        quarter,
-        timeRemaining,
-        yardLine,
-        gameId,
-      },
-    }) => ({
-      text,
-      time,
-      down,
-      distance,
-      quarter,
-      timeRemaining,
-      yardLine,
-      gameId,
-    })
-  );
-}
 
 function getRoster(matchup: ScheduleTeam) {
   return (
@@ -110,60 +35,9 @@ export async function listCurrentMatchups(input: GetLeagueInput) {
     league.schedule
       ?.filter((schedule) => getPeriodId(schedule) === currentPeriodId)
       ?.map((matchup) => mapMatchupWithScores(matchup, league)) || [];
-  const plays = await mapMatchupPlays(
-    league.seasonId,
-    currentPeriodId,
-    matchups
-  );
   return {
     matchups,
-    plays,
     week: currentPeriodId,
     hasPlayoffsStarted: hasPlayoffsStarted(league.schedule),
-  };
-}
-
-const listCurrentMatchupsToolName = "listCurrentMatchups";
-
-export function createListCurrentMatchupsTool(
-  input: GetLeagueInput
-): CallableTool {
-  const listCurrentMatchupsBinded = listCurrentMatchups.bind(null, input);
-  return {
-    callTool: async (functionCalls) => {
-      const results = await Promise.all(
-        functionCalls.map(async (call) => {
-          if (call.name !== listCurrentMatchupsToolName) {
-            return undefined;
-          }
-
-          const results = await listCurrentMatchupsBinded();
-          return {
-            functionResponse: {
-              id: call.id,
-              name: call.name,
-              response: { results },
-            },
-          };
-        })
-      );
-      return results.filter((result) => !!result);
-    },
-    tool: async () => {
-      return {
-        functionDeclarations: [
-          {
-            name: listCurrentMatchupsToolName,
-            description:
-              "List matchups in the league for the current scoring period",
-            parameters: {
-              type: Type.OBJECT,
-              properties: {},
-              required: [],
-            },
-          },
-        ],
-      };
-    },
   };
 }

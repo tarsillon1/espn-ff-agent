@@ -1,7 +1,8 @@
 import { espnS2, espnSwid, leagueId } from "@/espn";
-import { Content, GoogleGenAI, ToolListUnion } from "@google/genai";
+import { Content, ToolListUnion } from "@google/genai";
 import { createPodcastPrompt } from "./prompt";
 import {
+  findPlays,
   getDraft,
   getLeagueAnalytics,
   listCurrentMatchups,
@@ -9,10 +10,8 @@ import {
   listRosters,
   listTransactions,
 } from "./tools";
-
-const genai = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_GENERATIVE_AI_API_KEY,
-});
+import { google } from "./google";
+import { needsDraft, needsHistory, needsPlays } from "./classifiers";
 
 const groundingSystemInstruction = `
 The 'fantasyLeague.draft' field contains all players that were drafted by players.
@@ -27,6 +26,8 @@ The 'fantasyLeague.transactions' field contains all transactions that have occur
 The 'fantasyLeague.history' field contains all historical data for the league.
 
 The 'recentNFLHeadlines' field contains the most recent headlines from the NFL.
+
+The 'recentNFLPlays' field contains the most recent plays from live NFL games.
 `;
 
 const researchSystemInstruction = `
@@ -43,6 +44,22 @@ type GenerateFFTextInput = {
   research?: boolean;
 };
 
+function getSize(value: unknown) {
+  return Object.fromEntries(
+    Object.entries(value as object).map(([key, value]) => [
+      key,
+      JSON.stringify(value || "").length,
+    ])
+  );
+}
+
+function logGroundingDataSize(grounding: Record<string, unknown>) {
+  const size = Object.fromEntries(
+    Object.entries(grounding).map(([key, value]) => [key, getSize(value)])
+  );
+  console.log("grounding data size", size);
+}
+
 export async function generateFFText({
   prompt,
   season = new Date().getFullYear(),
@@ -51,27 +68,50 @@ export async function generateFFText({
 }: GenerateFFTextInput) {
   const config = { season, leagueId, espnS2, espnSwid };
 
-  const [rosters, history, draft, matchups, transactions, recentNFLHeadlines] =
-    await Promise.all([
-      listRosters(config),
-      getLeagueAnalytics(config),
-      getDraft(config),
-      listCurrentMatchups(config),
-      listTransactions(config),
-      listNFLHeadlines(),
-    ]);
+  const listCurrentMatchupsPromise = listCurrentMatchups(config);
+  const playsPromise = listCurrentMatchupsPromise.then((matchups) =>
+    findPlays(season, matchups.week, matchups.matchups)
+  );
 
-  const grounding = {
-    recentNFLHeadlines,
+  const draftPromise = getDraft(config);
+  const historyPromise = getLeagueAnalytics(config);
+
+  const classify = { systemPrompt: system, userPrompt: prompt };
+
+  const [
+    rosters,
+    matchups,
+    transactions,
+    headlines,
+    includePlays,
+    includeDraft,
+    includeHistory,
+  ] = await Promise.all([
+    listRosters(config),
+    listCurrentMatchupsPromise,
+    listTransactions(config),
+    listNFLHeadlines(),
+    needsPlays(classify),
+    needsDraft(classify),
+    needsHistory(classify),
+  ]);
+
+  const grounding: Record<string, unknown> = {
+    nfl: {
+      headlines,
+      plays: includePlays ? await playsPromise : undefined,
+    },
     fantasyLeague: {
+      draft: includeDraft ? await draftPromise : undefined,
+      history: includeHistory ? await historyPromise : undefined,
       season,
-      history,
-      draft,
       rosters,
       matchups,
       transactions,
     },
   };
+
+  logGroundingDataSize(grounding);
 
   const systemInstruction =
     system +
@@ -95,10 +135,8 @@ export async function generateFFText({
     tools.push({ googleSearch: {} });
   }
 
-  console.log(JSON.stringify(contents).length);
-
-  const result = await genai.models.generateContent({
-    model: "gemini-2.5-pro",
+  const result = await google.models.generateContent({
+    model: "gemini-2.5-flash",
     config: {
       systemInstruction,
       temperature: 0.5,

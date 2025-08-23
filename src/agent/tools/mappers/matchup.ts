@@ -70,8 +70,9 @@ export function mapRosterForPeriod(entry: RosterEntryForMatchupPeriod) {
   const position = getPosition(entry.playerPoolEntry.player.defaultPositionId);
   return {
     appliedStatTotal: entry.playerPoolEntry.appliedStatTotal,
+    playerId: entry.playerPoolEntry.player.id,
     player: {
-      id: entry.playerPoolEntry.player.id,
+      playerId: entry.playerPoolEntry.player.id,
       fullName: entry.playerPoolEntry.player.fullName,
       team: team.abbr,
       position: position.abbr,
@@ -88,9 +89,6 @@ export function mapScheduleTeamWithScores(
   if (!scheduleTeam) {
     return undefined;
   }
-  const team = findTeamById(league.teams, scheduleTeam.teamId);
-  const rosterBasicInfo = mapRosterBasicInfo(team, league.members);
-
   const roster =
     scheduleTeam.rosterForScoringPeriod || scheduleTeam.rosterForMatchupPeriod;
   const players = roster?.entries.map(mapRosterForPeriod);
@@ -99,18 +97,11 @@ export function mapScheduleTeamWithScores(
     isWinner,
     totalPoints: scheduleTeam.totalPoints,
     roster: {
-      ...rosterBasicInfo,
+      teamId: scheduleTeam.teamId,
       isEliminatedFromPlayoffs: isEliminatedFromPlayoffs(
         scheduleTeam.teamId,
         league.schedule
       ),
-      record: {
-        regularSeason: {
-          wins: team?.record.overall.wins,
-          ties: team?.record.overall.ties,
-          losses: team?.record.overall.losses,
-        },
-      },
       players,
     },
   };
