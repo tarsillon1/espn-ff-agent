@@ -6,6 +6,7 @@ import {
   VoiceChannel,
 } from "discord.js";
 import { getDiscordInstance } from "./client";
+import { chunk } from "./utils";
 
 export async function findTextChannel(guildId: string) {
   const discord = await getDiscordInstance();
@@ -14,10 +15,12 @@ export async function findTextChannel(guildId: string) {
   let latestBotMessage: Message | undefined;
   let fallbackChannel: TextChannel | VoiceChannel | null = guild.systemChannel;
 
-  for (const channel of guild.channels.cache.values()) {
+  const channels = await guild.channels.fetch();
+  for (const channel of channels.values()) {
     if (
-      channel.type !== ChannelType.GuildText &&
-      channel.type !== ChannelType.GuildVoice
+      !channel ||
+      (channel.type !== ChannelType.GuildText &&
+        channel.type !== ChannelType.GuildVoice)
     ) {
       continue;
     }
@@ -73,4 +76,23 @@ export async function sendAudioToTextChannel(
       ),
     ],
   });
+}
+
+export async function chunkAndSendText(
+  channel: TextChannel | VoiceChannel,
+  text: string
+) {
+  const chunks = chunk(text, 3000);
+
+  let lastMessage: Message | undefined;
+  for (const chunk of chunks) {
+    lastMessage = await channel.send({
+      content: chunk,
+      reply: lastMessage
+        ? {
+            messageReference: lastMessage,
+          }
+        : undefined,
+    });
+  }
 }

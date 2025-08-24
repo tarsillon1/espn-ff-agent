@@ -1,3 +1,5 @@
+import { chunk } from "./utils";
+
 export async function sendInteractionAudioFollowup(
   applicationId: string,
   interactionToken: string,
@@ -65,14 +67,6 @@ export async function sendInteractionFollowup(
   }
 
   return await response.json();
-}
-
-function chunk(message: string, chunkSize: number) {
-  const chunks = [];
-  for (let i = 0; i < message.length; i += chunkSize) {
-    chunks.push(message.slice(i, i + chunkSize));
-  }
-  return chunks;
 }
 
 export async function chunkAndSendInteractionFollowup(

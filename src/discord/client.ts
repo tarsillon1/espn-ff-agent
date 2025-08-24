@@ -2,7 +2,11 @@ import { Client, GatewayIntentBits } from "discord.js";
 import { discordToken } from "./config";
 
 const discord = new Client({
-  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildVoiceStates,
+    GatewayIntentBits.GuildMessages,
+  ],
 });
 
 let loginPromise: Promise<string> | undefined;

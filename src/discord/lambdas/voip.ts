@@ -32,8 +32,6 @@ async function handleBroadcastFollowup(
   }
 
   await sendAudioToTextChannel(destination.textChannelId, followupStream);
-
-  return [];
 }
 
 async function handleDestinationFollowup(

@@ -21,7 +21,7 @@ import {
   TextChannel,
   VoiceChannel,
 } from "discord.js";
-import { findTextChannel } from "../text";
+import { chunkAndSendText, findTextChannel } from "../text";
 
 const VOIP_SQS_QUEUE_URL = process.env.VOIP_SQS_QUEUE_URL;
 
@@ -52,13 +52,16 @@ async function handleBroadcastFollowup(
 ): Promise<VoipLambdaEvent[]> {
   const discord = await getDiscordInstance();
   const guilds = [...discord.guilds.cache.values()];
+  console.log("guilds", guilds);
   return Promise.all(
     guilds.map(async ({ id }) => {
       const [voiceChannel, textChannel] = await Promise.all([
         findVoiceChannel(id),
         findTextChannel(id),
       ]);
-      await textChannel?.send(text);
+      if (textChannel) {
+        await chunkAndSendText(textChannel, text);
+      }
       return {
         destination: {
           ...destination,

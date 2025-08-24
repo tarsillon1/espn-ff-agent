@@ -1,7 +1,6 @@
 import { ChannelType, VoiceChannel } from "discord.js";
 
 import { Readable } from "stream";
-import { AudioPlayerStatus, NoSubscriberBehavior } from "@discordjs/voice";
 import { getDiscordInstance } from "./client";
 
 export async function findVoiceChannel(
@@ -24,9 +23,11 @@ export async function findVoiceChannel(
     }
   }
 
-  const voiceChannels = guild.channels.cache.filter(
-    (c) => c.type === ChannelType.GuildVoice
+  const channels = await guild.channels.fetch();
+  const voiceChannels = [...channels.values()].filter(
+    (c) => c?.type === ChannelType.GuildVoice
   );
+  console.log("voiceChannels", voiceChannels);
 
   const channelWithMember = voiceChannels.find((c) =>
     c.members.find((m) => m.id === memberId)
@@ -39,14 +40,16 @@ export async function findVoiceChannel(
     return a.members.size - b.members.size;
   });
 
-  return sorted.first();
+  return sorted[0];
 }
 
-export async function createVoipClient(channel: VoiceChannel) {
+async function createVoipClient(channel: VoiceChannel) {
   const {
     joinVoiceChannel,
     createAudioPlayer,
     createAudioResource,
+    AudioPlayerStatus,
+    NoSubscriberBehavior,
     VoiceConnectionStatus,
   } = await import("@discordjs/voice");
 
