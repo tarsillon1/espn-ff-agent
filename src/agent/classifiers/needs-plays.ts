@@ -19,7 +19,7 @@ Plays are not needed when discussing:
 - League injuries
 - Previous week's games
 
-Respond with a JSON object with a single property "needsPlays" that is a boolean indicating if live NFL play data is required to answer.
+Respond with a boolean indicating if live NFL play data should be used to answer the user request.
 `;
 
 export type NeedsPlaysInput = {
@@ -34,15 +34,7 @@ export async function needsPlays(input: NeedsPlaysInput) {
     config: {
       systemInstruction: needsPlaysSystemInstruction,
       responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          needsPlays: {
-            type: Type.BOOLEAN,
-          },
-        },
-        required: ["needsPlays"],
-      },
+      responseSchema: { type: Type.BOOLEAN },
     },
     contents: [
       {
@@ -57,10 +49,9 @@ export async function needsPlays(input: NeedsPlaysInput) {
     ],
   });
 
-  const result = JSON.parse(response.text || "{}");
-  const needsPlays = !!result.needsPlays;
+  const needsPlays = response.text?.toLocaleLowerCase?.()?.includes("true");
   console.log("needsPlays", {
-    needsPlays,
+    needsPlays: response.text,
     usage: response.usageMetadata,
   });
   return needsPlays;

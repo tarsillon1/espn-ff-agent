@@ -1,72 +1,78 @@
 import { streamVoice } from "@/agent/voice/openai";
-import { VoipLambdaEvent } from "../types";
-import { createVoipClient, findVoiceChannel } from "../voip";
-import { Readable } from "stream";
-import { sendAudioFollowup } from "../followup";
-import { VoiceChannel } from "discord.js";
+import {
+  BroadcastDestination,
+  Destination,
+  InteractionDesitnation,
+  VoipLambdaEvent,
+} from "../types";
+import { findChannelAndPlayVoice } from "../voip";
+import { sendInteractionAudioFollowup } from "../followup";
 import { SQSEvent } from "aws-lambda";
+import { sendAudioToTextChannel } from "../text";
 
-async function playVoice(channel: VoiceChannel, stream: ReadableStream) {
-  const voip = await createVoipClient(channel);
-  if (!voip) {
-    console.warn("failed to create voip client");
+async function handleInteractionFollowup(
+  { applicationId, interactionToken }: InteractionDesitnation,
+  followupStream: ReadableStream
+) {
+  await sendInteractionAudioFollowup(
+    applicationId,
+    interactionToken,
+    await new Response(followupStream).arrayBuffer(),
+    "commentary.wav"
+  );
+}
+
+async function handleBroadcastFollowup(
+  destination: BroadcastDestination,
+  followupStream: ReadableStream
+) {
+  if (!destination.textChannelId) {
+    console.warn("no text channel id");
     return;
   }
 
-  console.log("playing voice");
+  await sendAudioToTextChannel(destination.textChannelId, followupStream);
 
-  await voip.play(Readable.from(stream));
-  voip.close();
+  return [];
+}
+
+async function handleDestinationFollowup(
+  destination: Destination,
+  followupStream: ReadableStream
+) {
+  if (destination.type === "interaction") {
+    return handleInteractionFollowup(destination, followupStream);
+  }
+  return handleBroadcastFollowup(destination, followupStream);
 }
 
 async function processVoipEvent({
-  applicationId,
-  token,
-  channelId,
-  guildId,
-  memberId,
+  voiceChannelId,
   script,
   style,
+  destination,
 }: VoipLambdaEvent) {
   const voice = await streamVoice(script, style);
   const [voipStream, followupStream] = voice.tee();
 
   console.log("creating voip client");
 
-  const channel = await findVoiceChannel(guildId, channelId, memberId);
-  if (!channel) {
-    console.warn("failed to find voice channel");
-    return;
-  }
-
-  if (channel.members.size !== 0) {
-    await playVoice(channel, voipStream);
+  if (voiceChannelId) {
+    await findChannelAndPlayVoice(voiceChannelId, voipStream);
   }
 
   console.log("sending audio file followup");
 
-  await sendAudioFollowup(
-    applicationId,
-    token,
-    await new Response(followupStream).arrayBuffer(),
-    "commentary.wav"
-  );
+  await handleDestinationFollowup(destination, followupStream);
 }
 
 export async function handler(sqsEvent: SQSEvent) {
-  console.log("Processing VoIP SQS event:", JSON.stringify(sqsEvent, null, 2));
-
   for (const record of sqsEvent.Records) {
     try {
       const voipEvent: VoipLambdaEvent = JSON.parse(record.body);
-      console.log("Processing VoIP event for guild:", voipEvent.guildId);
+      console.log("processing voip event:", voipEvent);
 
       await processVoipEvent(voipEvent);
-
-      console.log(
-        "Successfully processed VoIP event for guild:",
-        voipEvent.guildId
-      );
     } catch (error) {
       console.error("Failed to process VoIP event:", error);
       // Don't throw here to avoid retrying the entire batch

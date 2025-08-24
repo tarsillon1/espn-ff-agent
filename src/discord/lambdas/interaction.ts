@@ -1,13 +1,10 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
 import { verifyDiscordRequest } from "../verify";
-import { askLambdaName, discordPublicKey } from "../config";
-import { InvokeCommand, LambdaClient } from "@aws-sdk/client-lambda";
+import { discordPublicKey } from "../config";
 import { GenerateLambdaEvent } from "../types";
 import { SendMessageCommand, SQSClient } from "@aws-sdk/client-sqs";
 
-const lambdaClient = new LambdaClient({
-  region: "us-east-1",
-});
+import { createDraftRecapPrompt } from "../../agent/prompt";
 
 const GENERATE_SQS_QUEUE_URL = process.env.GENERATE_SQS_QUEUE_URL;
 
@@ -39,6 +36,10 @@ interface DiscordInteraction {
     username: string;
   };
 }
+
+const systemPrompts = {
+  draft: createDraftRecapPrompt(),
+};
 
 async function ask(interaction: DiscordInteraction) {
   const question =
@@ -86,15 +87,33 @@ async function ask(interaction: DiscordInteraction) {
     };
   }
 
+  const system = interaction.data?.options?.find(
+    (opt) => opt.name === "system"
+  )?.value;
+  if (system && typeof system !== "string") {
+    return {
+      type: 4,
+      data: {
+        content: "Please provide a valid system value.",
+      },
+    };
+  }
+
   const event: GenerateLambdaEvent = {
-    applicationId: interaction.application_id,
-    token: interaction.token,
+    destination: {
+      type: "interaction",
+      applicationId: interaction.application_id,
+      interactionToken: interaction.token,
+      guildId: interaction.guild_id,
+      channelId: interaction.channel_id,
+      memberId: interaction.member?.user.id,
+    },
     prompt: question,
-    channelId: interaction.channel_id,
-    guildId: interaction.guild_id,
-    memberId: interaction.member?.user.id,
     season: season ? Number(season) : undefined,
     research: typeof research === "boolean" ? research : undefined,
+    system: system
+      ? systemPrompts[system as keyof typeof systemPrompts]
+      : undefined,
   };
 
   await sqs.send(

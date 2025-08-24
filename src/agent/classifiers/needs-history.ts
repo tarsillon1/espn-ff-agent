@@ -15,7 +15,7 @@ History data is needed when discussing fantasy team's:
 - Playoff appearances
 - Historical performance
 
-Respond with a JSON object with a single property "needsHistory" that is a boolean indicating if fantasy football history data is required to answer.
+Respond with a boolean indicating if fantasy football history data should be used to answer the user request.
 `;
 
 export type NeedsHistoryInput = {
@@ -29,15 +29,7 @@ export async function needsHistory(input: NeedsHistoryInput) {
     config: {
       systemInstruction: needsHistorySystemInstruction,
       responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          needsHistory: {
-            type: Type.BOOLEAN,
-          },
-        },
-        required: ["needsHistory"],
-      },
+      responseSchema: { type: Type.BOOLEAN },
     },
     contents: [
       {
@@ -53,11 +45,9 @@ export async function needsHistory(input: NeedsHistoryInput) {
     ],
   });
 
-  const result = JSON.parse(response.text || "{}");
-  const needsHistory = !!result.needsHistory;
+  const needsHistory = response.text?.toLocaleLowerCase?.()?.includes("true");
   console.log("needsHistory", {
-    needsHistory,
-    result,
+    needsHistory: response.text,
     usage: response.usageMetadata,
   });
   return needsHistory;

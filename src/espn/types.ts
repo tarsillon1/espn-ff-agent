@@ -33,6 +33,7 @@ export interface DraftPick {
 }
 
 export interface DraftDetail {
+  completeDate: number;
   drafted: boolean;
   inProgress: boolean;
   picks: DraftPick[];

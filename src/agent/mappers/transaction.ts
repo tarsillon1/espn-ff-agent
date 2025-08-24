@@ -55,7 +55,7 @@ export function mapTransactions(
   league: ESPNLeagueResponse
 ) {
   return clean(
-    transactions.map((transaction) =>
+    (transactions || []).map((transaction) =>
       mapTransaction(transaction, players, league)
     )
   );

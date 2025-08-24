@@ -16,7 +16,7 @@ Transactions data is needed when discussing:
 - Free agency
 - Trades
 
-Respond with a JSON object with a single property "needsTransactions" that is a boolean indicating if transactions data is required to answer.
+Respond with a boolean indicating if transactions data should be used to answer the user request.
 `;
 
 export async function needsTransactions(input: NeedsTransactionsInput) {
@@ -25,15 +25,7 @@ export async function needsTransactions(input: NeedsTransactionsInput) {
     config: {
       systemInstruction: needsTransactionsSystemInstruction,
       responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          needsTransactions: {
-            type: Type.BOOLEAN,
-          },
-        },
-        required: ["needsTransactions"],
-      },
+      responseSchema: { type: Type.BOOLEAN },
     },
     contents: [
       {
@@ -49,10 +41,11 @@ export async function needsTransactions(input: NeedsTransactionsInput) {
     ],
   });
 
-  const result = JSON.parse(response.text || "{}");
-  const needsTransactions = !!result.needsTransactions;
+  const needsTransactions = response.text
+    ?.toLocaleLowerCase?.()
+    ?.includes("true");
   console.log("needsTransactions", {
-    needsTransactions,
+    needsTransactions: response.text,
     usage: response.usageMetadata,
   });
   return needsTransactions;

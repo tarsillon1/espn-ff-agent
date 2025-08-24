@@ -9,6 +9,10 @@ interface DiscordCommand {
     description: string;
     type: number;
     required: boolean;
+    choices?: Array<{
+      name: string;
+      value: string;
+    }>;
   }>;
 }
 
@@ -33,6 +37,18 @@ const commands: DiscordCommand[] = [
         description: `The season of the league (default: ${new Date().getFullYear()})`,
         type: 4,
         required: false,
+      },
+      {
+        name: "system",
+        description: "The system prompt to use",
+        type: 3,
+        required: false,
+        choices: [
+          {
+            name: "draft",
+            value: "draft",
+          },
+        ],
       },
       {
         name: "research",

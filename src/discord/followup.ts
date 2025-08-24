@@ -1,4 +1,4 @@
-export async function sendAudioFollowup(
+export async function sendInteractionAudioFollowup(
   applicationId: string,
   interactionToken: string,
   fileBuffer: ArrayBuffer,
@@ -39,7 +39,7 @@ export async function sendAudioFollowup(
   }
 }
 
-export async function sendFollowup(
+export async function sendInteractionFollowup(
   applicationId: string,
   interactionToken: string,
   body: object
@@ -75,7 +75,7 @@ function chunk(message: string, chunkSize: number) {
   return chunks;
 }
 
-export async function chunkAndSendFollowup(
+export async function chunkAndSendInteractionFollowup(
   applicationId: string,
   interactionToken: string,
   message: string
@@ -83,7 +83,7 @@ export async function chunkAndSendFollowup(
   const chunks = chunk(message, 1900);
 
   for (const chunk of chunks) {
-    await sendFollowup(applicationId, interactionToken, {
+    await sendInteractionFollowup(applicationId, interactionToken, {
       content: chunk,
     });
   }

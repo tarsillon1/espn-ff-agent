@@ -1,24 +1,15 @@
-import {
-  ChannelType,
-  Client,
-  GatewayIntentBits,
-  VoiceChannel,
-} from "discord.js";
-import { discordToken } from "./config";
+import { ChannelType, VoiceChannel } from "discord.js";
 
 import { Readable } from "stream";
 import { AudioPlayerStatus, NoSubscriberBehavior } from "@discordjs/voice";
+import { getDiscordInstance } from "./client";
 
 export async function findVoiceChannel(
   guildId: string,
-  voiceChannelId: string,
+  voiceChannelId?: string,
   memberId?: string
 ) {
-  const client = new Client({
-    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
-  });
-
-  await client.login(discordToken);
+  const client = await getDiscordInstance();
 
   const guild = await client.guilds.fetch(guildId);
   if (!guild) {
@@ -26,9 +17,11 @@ export async function findVoiceChannel(
     return;
   }
 
-  const channel = await guild.channels.fetch(voiceChannelId);
-  if (channel?.type === ChannelType.GuildVoice) {
-    return channel;
+  if (voiceChannelId) {
+    const channel = await guild.channels.fetch(voiceChannelId);
+    if (channel?.type === ChannelType.GuildVoice) {
+      return channel;
+    }
   }
 
   const voiceChannels = guild.channels.cache.filter(
@@ -124,4 +117,41 @@ export async function createVoipClient(channel: VoiceChannel) {
       connection.destroy();
     },
   };
+}
+
+async function playVoice(channel: VoiceChannel, stream: ReadableStream) {
+  const voip = await createVoipClient(channel);
+  if (!voip) {
+    console.warn("failed to create voip client");
+    return;
+  }
+
+  console.log("playing voice");
+
+  await voip.play(Readable.from(stream));
+  voip.close();
+}
+
+export async function findChannelAndPlayVoice(
+  voiceChannelId: string,
+  stream: ReadableStream
+) {
+  const client = await getDiscordInstance();
+  const channel = await client.channels.fetch(voiceChannelId);
+  if (!channel) {
+    console.warn("failed to find voice channel");
+    return;
+  }
+
+  if (channel.type !== ChannelType.GuildVoice) {
+    console.warn("voice channel is not a voice channel");
+    return;
+  }
+
+  if (channel.members.size === 0) {
+    console.warn("voice channel is empty");
+    return;
+  }
+
+  return playVoice(channel, stream);
 }

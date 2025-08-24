@@ -22,7 +22,7 @@ Matchups are not needed when discussing:
  - League draft order
  - League draft picks
 
-Respond with a JSON object with a single property "needsMatchups" that is a boolean indicating if matchups data is required to answer.
+Respond with a boolean indicating if matchups data should be used to answer the user request.
 `;
 
 export async function needsMatchups(input: NeedsMatchupsInput) {
@@ -31,15 +31,7 @@ export async function needsMatchups(input: NeedsMatchupsInput) {
     config: {
       systemInstruction: needsMatchupsSystemInstruction,
       responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          needsMatchups: {
-            type: Type.BOOLEAN,
-          },
-        },
-        required: ["needsMatchups"],
-      },
+      responseSchema: { type: Type.BOOLEAN },
     },
     contents: [
       {
@@ -55,10 +47,9 @@ export async function needsMatchups(input: NeedsMatchupsInput) {
     ],
   });
 
-  const result = JSON.parse(response.text || "{}");
-  const needsMatchups = !!result.needsMatchups;
+  const needsMatchups = response.text?.toLocaleLowerCase?.()?.includes("true");
   console.log("needsMatchups", {
-    needsMatchups,
+    needsMatchups: response.text,
     usage: response.usageMetadata,
   });
   return needsMatchups;

@@ -10,7 +10,7 @@ Draft data is needed when discussing:
 - League draft order
 - League draft picks
 
-Respond with a JSON object with a single property "needsDraft" that is a boolean indicating if fantasy football draft data is required to answer.
+Respond with a boolean indicating if fantasy football draft data should be used to answer the user request.
 `;
 
 export type NeedsDraftInput = {
@@ -24,15 +24,7 @@ export async function needsDraft(input: NeedsDraftInput) {
     config: {
       systemInstruction: needsDraftSystemInstruction,
       responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          needsDraft: {
-            type: Type.BOOLEAN,
-          },
-        },
-        required: ["needsDraft"],
-      },
+      responseSchema: { type: Type.BOOLEAN },
     },
     contents: [
       {
@@ -48,10 +40,9 @@ export async function needsDraft(input: NeedsDraftInput) {
     ],
   });
 
-  const result = JSON.parse(response.text || "{}");
-  const needsDraft = !!result.needsDraft;
+  const needsDraft = response.text?.toLocaleLowerCase?.()?.includes("true");
   console.log("needsDraft", {
-    needsDraft,
+    needsDraft: response.text,
     usage: response.usageMetadata,
   });
   return needsDraft;

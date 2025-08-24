@@ -1,23 +1,86 @@
-import type { GenerateLambdaEvent, VoipLambdaEvent } from "../types";
+import type {
+  BroadcastDestination,
+  Destination,
+  GenerateLambdaEvent,
+  InteractionDesitnation,
+  VoipLambdaEvent,
+} from "../types";
+
+import { randomBytes } from "crypto";
 
 import { generateFFText } from "@/agent/fantasy-football";
-import { chunkAndSendFollowup } from "../followup";
+import { chunkAndSendInteractionFollowup } from "../followup";
 import { SendMessageCommand, SQSClient } from "@aws-sdk/client-sqs";
 import { SQSEvent } from "aws-lambda";
+import { findVoiceChannel } from "../voip";
+import { getDiscordInstance } from "../client";
+import {
+  ChannelType,
+  Guild,
+  Message,
+  TextChannel,
+  VoiceChannel,
+} from "discord.js";
+import { findTextChannel } from "../text";
 
 const VOIP_SQS_QUEUE_URL = process.env.VOIP_SQS_QUEUE_URL;
 
-const sqs = new SQSClient({
-  region: "us-east-1",
-});
+const sqs = new SQSClient({ region: "us-east-1" });
+
+async function handleInteractionFollowup(
+  destination: InteractionDesitnation,
+  text: string
+): Promise<VoipLambdaEvent[]> {
+  const { applicationId, interactionToken, guildId, channelId, memberId } =
+    destination;
+  const [channel] = await Promise.all([
+    findVoiceChannel(guildId, channelId, memberId),
+    chunkAndSendInteractionFollowup(applicationId, interactionToken, text),
+  ]);
+  return [
+    {
+      destination,
+      script: text,
+      voiceChannelId: channel?.id,
+    },
+  ];
+}
+
+async function handleBroadcastFollowup(
+  destination: BroadcastDestination,
+  text: string
+): Promise<VoipLambdaEvent[]> {
+  const discord = await getDiscordInstance();
+  const guilds = [...discord.guilds.cache.values()];
+  return Promise.all(
+    guilds.map(async ({ id }) => {
+      const [voiceChannel, textChannel] = await Promise.all([
+        findVoiceChannel(id),
+        findTextChannel(id),
+      ]);
+      await textChannel?.send(text);
+      return {
+        destination: {
+          ...destination,
+          textChannelId: textChannel?.id,
+        },
+        script: text,
+        voiceChannelId: voiceChannel?.id,
+      };
+    })
+  );
+}
+
+function handleDestinationFollowup(destination: Destination, text: string) {
+  if (destination.type === "interaction") {
+    return handleInteractionFollowup(destination, text);
+  }
+  return handleBroadcastFollowup(destination, text);
+}
 
 async function processGenerateEvent({
-  applicationId,
-  token,
+  destination,
   prompt,
-  channelId,
-  guildId,
-  memberId,
   season,
   system,
   research,
@@ -31,25 +94,26 @@ async function processGenerateEvent({
     research,
   });
 
-  const voipEvent: VoipLambdaEvent = {
-    applicationId,
-    token,
-    channelId,
-    guildId,
-    memberId,
-    script: response.text ?? "",
-  };
+  if (!response.text) {
+    throw new Error("No text generated");
+  }
 
-  await Promise.all([
-    chunkAndSendFollowup(applicationId, token, response.text ?? ""),
-    sqs.send(
-      new SendMessageCommand({
-        QueueUrl: VOIP_SQS_QUEUE_URL,
-        MessageBody: JSON.stringify(voipEvent),
-        MessageGroupId: guildId,
-      })
-    ),
-  ]);
+  const voipEvents = await handleDestinationFollowup(
+    destination,
+    response.text
+  );
+  await Promise.all(
+    voipEvents.map(async (voipEvent) =>
+      sqs.send(
+        new SendMessageCommand({
+          QueueUrl: VOIP_SQS_QUEUE_URL,
+          MessageBody: JSON.stringify(voipEvent),
+          MessageGroupId:
+            voipEvent.voiceChannelId || randomBytes(16).toString("hex"),
+        })
+      )
+    )
+  );
 }
 
 export async function handler(sqsEvent: SQSEvent) {

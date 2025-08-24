@@ -13,7 +13,7 @@ Rosters data is needed when discussing:
 - Fantasy league team rankings
 - Injuries
 
-Respond with a JSON object with a single property "needsRosters" that is a boolean indicating if rosters data is required to answer.
+Respond with a boolean indicating if rosters data should be used to answer the user request.
 `;
 
 export type NeedsRostersInput = {
@@ -27,13 +27,7 @@ export async function needsRosters(input: NeedsRostersInput) {
     config: {
       systemInstruction: needsRostersSystemInstruction,
       responseMimeType: "application/json",
-      responseSchema: {
-        type: Type.OBJECT,
-        properties: {
-          needsRosters: { type: Type.BOOLEAN },
-        },
-        required: ["needsRosters"],
-      },
+      responseSchema: { type: Type.BOOLEAN },
     },
     contents: [
       {
@@ -44,10 +38,9 @@ export async function needsRosters(input: NeedsRostersInput) {
     ],
   });
 
-  const result = JSON.parse(response.text || "{}");
-  const needsRosters = !!result.needsRosters;
+  const needsRosters = response.text?.toLocaleLowerCase?.()?.includes("true");
   console.log("needsRosters", {
-    needsRosters,
+    needsRosters: response.text,
     usage: response.usageMetadata,
   });
   return needsRosters;
