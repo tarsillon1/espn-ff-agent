@@ -10,8 +10,7 @@ const generateQueueUrl = process.env.GENERATE_SQS_QUEUE_URL!;
 const sqs = new SQSClient({ region: "us-east-1" });
 
 export async function handler() {
-  //   const season = new Date().getFullYear();
-  const season = 2024; // testing
+  const season = new Date().getFullYear();
   const league = await getLeagueCached({
     espnS2,
     espnSwid,
@@ -19,12 +18,12 @@ export async function handler() {
     season,
   });
 
-  //   const draftCompletedAt = league.draftDetail.completeDate;
-  //   const drafted =
-  //     draftCompletedAt && draftCompletedAt > Date.now() - cronIntervalMs;
-  //   if (!drafted) {
-  //     return;
-  //   }
+  const draftCompletedAt = league.draftDetail.completeDate;
+  const drafted =
+    draftCompletedAt && draftCompletedAt > Date.now() - cronIntervalMs;
+  if (!drafted) {
+    return;
+  }
 
   const event: GenerateLambdaEvent = {
     prompt: "Please give a full draft recap.",

@@ -82,7 +82,7 @@ export async function chunkAndSendText(
   channel: TextChannel | VoiceChannel,
   text: string
 ) {
-  const chunks = chunk(text, 3000);
+  const chunks = chunk(text, 1980);
 
   let lastMessage: Message | undefined;
   for (const chunk of chunks) {

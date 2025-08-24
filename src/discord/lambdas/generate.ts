@@ -52,7 +52,6 @@ async function handleBroadcastFollowup(
 ): Promise<VoipLambdaEvent[]> {
   const discord = await getDiscordInstance();
   const guilds = [...discord.guilds.cache.values()];
-  console.log("guilds", guilds);
   return Promise.all(
     guilds.map(async ({ id }) => {
       const [voiceChannel, textChannel] = await Promise.all([

@@ -27,7 +27,6 @@ export async function findVoiceChannel(
   const voiceChannels = [...channels.values()].filter(
     (c) => c?.type === ChannelType.GuildVoice
   );
-  console.log("voiceChannels", voiceChannels);
 
   const channelWithMember = voiceChannels.find((c) =>
     c.members.find((m) => m.id === memberId)
