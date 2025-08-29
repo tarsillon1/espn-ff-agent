@@ -2,6 +2,7 @@ import type { PlayWithPlayers } from "@/espn";
 
 export function mapPlay(play: PlayWithPlayers) {
   return {
+    playId: play.play.playId,
     text: play.play.text,
     time: play.play.time,
     down: play.play.down,

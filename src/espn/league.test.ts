@@ -10,5 +10,6 @@ it("should get league", async () => {
     leagueId,
     season: 2024,
   });
+  writeFileSync("league.json", JSON.stringify(res, null, 2));
   expect(res.id).toBeDefined();
 });
