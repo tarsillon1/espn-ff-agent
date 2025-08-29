@@ -14,6 +14,7 @@ Rosters data is needed when discussing:
 - Injuries
 - Player performance (what went wrong, what went right)
 - Trash talking players in the league (eviserate every player)
+- Team comparisons to real life NFL teams
 
 It is better to return 'true' than 'false' when you are unsure.
 

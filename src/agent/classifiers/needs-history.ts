@@ -15,6 +15,7 @@ History data is needed when discussing fantasy team's:
 - Playoff appearances
 - Historical performance
 - Trash talking players in the league (eviserate every player)
+- Team comparisons to real life NFL teams
 
 It is better to return 'true' than 'false' when you are unsure.
 

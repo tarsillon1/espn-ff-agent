@@ -112,6 +112,7 @@ async function createVoiceConnection(channel: VoiceChannel) {
     createAudioResource,
     AudioPlayerStatus,
     NoSubscriberBehavior,
+    VoiceConnectionStatus,
   };
 }
 
@@ -144,6 +145,7 @@ async function createVoipClient(channel: VoiceChannel) {
     createAudioResource,
     AudioPlayerStatus,
     NoSubscriberBehavior,
+    VoiceConnectionStatus,
   } = await createVoiceConnectionWithRetry(channel);
 
   const player = createAudioPlayer({
@@ -180,6 +182,10 @@ async function createVoipClient(channel: VoiceChannel) {
     player.play(audioResource);
     return new Promise<void>((resolve) => {
       player.once(AudioPlayerStatus.Idle, () => {
+        resolve();
+      });
+      connection.once(VoiceConnectionStatus.Disconnected, () => {
+        console.log("voice connection disconnected");
         resolve();
       });
     });
