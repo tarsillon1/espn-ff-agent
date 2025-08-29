@@ -14,6 +14,9 @@ History data is needed when discussing fantasy team's:
 - Points scored
 - Playoff appearances
 - Historical performance
+- Trash talking players in the league (eviserate every player)
+
+It is better to return 'true' than 'false' when you are unsure.
 
 Respond with a boolean indicating if fantasy football history data should be used to answer the user request.
 `;

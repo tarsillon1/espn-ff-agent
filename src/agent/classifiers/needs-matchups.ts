@@ -21,6 +21,8 @@ Matchups are not needed when discussing:
  - League draft
  - League draft order
  - League draft picks
+ 
+It is better to return 'true' than 'false' when you are unsure.
 
 Respond with a boolean indicating if matchups data should be used to answer the user request.
 `;

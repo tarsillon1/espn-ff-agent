@@ -12,6 +12,10 @@ Rosters data is needed when discussing:
 - Fantasy league roster status, ownership, and availability of NFL players
 - Fantasy league team rankings
 - Injuries
+- Player performance (what went wrong, what went right)
+- Trash talking players in the league (eviserate every player)
+
+It is better to return 'true' than 'false' when you are unsure.
 
 Respond with a boolean indicating if rosters data should be used to answer the user request.
 `;

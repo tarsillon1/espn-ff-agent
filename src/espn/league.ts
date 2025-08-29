@@ -25,7 +25,7 @@ export async function getLeague({
 
   if (!res.ok) {
     throw new Error(
-      `Failed to fetch league transactions: ${res.status} ${await res.text()}`
+      `Failed to fetch league: ${res.status} ${await res.text()}`
     );
   }
 

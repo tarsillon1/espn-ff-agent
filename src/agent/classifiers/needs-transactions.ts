@@ -15,6 +15,9 @@ Transactions data is needed when discussing:
 - Waiver wire
 - Free agency
 - Trades
+- Player performance (what went wrong, what went right)
+
+It is better to return 'true' than 'false' when you are unsure.
 
 Respond with a boolean indicating if transactions data should be used to answer the user request.
 `;
