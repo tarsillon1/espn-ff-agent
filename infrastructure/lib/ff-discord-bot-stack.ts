@@ -152,6 +152,44 @@ export class FFDiscordBotStack extends cdk.Stack {
     });
     draftCronRule.addTarget(new targets.LambdaFunction(draftLambda));
 
+    const transactionsLambda = new aws_lambda_nodejs.NodejsFunction(
+      this,
+      "TransactionsLambda",
+      {
+        runtime: Runtime.NODEJS_20_X,
+        handler: "handler",
+        entry: path.join(
+          __dirname,
+          "../../src/discord/lambdas/transactions.ts"
+        ),
+        timeout: cdk.Duration.minutes(5),
+        memorySize: 512,
+        environment: {
+          ESPN_SWID: process.env.ESPN_SWID || "",
+          ESPN_S2: process.env.ESPN_S2 || "",
+          ESPN_LEAGUE_ID: process.env.ESPN_LEAGUE_ID || "",
+          GENERATE_SQS_QUEUE_URL: generateQueue.queueUrl,
+          CRON_INTERVAL_MS: "1800000", // 30 minutes in milliseconds
+        },
+      }
+    );
+
+    transactionsLambda.addToRolePolicy(
+      new iam.PolicyStatement({
+        actions: ["sqs:SendMessage"],
+        resources: [generateQueue.queueArn],
+      })
+    );
+
+    const transactionsCronRule = new events.Rule(this, "TransactionsCronRule", {
+      schedule: events.Schedule.rate(cdk.Duration.minutes(30)),
+      description:
+        "Triggers transactions lambda every 30 minutes to check for new transactions",
+    });
+    transactionsCronRule.addTarget(
+      new targets.LambdaFunction(transactionsLambda)
+    );
+
     // Create event source mapping for generate queue
     generateLambda.addEventSource(
       new lambdaEventSources.SqsEventSource(generateQueue, {

@@ -1,13 +1,10 @@
 import type { GenerateLambdaEvent } from "../types";
 
-import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
-import { getLeagueCached, espnS2, espnSwid, leagueId } from "@/espn";
 import { createDraftRecapPrompt } from "@/agent/prompt";
-
-const cronIntervalMs = parseInt(process.env.CRON_INTERVAL_MS || "0");
-const generateQueueUrl = process.env.GENERATE_SQS_QUEUE_URL!;
-
-const sqs = new SQSClient({ region: "us-east-1" });
+import { espnS2, espnSwid, getLeagueCached, leagueId } from "@/espn";
+import { SendMessageCommand } from "@aws-sdk/client-sqs";
+import { cronIntervalMs, generateQueueUrl } from "../config";
+import { sqs } from "../sqs";
 
 export async function handler() {
   const season = new Date().getFullYear();

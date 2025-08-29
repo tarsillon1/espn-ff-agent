@@ -52,11 +52,19 @@ function mapTransaction(
 export function mapTransactions(
   transactions: Transaction[],
   players: PlayerData[],
-  league: ESPNLeagueResponse
+  league: ESPNLeagueResponse,
+  filters?: {
+    transactionsStartDate?: number;
+  }
 ) {
   return clean(
-    (transactions || []).map((transaction) =>
-      mapTransaction(transaction, players, league)
-    )
+    (transactions || [])
+      .filter((transaction) => {
+        if (filters?.transactionsStartDate) {
+          return transaction.proposedDate > filters.transactionsStartDate;
+        }
+        return true;
+      })
+      .map((transaction) => mapTransaction(transaction, players, league))
   );
 }

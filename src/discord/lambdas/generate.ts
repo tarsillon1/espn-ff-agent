@@ -10,22 +10,13 @@ import { randomBytes } from "crypto";
 
 import { generateFFText } from "@/agent/fantasy-football";
 import { chunkAndSendInteractionFollowup } from "../followup";
-import { SendMessageCommand, SQSClient } from "@aws-sdk/client-sqs";
+import { SendMessageCommand } from "@aws-sdk/client-sqs";
 import { SQSEvent } from "aws-lambda";
 import { findVoiceChannel } from "../voip";
 import { getDiscordInstance } from "../client";
-import {
-  ChannelType,
-  Guild,
-  Message,
-  TextChannel,
-  VoiceChannel,
-} from "discord.js";
 import { chunkAndSendText, findTextChannel } from "../text";
-
-const VOIP_SQS_QUEUE_URL = process.env.VOIP_SQS_QUEUE_URL;
-
-const sqs = new SQSClient({ region: "us-east-1" });
+import { sqs } from "../sqs";
+import { voipQueueUrl } from "../config";
 
 async function handleInteractionFollowup(
   destination: InteractionDesitnation,
@@ -86,6 +77,7 @@ async function processGenerateEvent({
   season,
   system,
   research,
+  filters,
 }: GenerateLambdaEvent) {
   console.log("generating text");
 
@@ -94,6 +86,7 @@ async function processGenerateEvent({
     season,
     system,
     research,
+    filters,
   });
 
   if (!response.text) {
@@ -108,7 +101,7 @@ async function processGenerateEvent({
     voipEvents.map(async (voipEvent) =>
       sqs.send(
         new SendMessageCommand({
-          QueueUrl: VOIP_SQS_QUEUE_URL,
+          QueueUrl: voipQueueUrl,
           MessageBody: JSON.stringify(voipEvent),
           MessageGroupId:
             voipEvent.voiceChannelId || randomBytes(16).toString("hex"),

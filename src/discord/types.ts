@@ -21,6 +21,9 @@ export type GenerateLambdaEvent = {
   system?: string;
   research?: boolean;
   destination: Destination;
+  filters?: {
+    transactionsStartDate?: number;
+  };
 };
 
 export type VoipLambdaEvent = {

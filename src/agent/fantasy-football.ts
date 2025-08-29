@@ -67,6 +67,9 @@ type GenerateFFTextInput = {
   season?: number;
   system?: string;
   research?: boolean;
+  filters?: {
+    transactionsStartDate?: number;
+  };
 };
 
 function getSize(value: unknown) {
@@ -90,6 +93,7 @@ export async function generateFFText({
   season = new Date().getFullYear(),
   system = createPodcastPrompt(),
   research = true,
+  filters,
 }: GenerateFFTextInput) {
   const config = { season, leagueId, espnS2, espnSwid };
 
@@ -114,7 +118,8 @@ export async function generateFFText({
   const rostersPromise = leaguePromise.then(mapRosters);
 
   const transactionsPromise = Promise.all([leaguePromise, playersPromise]).then(
-    ([league, players]) => mapTransactions(league.transactions, players, league)
+    ([league, players]) =>
+      mapTransactions(league.transactions, players, league, filters)
   );
 
   const classify = { systemPrompt: system, userPrompt: prompt };
