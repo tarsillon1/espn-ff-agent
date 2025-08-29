@@ -1,6 +1,6 @@
 import { cache } from "@/utils";
 import { baseUrl } from "./config";
-import type { ESPNLeagueResponse, Member, Team } from "./types";
+import type { ESPNLeagueResponse, Member, Team, Transaction } from "./types";
 
 export type GetLeagueInput = {
   espnS2: string;
@@ -53,6 +53,11 @@ export function findPlayerInRoster(playerId: number, team: Team) {
   return team.roster.entries.find(
     (player) => player.playerId.toString() === playerId.toString()
   );
+}
+
+export function isLineupTransaction(transaction: Transaction) {
+  // if a transaction has any items that are not LINEUP, it is not a lineup transaction
+  return !transaction.items.some((item) => item.type !== "LINEUP");
 }
 
 export const getLeagueCached = cache(getLeague, 1000 * 60 * 5);

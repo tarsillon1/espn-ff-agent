@@ -1,4 +1,10 @@
-import { getLeagueCached, espnS2, espnSwid, leagueId } from "@/espn";
+import {
+  getLeagueCached,
+  espnS2,
+  espnSwid,
+  leagueId,
+  isLineupTransaction,
+} from "@/espn";
 import { cronIntervalMs, generateQueueUrl } from "../config";
 import { GenerateLambdaEvent } from "../types";
 import { createTransactionRecapPrompt } from "@/agent/prompt/transaction";
@@ -16,9 +22,9 @@ export async function handler() {
     season,
   });
   const transactions = league.transactions;
-  const transactionsSinceLastRun = transactions.filter(
-    (transaction) => transaction.proposedDate > lastRunDate
-  );
+  const transactionsSinceLastRun = transactions
+    .filter((transaction) => transaction.proposedDate > lastRunDate)
+    .filter((transaction) => !isLineupTransaction(transaction));
   if (!transactionsSinceLastRun.length) {
     return;
   }
