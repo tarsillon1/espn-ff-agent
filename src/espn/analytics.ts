@@ -3,6 +3,8 @@ import {
   LeagueSnapshot,
   HistorySchedule,
   HistoryTeam,
+  ESPNLeagueResponse,
+  Team,
 } from "./types";
 
 export interface TeamStats {
@@ -55,15 +57,32 @@ export interface LeagueAnalytics {
 
 export function analyzeLeagueHistory(
   history: LeagueHistory,
-  includeTeams: number[] = []
+  teams: Pick<Team, "id">[]
 ): LeagueAnalytics {
-  const teams: { [teamId: number]: TeamStats } = {};
+  const teamStats: { [teamId: number]: TeamStats } = {};
 
   let earliestDate = new Date();
   let latestDate = new Date(0);
 
-  const includedTeamSet = new Set(includeTeams);
-  const shouldFilterTeams = includeTeams.length > 0;
+  const includedTeamSet = new Set(teams.map((t) => t.id));
+
+  teams.forEach((team) => {
+    teamStats[team.id] = {
+      teamId: team.id,
+      totalWins: 0,
+      totalLosses: 0,
+      totalTies: 0,
+      winPercentage: 0,
+      averagePointsScored: 0,
+      totalPointsScored: 0,
+      totalGamesPlayed: 0,
+      playoffAppearances: 0,
+      championshipAppearances: 0,
+      championshipsWon: 0,
+      seasons: [],
+      headToHeadRecords: [],
+    };
+  });
 
   // Process each season/snapshot
   history.forEach((snapshot: LeagueSnapshot) => {
@@ -75,27 +94,8 @@ export function analyzeLeagueHistory(
 
     // Process teams in this snapshot
     snapshot.teams.forEach((team: HistoryTeam) => {
-      // Skip teams that are not in the includeTeams filter if filtering is enabled
-      if (shouldFilterTeams && !includedTeamSet.has(team.id)) {
+      if (!includedTeamSet.has(team.id)) {
         return;
-      }
-
-      if (!teams[team.id]) {
-        teams[team.id] = {
-          teamId: team.id,
-          totalWins: 0,
-          totalLosses: 0,
-          totalTies: 0,
-          winPercentage: 0,
-          averagePointsScored: 0,
-          totalPointsScored: 0,
-          totalGamesPlayed: 0,
-          playoffAppearances: 0,
-          championshipAppearances: 0,
-          championshipsWon: 0,
-          seasons: [],
-          headToHeadRecords: [],
-        };
       }
 
       // Initialize season stats
@@ -113,7 +113,7 @@ export function analyzeLeagueHistory(
         totalPoints: team.points,
       };
 
-      teams[team.id].seasons.push(seasonStats);
+      teamStats[team.id].seasons.push(seasonStats);
     });
 
     // Process schedule/matches for this season
@@ -125,7 +125,6 @@ export function analyzeLeagueHistory(
 
       // Skip matches that don't involve any of the included teams if filtering is enabled
       if (
-        shouldFilterTeams &&
         !includedTeamSet.has(homeTeam.teamId) &&
         !includedTeamSet.has(awayTeam.teamId)
       ) {
@@ -135,7 +134,7 @@ export function analyzeLeagueHistory(
       // Determine winner and update records
       if (match.winner === "HOME") {
         updateTeamSeasonStats(
-          teams,
+          teamStats,
           homeTeam.teamId,
           seasonId,
           true,
@@ -143,7 +142,7 @@ export function analyzeLeagueHistory(
           homeTeam.totalPoints
         );
         updateTeamSeasonStats(
-          teams,
+          teamStats,
           awayTeam.teamId,
           seasonId,
           false,
@@ -151,26 +150,24 @@ export function analyzeLeagueHistory(
           awayTeam.totalPoints
         );
         updateHeadToHeadRecord(
-          teams,
+          teamStats,
           homeTeam.teamId,
           awayTeam.teamId,
           true,
           false,
-          includedTeamSet,
-          shouldFilterTeams
+          includedTeamSet
         );
         updateHeadToHeadRecord(
-          teams,
+          teamStats,
           awayTeam.teamId,
           homeTeam.teamId,
           false,
           true,
-          includedTeamSet,
-          shouldFilterTeams
+          includedTeamSet
         );
       } else if (match.winner === "AWAY") {
         updateTeamSeasonStats(
-          teams,
+          teamStats,
           awayTeam.teamId,
           seasonId,
           true,
@@ -178,7 +175,7 @@ export function analyzeLeagueHistory(
           awayTeam.totalPoints
         );
         updateTeamSeasonStats(
-          teams,
+          teamStats,
           homeTeam.teamId,
           seasonId,
           false,
@@ -186,27 +183,25 @@ export function analyzeLeagueHistory(
           homeTeam.totalPoints
         );
         updateHeadToHeadRecord(
-          teams,
+          teamStats,
           awayTeam.teamId,
           homeTeam.teamId,
           true,
           false,
-          includedTeamSet,
-          shouldFilterTeams
+          includedTeamSet
         );
         updateHeadToHeadRecord(
-          teams,
+          teamStats,
           homeTeam.teamId,
           awayTeam.teamId,
           false,
           true,
-          includedTeamSet,
-          shouldFilterTeams
+          includedTeamSet
         );
       } else {
         // Tie
         updateTeamSeasonStats(
-          teams,
+          teamStats,
           homeTeam.teamId,
           seasonId,
           false,
@@ -214,7 +209,7 @@ export function analyzeLeagueHistory(
           homeTeam.totalPoints
         );
         updateTeamSeasonStats(
-          teams,
+          teamStats,
           awayTeam.teamId,
           seasonId,
           false,
@@ -222,32 +217,30 @@ export function analyzeLeagueHistory(
           awayTeam.totalPoints
         );
         updateHeadToHeadRecord(
-          teams,
+          teamStats,
           homeTeam.teamId,
           awayTeam.teamId,
           false,
           false,
-          includedTeamSet,
-          shouldFilterTeams
+          includedTeamSet
         );
         updateHeadToHeadRecord(
-          teams,
+          teamStats,
           awayTeam.teamId,
           homeTeam.teamId,
           false,
           false,
-          includedTeamSet,
-          shouldFilterTeams
+          includedTeamSet
         );
       }
     });
 
     // Determine playoff and championship appearances
-    determinePlayoffAndChampionshipStats(teams, seasonId, snapshot);
+    determinePlayoffAndChampionshipStats(teamStats, seasonId, snapshot);
   });
 
   // Calculate aggregate statistics
-  Object.values(teams).forEach((team) => {
+  Object.values(teamStats).forEach((team) => {
     team.totalWins = team.seasons.reduce((sum, season) => sum + season.wins, 0);
     team.totalLosses = team.seasons.reduce(
       (sum, season) => sum + season.losses,
@@ -296,7 +289,7 @@ export function analyzeLeagueHistory(
   });
 
   return {
-    teams,
+    teams: teamStats,
     totalSeasons: history.length,
     dateRange: {
       earliest: earliestDate,
@@ -333,19 +326,12 @@ function updateHeadToHeadRecord(
   opponentId: number,
   isWin: boolean,
   isLoss: boolean,
-  includedTeamSet: Set<number>,
-  shouldFilterTeams: boolean
+  includedTeamSet: Set<number>
 ) {
   const team = teams[teamId];
   if (!team) return;
 
-  // Only create head-to-head records for teams in the include list when filtering is enabled
-  if (shouldFilterTeams && !includedTeamSet.has(teamId)) {
-    return;
-  }
-
-  // Also check that the opponent is in the include list when filtering is enabled
-  if (shouldFilterTeams && !includedTeamSet.has(opponentId)) {
+  if (!includedTeamSet.has(teamId) || !includedTeamSet.has(opponentId)) {
     return;
   }
 

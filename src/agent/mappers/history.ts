@@ -8,7 +8,6 @@ export function mapLeagueHistory(
   history: LeagueHistory,
   leagueData: Pick<ESPNLeagueResponse, "teams">
 ) {
-  const activeTeamIds = leagueData.teams.map((team) => team.id);
-  const analytics = analyzeLeagueHistory(history, activeTeamIds);
+  const analytics = analyzeLeagueHistory(history, leagueData.teams);
   return analytics;
 }
