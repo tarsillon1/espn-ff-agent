@@ -73,8 +73,20 @@ async function createVoiceConnection(channel: VoiceChannel) {
   console.log("waiting for voice connection ready");
 
   await new Promise<void>((resolve, reject) => {
+    if (connection.state.status === VoiceConnectionStatus.Ready) {
+      console.log("voice connection already ready");
+      resolve();
+      return;
+    }
+
     const timeout = setTimeout(() => {
-      console.log("voice connection timeout");
+      if (connection.state.status === VoiceConnectionStatus.Ready) {
+        console.log("voice connection did not emit ready event but is ready");
+        resolve();
+        return;
+      }
+
+      console.log("voice connection timeout", connection.state.status);
       reject(new Error("voice connection timeout"));
     }, 5000);
 
