@@ -42,7 +42,7 @@ export async function findVoiceChannel(
   return sorted[0];
 }
 
-async function createVoipClient(channel: VoiceChannel) {
+async function createVoiceConnection(channel: VoiceChannel) {
   const {
     joinVoiceChannel,
     createAudioPlayer,
@@ -60,7 +60,6 @@ async function createVoipClient(channel: VoiceChannel) {
 
   connection.on(VoiceConnectionStatus.Disconnected, () => {
     console.log("voice connection disconnected");
-    connection;
   });
 
   connection.on(VoiceConnectionStatus.Destroyed, () => {
@@ -71,9 +70,21 @@ async function createVoipClient(channel: VoiceChannel) {
     console.log("voice connection connecting");
   });
 
+  console.log("waiting for voice connection ready");
+
   await new Promise<void>((resolve, reject) => {
+    const timeout = setTimeout(() => {
+      console.log("voice connection timeout");
+      reject(new Error("voice connection timeout"));
+    }, 5000);
+
+    connection.on(VoiceConnectionStatus.Connecting, () => {
+      console.log("voice connection connecting");
+    });
+
     connection.on(VoiceConnectionStatus.Ready, () => {
       console.log("voice connection ready");
+      clearTimeout(timeout);
       resolve();
     });
 
@@ -83,9 +94,49 @@ async function createVoipClient(channel: VoiceChannel) {
     });
   });
 
+  return {
+    connection,
+    createAudioPlayer,
+    createAudioResource,
+    AudioPlayerStatus,
+    NoSubscriberBehavior,
+  };
+}
+
+async function createVoiceConnectionWithRetry(
+  channel: VoiceChannel,
+  max = 5,
+  delay = 1000
+) {
+  try {
+    return await createVoiceConnection(channel);
+  } catch (error) {
+    console.error("failed to create voice connection", error);
+    if (max > 0) {
+      console.log("retrying voice connection in " + delay + "ms", max - 1);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      console.log("retrying voice connection", max - 1);
+      return createVoiceConnectionWithRetry(channel, max - 1, delay * 2);
+    }
+    throw error;
+  }
+}
+
+async function createVoipClient(channel: VoiceChannel) {
+  console.log("joining voice channel");
+
+  const {
+    connection,
+    createAudioPlayer,
+    createAudioResource,
+    AudioPlayerStatus,
+    NoSubscriberBehavior,
+  } = await createVoiceConnectionWithRetry(channel);
+
   const player = createAudioPlayer({
     behaviors: {
-      noSubscriber: NoSubscriberBehavior.Stop,
+      noSubscriber: NoSubscriberBehavior.Play,
     },
   });
   connection.subscribe(player);
@@ -102,7 +153,17 @@ async function createVoipClient(channel: VoiceChannel) {
     console.log("audio player error", error);
   });
 
+  player.on(AudioPlayerStatus.AutoPaused, () => {
+    console.log("audio player auto paused");
+  });
+
+  player.on(AudioPlayerStatus.Paused, () => {
+    console.log("audio player paused");
+  });
+
   function play(stream: Readable) {
+    console.log("playing audio");
+
     const audioResource = createAudioResource(stream);
     player.play(audioResource);
     return new Promise<void>((resolve) => {
@@ -127,11 +188,12 @@ async function playVoice(channel: VoiceChannel, stream: ReadableStream) {
     console.warn("failed to create voip client");
     return;
   }
-
-  console.log("playing voice");
-
-  await voip.play(Readable.from(stream));
-  voip.close();
+  try {
+    console.log("playing voice");
+    await voip.play(Readable.from(stream));
+  } finally {
+    voip.close();
+  }
 }
 
 export async function findChannelAndPlayVoice(
@@ -154,6 +216,13 @@ export async function findChannelAndPlayVoice(
     console.warn("voice channel is empty");
     return;
   }
+
+  console.log(
+    "playing voice in channel " +
+      channel?.name +
+      " with members " +
+      [...channel.members.values()].map((m) => m.user.username).join(", ")
+  );
 
   return playVoice(channel, stream);
 }

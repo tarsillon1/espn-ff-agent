@@ -73,8 +73,7 @@ export async function handler(sqsEvent: SQSEvent) {
       await processVoipEvent(voipEvent);
     } catch (error) {
       console.error("Failed to process VoIP event:", error);
-      // Don't throw here to avoid retrying the entire batch
-      // The message will be retried by SQS if needed
+      // dont retry (audio is expensive)
     }
   }
 }
