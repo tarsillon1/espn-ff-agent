@@ -16,8 +16,13 @@ export async function handler() {
   });
 
   const draftCompletedAt = league.draftDetail.completeDate;
+  const allPicksMade = league.draftDetail.picks.every(
+    (pick) => !!pick.playerId
+  );
   const drafted =
-    draftCompletedAt && draftCompletedAt > Date.now() - cronIntervalMs;
+    draftCompletedAt &&
+    draftCompletedAt > Date.now() - cronIntervalMs &&
+    allPicksMade;
   if (!drafted) {
     return;
   }

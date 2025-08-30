@@ -18,7 +18,7 @@ export async function findVoiceChannel(
 
   if (voiceChannelId) {
     const channel = await guild.channels.fetch(voiceChannelId);
-    if (channel?.type === ChannelType.GuildVoice) {
+    if (channel?.type === ChannelType.GuildVoice && channel.members.size > 0) {
       return channel;
     }
   }
