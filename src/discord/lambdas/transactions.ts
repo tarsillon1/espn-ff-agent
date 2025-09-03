@@ -4,6 +4,7 @@ import {
   espnSwid,
   leagueId,
   isLineupTransaction,
+  isPrivateTransaction,
 } from "@/espn";
 import { cronIntervalMs, generateQueueUrl } from "../config";
 import { GenerateLambdaEvent } from "../types";
@@ -24,7 +25,8 @@ export async function handler() {
   const transactions = league.transactions;
   const transactionsSinceLastRun = transactions
     .filter((transaction) => transaction.proposedDate > lastRunDate)
-    .filter((transaction) => !isLineupTransaction(transaction));
+    .filter((transaction) => !isLineupTransaction(transaction))
+    .filter((transaction) => !isPrivateTransaction(transaction));
   if (!transactionsSinceLastRun.length) {
     return;
   }

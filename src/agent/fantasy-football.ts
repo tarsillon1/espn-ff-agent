@@ -5,6 +5,7 @@ import {
   getLeagueCached,
   getLeagueHistory,
   getPlayersCached,
+  isPrivateTransaction,
   leagueId,
 } from "@/espn";
 import { Content, ToolListUnion } from "@google/genai";
@@ -119,7 +120,14 @@ export async function generateFFText({
 
   const transactionsPromise = Promise.all([leaguePromise, playersPromise]).then(
     ([league, players]) =>
-      mapTransactions(league.transactions, players, league, filters)
+      mapTransactions(
+        league.transactions.filter(
+          (transaction) => !isPrivateTransaction(transaction)
+        ),
+        players,
+        league,
+        filters
+      )
   );
 
   const classify = { systemPrompt: system, userPrompt: prompt };

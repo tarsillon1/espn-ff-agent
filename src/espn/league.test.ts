@@ -8,7 +8,7 @@ it("should get league", async () => {
     espnS2,
     espnSwid,
     leagueId,
-    season: 2024,
+    season: 2025,
   });
   writeFileSync("league.json", JSON.stringify(res, null, 2));
   expect(res.id).toBeDefined();

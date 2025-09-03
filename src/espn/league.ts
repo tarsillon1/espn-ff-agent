@@ -56,8 +56,16 @@ export function findPlayerInRoster(playerId: number, team: Team) {
 }
 
 export function isLineupTransaction(transaction: Transaction) {
-  // if a transaction has any items that are not LINEUP, it is not a lineup transaction
+  // if a transaction has any i tems that are not LINEUP, it is not a lineup transaction
   return !transaction.items.some((item) => item.type !== "LINEUP");
+}
+
+export function isPrivateTransaction(transaction: Transaction) {
+  const isCanceled = transaction.status === "CANCELED";
+  const isPendingWaiverOrTradeProposal =
+    transaction.status === "PENDING" &&
+    (transaction.type === "WAIVER" || transaction.type === "TRADE_PROPOSAL");
+  return isCanceled || isPendingWaiverOrTradeProposal;
 }
 
 export const getLeagueCached = cache(getLeague, 1000 * 60 * 5);
