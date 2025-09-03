@@ -43,7 +43,7 @@ function mapTransaction(
       : undefined,
     actingOwnerId: transaction.memberId,
     affectedTeamId: transaction.teamId,
-    items: transaction.items.map((item) =>
+    items: transaction.items?.map?.((item) =>
       mapTransactionItem(item, players, league)
     ),
   };

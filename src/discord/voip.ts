@@ -36,7 +36,7 @@ export async function findVoiceChannel(
   }
 
   const sorted = voiceChannels.sort((a, b) => {
-    return a.members.size - b.members.size;
+    return b.members.size - a.members.size;
   });
 
   return sorted[0];
