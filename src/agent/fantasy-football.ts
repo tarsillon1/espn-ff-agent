@@ -157,7 +157,8 @@ export async function generateFFText({
       history: includeHistory ? await historyPromise : undefined,
       matchups: includeMatchups ? await matchupsPromise : undefined,
       transactions: includeTransactions ? await transactionsPromise : undefined,
-      rosters: includeRosters ? await rostersPromise : undefined,
+      rosters:
+        includeRosters || includeMatchups ? await rostersPromise : undefined,
       season,
       teams: await teamsPromise,
     },

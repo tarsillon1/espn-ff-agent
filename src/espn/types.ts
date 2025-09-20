@@ -79,6 +79,7 @@ export interface Transaction {
   subOrder: number;
   teamId: number;
   type: string;
+  relatedTransactionId: string;
 }
 
 export interface TransactionItem {
@@ -415,6 +416,7 @@ export interface Team {
   valuesByStat: Record<string, number>;
   waiverRank: number;
   watchList?: number[];
+  pendingTransactions?: Transaction[];
 }
 
 // New comprehensive roster types for teams

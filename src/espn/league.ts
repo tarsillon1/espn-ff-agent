@@ -65,7 +65,25 @@ export function isPrivateTransaction(transaction: Transaction) {
   const isPendingWaiverOrTradeProposal =
     transaction.status === "PENDING" &&
     (transaction.type === "WAIVER" || transaction.type === "TRADE_PROPOSAL");
-  return isCanceled || isPendingWaiverOrTradeProposal;
+  const isTradeVote =
+    transaction.type === "TRADE_VETO" || transaction.type === "TRADE_UPHOLD";
+  return isCanceled || isPendingWaiverOrTradeProposal || isTradeVote;
+}
+
+export function findTransaction(league: ESPNLeagueResponse, id: string) {
+  const transaction = league.transactions.find((t) => t.id === id);
+  if (transaction) {
+    return transaction;
+  }
+
+  for (const team of league.teams) {
+    const transaction = team.pendingTransactions?.find((t) => t.id === id);
+    if (transaction) {
+      return transaction;
+    }
+  }
+
+  return undefined;
 }
 
 export const getLeagueCached = cache(getLeague, 1000 * 60 * 5);

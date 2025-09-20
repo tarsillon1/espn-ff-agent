@@ -6,6 +6,7 @@ import {
   TransactionItem,
   getSlotName,
   Transaction,
+  findTransaction,
 } from "@/espn";
 import { mapPlayerData } from "./player";
 import { clean } from "@/utils";
@@ -33,6 +34,10 @@ function mapTransaction(
   players: PlayerData[],
   league: ESPNLeagueResponse
 ) {
+  const relatedTransaction =
+    transaction.type === "TRADE_ACCEPT"
+      ? findTransaction(league, transaction.relatedTransactionId)
+      : undefined;
   return {
     id: transaction.id,
     type: transaction.type,
@@ -43,6 +48,7 @@ function mapTransaction(
       : undefined,
     actingOwnerId: transaction.memberId,
     affectedTeamId: transaction.teamId,
+    relatedTransaction,
     items: transaction.items?.map?.((item) =>
       mapTransactionItem(item, players, league)
     ),
